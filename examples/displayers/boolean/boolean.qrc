@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>Resources/high.xpm</file>
+        <file>Resources/low.xpm</file>
+    </qresource>
+</RCC>

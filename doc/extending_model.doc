@@ -1,0 +1,260 @@
+/*!
+
+\page extend_model Extending the QicsTable Data Model
+ 
+This page describes how you can extend the %QicsTable Data Model
+architecture to support your organization's specific requirements.  In
+general, you can extend the data model in two ways: by
+\ref items "adding a new data type", and by
+\ref model "implementing a new data model".
+
+\section items Adding a New Data Item Type
+
+%QicsTable provides built-in support for many of the common C++ and Qt
+data types.  In the event that you need to store data that is not
+natively supported, it is a simple task to create your own data type.
+All user-defined data types must be a subclass of QicsDataItem, and
+must implement all pure virtual methods of that class.  An example of
+a subclass that represents a QPoint is shown below, with a description
+of each method.  (All code is inlined in the class definition for
+brevity.)
+
+Our new data type is subclassed from QicsDataItem.
+
+\code
+class QicsDataQPoint : public QicsDataItem
+{
+\endcode
+
+The actual QPoint value is stored here.
+\code
+protected:
+    QPoint myData;     
+\endcode
+
+The constructors for the class.
+\code
+public:
+    QicsDataQPoint() : QicsDataItem()
+	{ }
+    QicsDataQPoint(const QPoint &p) : QicsDataItem()
+	{ setData(p); }
+    QicsDataQPoint(const QicsDataQPoint &di) : QicsDataItem()
+	{ setData(di.data()); }
+\endcode
+
+These methods implement a "virtual constructor" and a "virtual copy
+constructor".  We do this so that it is possible to create a new
+object of this type (or copy an existing object) without knowing the
+the type of the original object.
+\code
+    inline QicsDataItem *create(void) const
+	{ return new QicsDataQPoint(); }
+    inline QicsDataItem *clone(void) const
+	{ return new QicsDataQPoint(*this); }
+\endcode
+
+The assignment operator.
+\code
+    inline virtual QicsDataQPoint& operator=(const QPoint & p)
+	{ setData(p); return *this;}
+\endcode
+
+\link QicsDataItem::type type()\endlink must return
+\b QicsDataItem_UserDefined.
+\link QicsDataItem::typeString typeString()\endlink
+should return a unique string that can identify this data type.
+There also should be a static method called \b typeName() that returns
+the same string.
+\code
+    inline virtual QicsDataItemType type(void) const
+	{ return (QicsDataItem_UserDefined); }
+    inline virtual QString typeString(void) const
+	{ return QicsDataQPoint::typeName(); }
+    inline static QString typeName(void)
+	{ return QString("qpoint"); }
+\endcode
+
+\link QicsDataItem::string string()\endlink should return a string
+representation of the data item.
+\link QicsDataItem::setString setString()\endlink should attempt to
+parse the input string and set the object's value to the parsed value.
+\code
+    inline virtual const QString string(void) const
+	{ return QString("(%1, %2)").arg(myData.x()) .arg(myData.y()); }
+    inline virtual bool setString(const QString &str) 
+	{
+	    // This is very simple.  There should be more error checking
+	    // in a robust version of this class
+
+	    int x = (str.right(str.length() - 1)).section(',', 0, 0).toInt();
+	    int y = (str.left(str.length() - 1)).section(',', 1, 1).toInt();
+
+	    setData(QPoint(x, y));
+	    return true;
+	}
+\endcode
+
+\link QicsDataItem::data data()\endlink should return the native value
+of this object.
+\link QicsDataItem::setData setData()\endlink should set the value
+of this object.
+\code
+    inline QPoint data(void) const
+	{ return myData; }
+    inline void setData(const QPoint & p)
+	{ myData = p;}
+\endcode
+
+\link QicsDataItem::format format()\endlink should use the given
+format string to generate a string representation of the object.  The
+syntax of the format string is not defined.  This method is generally
+used by QicsDataItemFormatter to format a data item.
+\code
+    inline virtual QString format(const char *fmt_string) const
+	{ QString str; return str.sprintf(fmt_string, myData.x(), myData.y()); }
+\endcode
+
+\link QicsDataItem::compareTo compareTo()\endlink should return -1 if
+the object is "less than" \a x, 1 if the object is "greater than" \a
+x, and 0 if they are equal.  This method is used by the sorting
+routines of QicsTable.
+\code
+    int compareTo(const QicsDataItem &x) const
+	{
+	    assert(this->type() == x.type());
+
+	    const QicsDataQPoint *v = dynamic_cast<const QicsDataQPoint *> (&x);
+	    assert(v != NULL);
+
+	    if (myData.x() < v->myData.x())
+		return -1;
+	    else if (myData.x() > v->myData.x())
+		return 1;
+	    else
+	    {
+		if (myData.y() < v->myData.y())
+		    return -1;
+		else if (myData.y() > v->myData.y())
+		    return 1;
+		else
+		    return 0;
+	    }
+	}
+\endcode
+
+\link QicsDataItem::encode encode()\endlink encodes the object and its
+type string into a data stream.  The method must first encode the
+appropriate type string, followed by the object's value.
+
+\link QicsDataItem::decode decode()\endlink decodes an object from a
+data stream.  When this method is called, it has already been
+determined that the next object in the stream is of the appropriate
+type.  The method must decode the value from the stream and return a
+newly allocated object.
+\code
+    inline void encode(QDataStream &ds) const 
+	{ ds << typeString(); ds << myData; }
+    static QicsDataItem *decode(QDataStream &ds)
+	{ QPoint val; ds >> val; return new QicsDataQPoint(val); }
+\endcode
+
+\link QicsDataItem::fromString fromString()\endlink attempts to parse
+the input string and create a new object from the parsed value.  If
+the parse is successful, a newly allocated object is returned,
+otherwise, 0 is returned.
+\code
+    static QicsDataItem *fromString(const QString &str)
+	{
+	    QicsDataQPoint *qp = new QicsDataQPoint();
+
+	    if (qp->setString(str))
+		return qp;
+	    else
+	    {
+		delete qp;
+		return 0;
+	    }
+	}
+};
+\endcode
+
+The final step to create a new data type is to register the new
+type.  This allows the new type to be used in streaming, drag and
+drop, and cut and paste operations.  If you do not register a type, it
+can still be used in a data model, but the above operations will not
+succeed.
+\code
+// Somewhere in the client program, this line must be added
+   QicsDataItem::registerType(QicsDataQPoint::typeName(),
+                              QicsDataQPoint::fromString,
+                              QicsDataQPoint::decode);
+\endcode
+
+For the complete code for this example, see \ref cdt_example.
+
+
+\section model Creating a New Data Model
+
+%QicsTable provides a default data model, QicsDataModelDefault, that
+implements the QicsDataModel API and serves as a good, general purpose
+data model for the table.  There may be instances in which
+QicsDataModelDefault is not the best choice however.  This can be the
+case when you have already defined and developed a "data model"
+abstraction for use in your application.  While it is certainly
+possible to create a QicsDataModelDefault object and copy all of the
+data from your model into the new object, this isn't very efficient.
+Furthermore, this approach requires that you keep the two data model
+objects "in sync", making sure that changes in one are reflected in
+the other.
+
+In such a case, a better solution is to define a new subclass of
+QicsDataModel that implements the QicsDataModel API, but uses your
+existing object for data storage.  This will provide a transparent
+interface between your model and %QicsTable.  Often, the easiest way to
+design this subclass is to create a class that inherits from both your
+existing data model and QicsDataModel.  This allows a single object to
+fulfill both interfaces, and simplifies the coordination of the two
+model abstractions.
+
+When subclassing from QicsDataModel, you must provide implementations
+for all pure virtual functions.  These include:
+
+- QicsDataModel::item()
+- QicsDataModel::setItem()
+- QicsDataModel::rowItems()
+- QicsDataModel::setRowItems()
+- QicsDataModel::columnItems()
+- QicsDataModel::setColumnItems()
+- QicsDataModel::addRows()
+- QicsDataModel::addColumns()
+- QicsDataModel::insertRows()
+- QicsDataModel::insertColumns()
+- QicsDataModel::deleteRow()
+- QicsDataModel::deleteRows()
+- QicsDataModel::deleteColumn()
+- QicsDataModel::deleteColumns()
+- QicsDataModel::clearItem()
+- QicsDataModel::clearModel()
+
+In addition, you must make sure that your new data model object emits
+the required signals when the model size and/or contents have
+changed.  Remember that not only must the above QicsDataModel methods
+emit these signals, but that your existing data model methods that
+modify the data must emit these signals as well.  If not, changes to
+the data via the original data model interface will not be reflected
+in the QicsTable.
+
+To use your new data model object with a QicsTable widget, simply
+create an instance of your data model and pass its pointer to the
+QicsTable constructor (QicsTable::QicsTable).
+
+For an example of a custom data model, see \ref cdm_example.
+
+Custom data models also can be used for the headers.  The standard
+QicsTable constructor automatically creates two instances of
+QicsDataModelDefault, one for the row header and one for the column
+header.  By using the alternate QicsTable constructor
+(QicsTable::QicsTable), you can use your own data model objects
+instead.
+*/

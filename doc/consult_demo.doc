@@ -1,0 +1,19 @@
+/*!
+
+\page consult_demo Demo - Consultants
+
+\image html consult.png
+<P>
+This demonstration program shows QicsTable used in a program displaying
+a list of consultants.  In the source, you will find examples of setting
+properties on cells, selection handling, as well loading and saving data from
+text files. You will also find uses of custom cell display objects,
+custom validators, and custom text formatters.
+
+The code in this example can be found in \b \<QICSDIR\>/examples/consultant.
+
+- \ref consult_main_cpp Main Program Code
+- \ref consult_h        Class Definitions
+- \ref consult_cpp      Class Code
+
+*/

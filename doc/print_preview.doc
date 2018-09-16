@@ -1,0 +1,344 @@
+/*! \page print_preview Print Preview Framework
+
+%QicsTable introduces a powerful framework for WYSIWYG printing. This framework
+provides highly-customizable preview of the printer output before printing, 
+including several preview policies and modes, page layouting, paper size and so on.
+Also the framework extends standard printing facilities by introducing page
+printing order options, to make printing as much conveniet as possible.
+
+\image html preview1.png "Print Preview"
+
+
+<h2>Features</h2>
+
+The framework provides the following useable features:
+
+	- automatic layout of the pages using several layout policies including:
+		- showing desired number of pages with selectable scale;
+		- showing desired number of pages with automatic scale (to fit into window);
+		- showing number of pages which can fit into window with currently set scale;
+		- vertical or horizontal numeration;
+	- dynamic page counting mode allows to begin working with available pages while the rest is
+		still under preparing for preview;
+	- pan mode which helps to navigate through a large set of pages;
+	- selecting current page with single click, and extending/contracting the selection
+		with Control button pressed;
+	- auto-zoom to 100% and returning to previous scale with double click;
+	- auto-jump to active page when the layout is changed;
+	- showing metrical rulers for active page;
+	- showing semitransparent page numbers independent of current page size and content
+		(most convenient when pages have
+		no numbers by themselves, and when the scale is too small to see them);
+	- enabling/disabling a set of pages which results in "cross out" representation and
+		may be helpful while choosing which pages to exclude from the printing;
+	- extended settings of number of copies and printing order;
+	- callback signals during printing useful to update current progress and to inform
+		about issues.
+
+
+
+<h2>Framework structure</h2>
+
+The framework is represented by the following main classes:
+	- QicsPrintPreviewWidget
+	- QicsPrintPreviewPage
+	- QicsPageMetrics
+
+QicsPrintPreviewWidget is the general class performing the most preview and printing
+operations. It is responcible for counting, layouting and displaying pages, choosing
+preview policies and modes, interaction with the user, choosing and setting current 
+printer and paper options, and printing the chosen range of pages in the given order.
+
+QicsPrintPreviewPage represents single page object. It holds common page properties,
+such as number, size and state, and is responcible to draw its content.
+
+QicsPageMetrics is the helper class which extends standard QPrinter's predefined paper 
+parameters and provides several methods to convert between paper codes and phisical
+metrics of pages.
+
+Also there is additional class, QicsRuler, which is used to display page size in metrical
+units to help imagine real content dimensions before printing.
+
+
+
+<h2>Using the framework</h2>
+
+In general, the framework is designed to be fully independend from external code from which it is called.
+Therefore, some content-dependent tasks must be coded explicitly in the application:
+	- count the total number of the pages depending of current printer/paper size selected;
+	- paint the content of every page to the screen while previewing and to the printer
+		while printing;
+	- adequate responce to progress info/issues during printing;
+	- provide GUI for showing preview widget and printing options.
+
+The framework helps to organize these task in the most usable and convenient way, and is
+responcible to automatically perform all the necessary calls when needed. 
+
+<b>Note for QicsTable users:</b> QicsTablePrint class already includes all the necessary code. 
+A helper class QicsPrintPreviewDialog is available (it is placed in \a addons directory). In most cases, its capabilities are enough to organize full-featured printing with preview.
+The only thing needs to be performed is to call static method 
+QicsPrintPreviewDialog::previewAndPrint(QicsTable *table), passing table to print as argument:
+
+\code
+
+QicsTable *table = new QicsTable(...);
+
+...
+
+QicsPrintPreviewDialog::previewAndPrint(table);
+
+\endcode
+
+
+
+The following description is intended for developers interesting in designing a preview for 
+their own content only which will be used in their own software.
+
+
+<a name="counting"></a>
+<h3>Counting the pages</h3>
+
+Every time when printer/paper settings are changed, the framework should update page 
+layout and representation. The first step which should be performed at this stage is to count
+total number of pages to print, using new printer/paper settings.
+
+The framework provides tho page counting modes: static and dynamic. In the static mode,
+all the pages are being counted without interaction - it is impossible to do anything until
+the last page will be processed. This is the easiest way to handle, but it is often 
+unconvenient because when there are a lot of pages available, their counting
+could take significant time, and may result in temporary GUI freezing. Therefore, 
+dynamic counting mode was intoduced which allows to start working with preview while the pages
+are still being counted in parallel. Handling this mode requires some additional efforts.
+
+\b Static mode.
+
+In order to provide the framework with number of total pages, it is necessary to handle
+QicsPrintPreviewWidget::countPages(int *pages, QPrinter *printer) signal. The handler should
+obtain the settings from \a printer, count the number of pages based on these settings,
+and fill \a pages varible with this number.
+
+In most cases, only the size of QPrinter::pageRect() parameter is enough to get the 
+actual dimensions of the page print area and to count total number of pages.
+
+The following code example illustrates the general QicsPrintPreviewWidget::countPages() signal handler. Actual page counting
+is performed in page count loop which should be written by the developer.
+
+\code
+
+void myProgram::slotCountPages(int *pages, QPrinter *printer)
+{
+	// get new actual page size from the printer object
+	QSize pageSize = printer->pageRect().size();
+
+	// count number of pages based on this size value
+	int n = 0;
+	
+	// page count loop
+	do {
+		...			// here try to count one more page based on "pageSize"
+		n++;		
+	} while (...);	// wait for some exit condition
+
+	// pass it back to the framework
+	*pages = n;
+}
+
+\endcode
+
+
+\b Dynamic mode.
+
+In the dynamic mode, QicsPrintPreviewWidget::terminateCount() signal should be handled 
+additionally to QicsPrintPreviewWidget::countPages(...). The handler should immediately stop 
+current page counting. After processing this signal, the framework will emit 
+QicsPrintPreviewWidget::countPages(...) again with the new printer/paper parameters.
+
+Another difference from static mode is that you should call  QicsPrintPreviewWidget::pageCounted() after a new page was counted.
+
+The simplest way to implement such behavior is to use boolean variable which will be set to true when entering the page counting loop (handler of QicsPrintPreviewWidget::countPages()), and examined inside this loop is it still true. If it becomes false, then immediately break the loop and return. In the handler of QicsPrintPreviewWidget::terminateCount(), this variable should be set to false.
+
+\code
+
+class myProgram
+{
+public:
+	myProgram();
+	...
+	
+private:
+	// boolean variable used for break the counting.
+	volatile bool m_break;
+	// pointer to preview widget
+	QicsPrintPreviewWidget *myPreview;
+	
+private slots:
+	void slotCountPages(int *pages, QPrinter *printer);
+	void slotTerminateCount();
+};
+
+\endcode
+
+\code
+
+myProgram::myProgram()
+{
+	...
+	// install the handlers for counting
+	connect(myPreview, SIGNAL(countPages(int *, QPrinter *)), this, SLOT(slotCountPages(int *, QPrinter *)));
+	connect(myPreview, SIGNAL(terminateCount()), this, SLOT(slotTerminateCount()));	
+	// install the handlers for drawing
+	connect(myPreview, SIGNAL(drawPage(QicsPrintPreviewPage*)), this, SLOT(slotPreviewPage(QicsPrintPreviewPage*)));
+	connect(myPreview, SIGNAL(printPage(QicsPrintPreviewPage*, QPainter*)), this, SLOT(slotPrintPage(QicsPrintPreviewPage*, QPainter*)));
+	...
+}
+
+\endcode
+
+\code
+
+void myProgram::slotCountPages(int *pages, QPrinter *printer)
+{
+	// get new actual page size from the printer object
+	QSize pageSize = printer->pageRect().size();
+
+	// count number of pages based on this size value
+	int n = 0;
+	
+	// initialize break variable
+	m_break = false;
+	
+	// page count loop
+	do {
+		...				// here try to count one more page based on "pageSize"
+		
+		myPreview->pageCounted();	// inform framework that the page was 	counted
+		
+		n++;		
+	} while (!m_break);	// wait for exit condition
+
+	// pass it back to the framework
+	*pages = n;
+}
+
+\endcode
+
+\code
+
+void myProgram::slotTerminateCount()
+{
+	m_break = true;
+}
+
+\endcode
+
+
+<a name="painting"></a>
+<h3>Painting page content</h3>
+
+It is the second necessary task which should be implemented while using the framework for
+preview own content. In general, there are two cases when a page needs to be painted:
+	- when a page is being shown on the screen during preview;
+	- when a page is being sent to the printer.
+
+Due to performance and quality reasons (because in most cases previewed page can have 
+worse quality than while sending to real printer), there are two signal which should be handled
+in the code: QicsPrintPreviewWidget::drawPage(QicsPrintPreviewPage *page) which handler
+should be responcible to paint \a page content for preview, 
+and QicsPrintPreviewWidget::printPage(QicsPrintPreviewPage *page, QPainter *painter) which should
+be handled in order to paint \a page using \painter onto the real printer device (i.e. perform
+actual printing of the page).
+
+The handler for QicsPrintPreviewWidget::printPage() signal can have general structure shown
+in the example. 
+
+Note that page number is phisical (framework-related), and always has a value in range 
+[1..total_number_counted] (where total_number_counted is the value counted at the previous step).
+Therefore it may or may not correspond to the logical page number (for example, for any reason
+you decided to allow preview only pages from 101 to 120, so total_number_counted is 20, and
+phisical numbers for the framework will be in range [1..20], so page->number() will return 1 for
+logical page 101, 2 for 102 and so on). Usually, this number is shown
+during preview stage only and should not be drawn in these handlers - the corresponding
+logical number should be used for this reason instead.
+
+Another important parameter is QicsPrintPreviewPage::pageRect() which defines screen page size
+(which can be smaller or larger then actual size, QicsPrintPreviewPage::realPageRect(), depending
+of the current scale value).
+
+\code
+
+void myProgram::slotPreviewPage(QicsPrintPreviewPage *page)
+{
+	// get the screen page size from the page object
+	const QRect &r = page->pageRect();
+
+	// get page number (1-based)
+	int n = page->number();
+
+	// create painter and draw page content 
+	QPainter p(page);
+	
+	// draw page with corresponding logical page number (i.e. 101,102,103...)
+	drawPageContent(&p, r, n+100);
+}
+
+\endcode
+
+The handler for QicsPrintPreviewWidget::printPage() probably will have similar structure
+except of creating painter object (since it is already done by the framework for the active
+printer). 
+
+Also, QicsPrintPreviewPage::realPageRect() should be used to obtain real dimensions of the page
+being printed. However, the framework already sets up the painter to match this size,
+so it is impossible to occasionally break the allowed painting area.
+
+\code
+
+void myProgram::slotPrintPage(QicsPrintPreviewPage *page, QPainter *painter)
+{
+	// get the actual page size from the page object
+	const QRect &r = page->realPageRect();
+
+	// get page number (1-based)
+	int n = page->number();
+
+	// draw page with corresponding logical page number (i.e. 101,102,103...)
+	printPageContent(painter, r, n+100);
+}
+
+\endcode
+
+The methods \b drawPageContent(...) and \b printPageContent(...) should be written by the 
+developer of course.
+
+
+
+<h3>Interactive setting of the preview and printing options</h3>
+
+The next important task is to provide the user with flexible graphic interface to allow him
+easily setup pages layout, scale, choose printer and paper size, and perform printing based
+on customizable set of options.
+
+The framework does not contain itself any facilities to create such a GUI. QicsPrintPreviewWidget has
+a couple of methods for setting these options directly, but it is application's responce to provide
+the interaction between GUI and corresponding QicsPrintPreviewWidget methods. In general, the GUI
+should include QicsPrintPreviewWidget as the main widget showing pages being previewed, and some
+additional controls which should be connected with its corresponding methods to get/set all the
+options. Also, there should be an opportunity to choose which printer and paper to use (in general,
+Qt provides standard dialogs for this). After the printer/paper parameters were changed, 
+QicsPrintPreviewWidget must be updated in order to reflect these changes.
+
+There is an example - \link stocks2_demo Stocks2 \endlink - which implements all the desired behavior. It is based on two dialogs -
+first one contains QicsPrintPreviewWidget as the main preview area, and input elements for
+setting of page numbering, scale, page count and layout policy. Also there are inputs for switching
+between pan/select mode, and for choosing some appearance items (such as showing page numbers,
+automatically go to the active page etc.). Also it has buttons for choosing printer/paper
+options, "Close" button and "Print" button.
+
+Clicking "Print" button will invoke the second dialog - for customizing printing options and
+to start printing. Here the user can set, how many copies and in which order to print.
+
+
+
+
+
+*/

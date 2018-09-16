@@ -1,0 +1,73 @@
+               PyQicsTable - Python Bindings for the QicsTable Widget
+
+
+INTRODUCTION
+
+These are the Python bindings for the QicsTable widget.  You must also have
+PyQt and the SIP Python bindings generator installed.
+
+The homepage of PyQt is http://www.riverbankcomputing.co.uk/pyqt/.
+
+The homepage of SIP is http://www.riverbankcomputing.co.uk/sip/.
+
+NOTE: for building PyQicsTable for Qt 4.5.x you should have SIP 4.8 or later.
+
+INSTALLATION
+
+Check for any other README files in this directory that relate to your
+particular platform.  Feel free to contribute a README for your platform or to
+provide updates to any existing documentation.
+
+The first step is to configure PyQicsTable by running the following command.
+
+	python configure.py
+
+This assumes that the correct Python interpreter is on your path.  Something
+like the following may be appropriate on Windows.
+
+	c:\python23\python configure.py
+
+If you have multiple versions of Python installed then make sure you use the
+interpreter for which you wish to generate bindings for.
+
+The configure.py script takes many options.  Use the "-h" command line option
+to display a full list of the available options.
+
+The next step is to build PyQicsTable using your platform's make command.
+
+	make
+
+Optionaly you can add CFLAGS and/or CXXFLAGS(CPPFLAGS) for make utility 
+(e.g. nonstandard header directory, optimization code features ...).
+
+The final step is to install PyQicsTable by running the following command.
+(Depending on your system you may require root or administrator privileges.)
+
+	make install
+
+
+THE REST OF THE DISTRIBUTION
+
+The "examples" directory contain ports to Python of the QicsTable example
+applications.
+
+The "doc" directory contains SGML and HTML documentation for the bindings.
+This documentation includes a section describing the differences visible to
+the Python programmer between this and the previous version - please read it.
+
+NOTE:
+  Windows
+    Qt-4.4.3
+      QicsTable only works with sip-4.7.9 + PyQt-win-commercial-4.4 and sip-4.8.2 + PyQt-win-commercial-4.5.
+    Qt-4.5.3
+      QicsTable only works with sip-4.7.9 + PyQt-win-commercial-4.4, sip-4.8.2 + PyQt-win-commercial-4.5 and sip-4.10 + PyQt-win-commercial-4.7.
+    Qt-4.6.1
+      QicsTable only works with sip-4.10 + PyQt-win-commercial-4.7.
+
+  Linux
+    Qt-4.4.3
+      QicsTable only works with sip-4.7.9 + PyQt-win-commercial-4.4, sip-4.8.2 + PyQt-win-commercial-4.5 and sip-4.10 + PyQt-win-commercial-4.7.
+    Qt-4.5.3
+      QicsTable only works with sip-4.7.9 + PyQt-win-commercial-4.4, sip-4.8.2 + PyQt-win-commercial-4.5 and sip-4.10 + PyQt-win-commercial-4.7.
+    Qt-4.6.1
+      QicsTable only works with sip-4.10 + PyQt-win-commercial-4.7.

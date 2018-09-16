@@ -1,0 +1,16 @@
+/*!
+
+\page stocks_demo Demo - Stocks
+
+\image html stocks.png
+<P>
+This demonstration program shows QicsTable used in a simple stock market 
+simulation.  In the source, you will find examples of setting
+properties on cells, rows, and columns.  Frozen rows are used, and
+real-time updates are shown.
+
+The code in this example can be found in \b \<QICSDIR\>/examples/stocks.
+
+- \ref stocks_cpp        Class Definitions & Program Code
+
+*/

@@ -1,0 +1,60 @@
+PyQicsTable 3.0               2014/02/11
+
+- Ported to Qt 5
+----------------------------------------
+
+
+PyQicsTable 2.4.1             2010/01/27
+----------------------------------------
+
+Improvements:
+- Supporting PyQt 4.5.x and SIP 4.8 (or later SIP version) has been added (#88676, RT)
+
+PyQicsTable 2.4.0             2008/01/19
+----------------------------------------
+
+Improvements:
+- Compatibility with all sip versions (except sip-4.7.0 - sip-4.7-snapshot-20071007)
+- Adapted sip code for latest code of qicstable-2.4
+- Support for PyQt 4.1.1
+
+Fixed:
+- Build problems on x86_64 platforms
+- Build problems with sip 4.5
+- Most warning messages
+
+Added:
+- QicsNavigator support
+- Added to QicsGridCommon [set]selectionStyle() methods.
+- Added to QicsGridInfo row filters methods (set/remove)
+- Added to QicsNamespace QicsSelectionStyle enum
+- Added to QicsRow isFilter property
+- Added to QicsTable python class methods: selectionStyle(),
+    isNavigatorAllowed(), [set]rowFilter(), removeRowFilter(),
+    removeAllRowFilters()
+
+PyQicsTable 1.2.0 beta 3
+----------------------------------------
+
+- Adapted for QicsTable 1.2.0 (with PyQt4 support)
+- Remaked examples for this version of PyQicsTable
+- Added setNumRows and setNumColumns in QicsDataModel
+
+PyQicsTable 1.1.0 RC1
+----------------------------------------
+
+- Fix "consultant" example where QicsDataModelDefault::setItem() was 
+  called with wrong parameter.
+- Add slot moveEdit() to QicsCheckCellDisplay.
+- Add slot moveEdit() to QicsComboCellDisplay.
+- Add signal cellValueChanged() to QicsDataModel.
+- Add signal uneditRequest() to QicsScreenGrid.
+- Add slots setBackgroundColor() and setForegroundColor() to QicsTable.
+
+PyQicsTable
+----------------------------------------
+
+- Fix "consultant" example: QtGui.QValidator.Valid - QValidator do not have a Valid state
+- Rewrite "spreadsheet" example
+- Fix "Stocks" example - project closed with "Segmentation fault"
+- Fix "custom_data_type" example - QtPoint was not in QtCore module

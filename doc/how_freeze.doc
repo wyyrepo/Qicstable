@@ -1,0 +1,57 @@
+/*!
+
+\page how_freeze HOWTO - Freezing Rows and Columns
+
+QicsTable supports frozen rows and columns at all four edges of the
+table.  A frozen row remains visible at all times at the top (or
+bottom) of the table and does not scroll with the rest of the rows.
+A frozen column remains visible at all times at the left (or 
+right) of the table and does not scroll with the rest of the columns.
+
+When you freeze rows at the top of the table, only rows at the top of
+the current
+\link QicsTable::viewport viewport\endlink can be frozen.  If you wish
+to freeze rows that are not at top of the viewport, you must first
+move those rows to the top using
+\link QicsTable::moveRows moveRows()\endlink.
+Once the rows are at the top of the viewport, you can call
+\link QicsTable::freezeTopRows freezeTopRows()\endlink to freeze
+them.
+
+Similarly, when you freeze rows at the bottom, only rows at the bottom
+of the current \link QicsTable::viewport viewport\endlink can be
+frozen.  If you wish to freeze rows that are not at bottom of the
+viewport, you must first move those rows to the bottom using
+\link QicsTable::moveRows moveRows()\endlink.
+Once the rows are at the botom of the viewport, you can call
+\link QicsTable::freezeBottomRows freezeBottomRows()\endlink to freeze
+them.
+
+\code
+// Move rows 6 and 7 to the top of the table
+
+QMemArray<int> rows_to_move(2);
+
+rows_to_move[0] = 6;
+rows_to_move[1] = 7;
+
+table->moveRows(0, rows_to_move);
+
+// Now freeze the rows
+
+table->freezeTopRows(2);
+\endcode
+
+\image html frozen.png
+<P>
+Similar methods exist for freezing columns.  Move the columns you wish
+to freeze to the left or right edge of the table using
+\link QicsTable::moveColumns moveColumns()\endlink,
+then freeze the columns by calling
+\link QicsTable::freezeLeftColumns freezeLeftColumns()\endlink or
+\link QicsTable::freezeRightColumns freezeRightColumns()\endlink.
+
+For a complete example program showing frozen rows and columns, see
+\ref freeze_example.
+
+*/

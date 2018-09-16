@@ -1,0 +1,264 @@
+ICS COMMERCIAL LICENSE AGREEMENT
+FOR QT BASED PRODUCTS
+
+Agreement version ICS-2.6
+
+IMPORTANT-READ CAREFULLY:
+1. This Integrated Computer Solutions Incorporated End-User 
+License Agreement ("Agreement") is a legal agreement between 
+you (either an individual or a legal entity) ("Licensee") 
+and Integrated Computer Solutions Incorporated ("ICS") for 
+the ICS software product(s) accompanying this Agreement, 
+which include(s) computer software and may include "online" 
+or electronic documentation, associated media, and printed 
+materials, including the source code, example programs and 
+the documentation ("Licensed Software").
+
+2. The Licensed Software is protected by copyright laws and 
+international copyright treaties, as well as other 
+intellectual property laws and treaties. The Licensed 
+Software is licensed, not sold.
+
+3. The terms of the License Certificate ("License 
+Certificate") accompanying the Licensed Software are 
+considered part of the Agreement. In the event of 
+inconsistency or conflict between the language of this 
+Agreement and the License Certificate, the provisions of 
+this Agreement shall govern.
+
+4. By installing, copying, or otherwise using the Licensed 
+Software, Licensee agrees to be bound by the terms of this 
+Agreement. If Licensee does not agree to the terms of this 
+Agreement, Licensee may not install, copy, or otherwise use 
+the Licensed Software; Licensee may, however, return it to 
+Licensee's place of purchase for a full refund. In addition, 
+by installing, copying, or otherwise using any updates or 
+other components of the Licensed Software that Licensee 
+receives separately as part of the Licensed Software 
+("Updates"), Licensee agrees to be bound by any additional 
+license terms that accompany such Updates. If Licensee does 
+not agree to the additional license terms that accompany 
+such Updates, Licensee may not install, copy, or otherwise 
+use such Updates.
+
+5. Upon Licensee's acceptance of the terms and conditions of 
+this Agreement, ICS grants Licensee the right to use the 
+Licensed Software in the manner provided below.
+
+6. ICS grants to Licensee as an individual a personal, 
+nonexclusive, nontransferable license to make and use copies 
+of the Licensed Software for the sole purposes of designing, 
+developing, and testing Licensee's software product(s) 
+("Applications"). Licensee may install copies of the 
+Licensed Software on an unlimited number of computers 
+provided that Licensee is the only individual using the 
+Licensed Software. If Licensee is an entity, ICS grants 
+Licensee the right to designate one, and only one, 
+individual within Licensee's organization who shall have the 
+sole right to use the Licensed Software in the manner 
+provided above. Licensee may at any time, but not more 
+frequently that once every six (6) months, designate another 
+individual to replace the current designated user by 
+notifying ICS, so long as there is no more than one 
+designated user at any given time.
+
+7. The Licensed Software may provide links to third party 
+libraries or code (collectively "Third Party Libraries") to 
+implement various functions. Third Party Libraries are not 
+prepared by or owned by ICS, and do not comprise part of the 
+Licensed Software. In some cases, access to Third Party 
+Libraries may be included along with the Licensed Software 
+delivery as a convenience for development and testing only. 
+Such source code and libraries as are or may be listed in 
+the ".../src/3rdparty" source tree delivered with the 
+Licensed Software, as may be amended from time to time, do 
+not comprise the Licensed Software. Licensee acknowledges 
+(1) that some Third Party Libraries may require additional 
+licensing of copyright and patents from the owners of such, 
+and (2) that distribution of any of the Licensed Software 
+referencing any portion of a Third Party Library may require 
+appropriate licensing from such third parties. Third Party 
+Libraries include but are not limited to the following 
+categories: GIF, JPEG and MPEG. 
+
+GENERAL TERMS THAT APPLY TO APPLICATIONS AND 
+REDISTRIBUTABLES
+8. ICS grants Licensee a nonexclusive, royalty-free right to 
+reproduce and distribute the object code form of certain 
+portions of the Licensed Software ("Redistributables"), as 
+specified in Appendix 1, for execution on any operating 
+system of a type listed in the License Certificate 
+("Platforms"). Copies of Redistributables may only be 
+distributed with and for the sole purpose of executing 
+Applications permitted under this Agreement that Licensee 
+has created using the Licensed Software. Under no 
+circumstances may any copies of Redistributables be 
+distributed separately.
+
+9. The license granted in this Agreement for Licensee to 
+create Applications and distribute them and the 
+Redistributables (if any) to Licensee's customers is subject 
+to all of the following conditions: (i) all copies of the 
+Applications Licensee creates must bear a valid copyright 
+notice, either Licensee's own or the copyright notice that 
+appears on the Licensed Software; (ii) Licensee may not 
+remove or alter any copyright, trademark or other 
+proprietary rights notice contained in any portion of the 
+Licensed Software; (iii) Redistributables, if any, shall be 
+licensed to Licensee's customer "as is"; (ICS MAKES NO 
+WARRANTIES OR REPRESENTATIONS VIS-A-VIS LICENSEE'S CUSTOMER 
+WITH RESPECT TO REDISTRIBUTABLES, AND ICS EXPRESSLY 
+DISCLAIMS ANY AND ALL WARRANTIES VIS-A-VIS LICENSEE'S 
+CUSTOMER, WHETHER EXPRESS OR IMPLIED, ORAL OR WRITTEN, 
+INCLUDING, BUT NOT LIMITED TO ANY IMPLIED WARRANTY OF 
+MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE, 
+WHETHER OR NOT ICS KNOWS, HAS REASON TO KNOW, HAS BEEN 
+ADVISED OR IS OTHERWISE AWARE OF SUCH PURPOSE); (iv) 
+Licensee will indemnify and hold ICS, its related companies 
+and its suppliers, harmless from and against any claims or 
+liabilities arising out of the use, reproduction or 
+distribution of Applications; (v) Applications must be 
+developed using a licensed, registered copy of the Licensed 
+Software; (vi) Applications must add primary and substantial 
+functionality to the Licensed Software; (vii) Applications 
+may not pass on functionality which in any way makes it 
+possible for others to create software with the Licensed 
+Software; (viii) Applications may not compete with the 
+Licensed Software; (ix) Licensee may not use ICS's or any of 
+its suppliers' names, logos, or trademarks to market the 
+Application(s), except to state that the Application was 
+developed using the Licensed Software. NOTE: If it exists, 
+any Free Edition of the Licensed Software is licensed under 
+the terms of the GPL and not under this Agreement. If 
+Licensee has, at any time, developed all (or any portions 
+of) the Application(s) using the Free Edition, Licensee must 
+license such Application(s) (or any portions derived there 
+from) under the terms of the Free Software Foundation's GNU 
+General Public License (the "GPL") a copy of which is 
+located at http://www.gnu.org/copyleft/gpl.html#SEC1 (i.e., 
+any Product(s) and/or parts, components, portions thereof 
+developed using GPL licensed software, including Free 
+Edition, must be licensed under the terms of the GPL, and 
+the GPL-based source code must be made available upon 
+request).
+
+WARRANTY DISCLAIMER
+10. THE LICENSED SOFTWARE IS LICENSED TO LICENSEE "AS IS". 
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, ICS ON 
+BEHALF OF ITSELF AND ITS SUPPLIERS, DISCLAIMS ALL WARRANTIES 
+AND CONDITIONS, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT 
+NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT 
+WITH REGARD TO THE LICENSED SOFTWARE. THIS WARRANTY 
+DISCLAIMER NOTWITHSTANDING, LICENSEE MAY HAVE SPECIFIC LEGAL 
+RIGHTS WHICH MAY VARY FROM STATE/JURISDICTION TO 
+STATE/JURISDICTION.
+
+LIMITATION OF LIABILITY
+11. IF, ICS'S WARRANTY DISCLAIMER NOTWITHSTANDING, ICS IS 
+HELD LIABLE TO LICENSEE, WHETHER IN CONTRACT, TORT OR ANY 
+OTHER LEGAL THEORY, BASED ON THE LICENSED SOFTWARE, ICS'S 
+ENTIRE LIABILITY TO LICENSEE AND LICENSEE'S EXCLUSIVE REMEDY 
+SHALL BE, AT ICS'S OPTION, EITHER (A) RETURN OF THE PRICE 
+LICENSEE PAID FOR THE LICENSED SOFTWARE, OR (B) REPAIR OR 
+REPLACEMENT OF THE LICENSED SOFTWARE, PROVIDED LICENSEE 
+RETURNS TO ICS ALL COPIES OF THE LICENSED SOFTWARE AS 
+ORIGINALLY DELIVERED TO LICENSEE. ICS SHALL NOT UNDER ANY 
+CIRCUMSTANCES BE LIABLE TO LICENSEE BASED ON FAILURE OF THE 
+LICENSED SOFTWARE IF THE FAILURE RESULTED FROM ACCIDENT, 
+ABUSE OR MISAPPLICATION, NOR SHALL ICS UNDER ANY 
+CIRCUMSTANCES BE LIABLE FOR SPECIAL DAMAGES, PUNITIVE OR 
+EXEMPLARY DAMAGES, DAMAGES FOR LOSS OF PROFITS OR 
+INTERRUPTION OF BUSINESS OR FOR LOSS OR CORRUPTION OF DATA. 
+ANY AWARD OF DAMAGES FROM ICS TO LICENSEE SHALL NOT EXCEED 
+THE TOTAL AMOUNT LICENSEE HAS PAID TO ICS IN CONNECTION WITH 
+THIS AGREEMENT. 
+
+SUPPORT AND UPDATES
+12. Licensee will be eligible to receive email and telephone 
+based software developer support and access to Updates to 
+the Licensed Software for a period not to exceed one year 
+from the date of initial delivery, in accordance with ICS's 
+then current license agreement, policies and procedures, if 
+any. Such policies and procedures may be changed from time 
+to time.
+
+GENERAL PROVISIONS
+TERMINATION
+13. ICS may terminate the Agreement at any time immediately 
+upon written notice by ICS to Licensee if Licensee breaches 
+this Agreement, fails to pay the fees for the Licensed 
+Software, or infringes ICS's intellectual property in or to 
+the Licensed Software. Upon termination of the Licenses, 
+Licensee shall return to ICS all copies of Licensed Software 
+that were supplied by ICS. All other copies of Licensed 
+Software in the possession or control of Licensee must be 
+erased or destroyed. An officer of Licensee must promptly 
+deliver to ICS a written confirmation that this has 
+occurred.
+
+GOVERNMENT END USERS
+14. A "U.S. Government End User" shall mean any agency or 
+entity of the government of the United States. The following 
+shall apply if Licensee is a U.S. Government End User. The 
+Licensed Software is a "commercial item," as that term is 
+defined in 48 C.F.R. 2.101 (Oct. 1995), consisting of 
+"commercial computer software" and "commercial computer 
+software documentation," as such terms are used in 48 C.F.R. 
+12.212 (Sept. 1995). Consistent with 48 C.F.R. 12.212 and 48 
+C.F.R. 227.7202-1 through 227.7202-4 (June 1995), all U.S. 
+Government End Users acquire the Licensed Software with only 
+those rights set forth herein. The Licensed Software 
+(including related documentation) is provided to U.S. 
+Government End Users: (a) only as a commercial end item; and 
+(b) only pursuant to this Agreement.
+
+COMPLIANCE WITH LOCAL LAWS
+15. Licensee shall comply with all applicable laws and 
+regulations relating to the Licensed Software in the United 
+States and in other countries in which Licensee uses or 
+modifies the Licensed Software. Without limiting the 
+generality of the foregoing, Licensee shall not export, 
+reexport, disclose or distribute any of the Licensed 
+Software in violation of any applicable laws or regulations, 
+including the export laws and regulations of the United 
+States, and shall comply with all such laws and regulations.
+
+16. This Agreement may only be modified in writing signed by 
+authorized representatives of Licensee and ICS. In case of a 
+conflict between the Agreement and the terms of any purchase 
+order or other ordering document, the Agreement shall 
+prevail. If any provision of the Agreement is found void or 
+unenforceable, the remainder will remain valid and 
+enforceable according to its terms. If any remedy provided 
+is determined to have failed for its essential purpose, all 
+limitations of liability and exclusions of damages set forth 
+in this Agreement shall remain in effect.
+
+17. This Agreement shall be construed, interpreted and 
+governed by the laws of the Commonwealth of Massachusetts, 
+USA. Any action or proceeding arising from or relating to 
+this Agreement shall be brought in the Federal Courts 
+sitting in Boston, Massachusetts or in the State Court in 
+Middlesex County, Massachusetts, and each party irrevocably 
+submits to the personal jurisdiction of any such court in 
+any such action or proceeding. The Agreement gives Licensee 
+specific legal rights; Licensee may have others, which vary 
+from state to state and from country to country. ICS 
+reserves all rights not specifically granted in this 
+Agreement.
+
+
+ICS COMMERCIAL LICENSE AGREEMENT 
+FOR QT BASED PRODUCTS 
+Appendix 1:
+
+Parts of the Licensed Software that are permitted for 
+distribution ("Redistributables"):
+- The Licensed Software's libraries in object code form
+
+Parts of the Licensed Software that are not permitted for 
+distribution include, but are
+not limited to:
+- The Licensed Software's source code and header files
+- The Licensed Software's documentation

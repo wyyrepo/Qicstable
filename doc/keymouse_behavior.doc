@@ -1,0 +1,156 @@
+/*!
+
+\page keymouse_behavior Customizing Grid Keyboard and Mouse Event Behavior
+
+%QicsTable provides built-in keyboard traversal, selection via
+keyboard and mouse, drag and drop, and other mouse-based behavior.
+For most users, the built-in behavior will be sufficient, but some
+users may want to change the default keyboard and mouse behavior of
+the table.  This requires a more detailed understanding of the
+internals of the QicsTable widget.
+
+The toplevel, programmer-visible QicsTable widget is largely a layout
+widget.  QicsTable does not actually draw anything.  Rather, it
+contains many child widgets, which it lays out in such a way as to
+create the appropriate table.  Some of these widgets are
+user-provided, such as the title widgets and the corner widgets.  Most
+of the widgets, however, are created automatically by the QicsTable as
+needed.  These widgets are called grid widgets.  There is at least one
+grid widget for the "main grid" of the table (but possibly more, if
+there are frozen rows and/or columns).  There is at least one grid
+widget for the row header (again, possibly more if there are frozen
+rows and/or columns) and at least one grid widget for the column
+header.
+
+<H3>Grid Widgets</H3>
+
+Grid widgets are the "brains" of the %QicsTable.  They handle cell
+layout, call the appropriate QicsCellDisplay object to draw each cell,
+and handle most user interaction.
+
+The base class of the grid hierarchy is QicsGrid.  The important thing
+to notice about QicsGrid is that it is \b not a widget.  QicsGrid is
+an object that knows how to layout and draw cells in a grid.  There is
+very little customization that can be done in this class.
+
+One subclass of QicsGrid is QicsPrintGrid.  This class is used when
+printing a grid, and is not relevant to the present customization
+topic.
+
+The base \a widget class of the grid hierarchy is QicsScreenGrid.
+This class is derived from both QicsGrid (thus gaining its layout and
+drawing capabilities) and QFrame (thus making it a widget that can be
+displayed on the screen).  While this class can be instantiated, it is
+primarily meant to be a superclass.  The drawing behavior of all
+grids, header or table, is completely implemented in QicsScreenGrid.
+The subclasses of QicsScreenGrid differ only in the way they handle
+keyboard and mouse events.  QicsScreenGrid also contains the
+"infrastructure" of most traversal and drag and drop operations.  By
+this, we mean that traversal and drag and drop are available in all
+subclasses of QicsScreenGrid, but (with one exception -- discussed
+below) QicsScreenGrid does not "bind" these operations to any mouse or
+keyboard events.  That is the job of the subclasses.
+
+The two subclasses of QicsScreenGrid are QicsTableGrid and
+QicsHeaderGrid.  QicsTableGrid is used for the "main grid" of the
+table.  QicsHeaderGrid is used for the headers of the table.  As
+previously stated, these two classes draw in exactly the same way.
+The only difference between the two is in user interaction.
+QicsTableGrid supports keyboard traversal, cell editing, selection,
+and drag and drop.  QicsHeaderGrid supports selection and changing row
+height or column width.
+
+<H3>Keyboard Events</H3>
+
+Keyboard events in grid widgets are handled slightly differently than
+the usual method for QWidgets.  Normally, all keyboard behavior is
+handled in the keyPressEvent() and keyReleaseEvent() methods.  If you
+wish to change this behavior, you must reimplement the appropriate
+method in your subclass, making sure to replicate any desired existing
+code from the superclass in your event method.
+
+QicsScreenGrid and its subclasses take a different approach.  The base
+grid widget class, QicsScreenGrid, implements a
+\link QicsScreenGrid::keyPressEvent keyPressEvent()\endlink method that
+handles many of the common behaviors that are needed in any grid
+widget.  QicsScreenGrid automatically handles keyboard traversal and
+cell editing, and dispatches events to individual cell display
+objects.  If an event is not handled by any of the above, it is
+dispatched to the
+\link QicsScreenGrid::handleKeyPressEvent handleKeyPressEvent()\endlink
+method.  This method is intended to be used by programmers who wish to
+augment the grid's keyboard handling in subclasses.  Simply
+reimplement this method in your subclass and handle the appropriate
+key events as you wish.
+
+If you need to modify the grid's traversal behavior, you must
+reimplement
+\link QicsScreenGrid::handleTraversalKeys handleTraversalKeys()\endlink.
+This method is called by
+\link QicsScreenGrid::keyPressEvent keyPressEvent()\endlink
+and handles all keyboard traversal actions.
+
+If your keyboard semantics cannot be met by reimplementing
+\link QicsScreenGrid::handleKeyPressEvent handleKeyPressEvent()\endlink
+or
+\link QicsScreenGrid::handleTraversalKeys handleTraversalKeys()\endlink,
+you will need to completely reimplement
+\link QicsHeaderGrid::keyPressEvent keyPressEvent()\endlink.
+This will require you to duplicate any part of the default
+\link QicsHeaderGrid::keyPressEvent keyPressEvent()\endlink keyboard
+handling that you wish to preserve.
+
+\b Note:  The current implementation of QicsHeaderGrid has no keyboard
+behavior defined.  Therefore, this class reimplements
+\link QicsHeaderGrid::keyPressEvent keyPressEvent()\endlink
+to be an empty method.
+
+<H3>Mouse Events</H3>
+
+Similarly to keyboard events, mouse events in grid widgets are handled
+slightly differently than the usual method for QWidgets.  Normally,
+all mouse behavior is handled in the mousePressEvent(),
+mouseMoveEvent(), and keyReleaseEvent() methods.  If you wish to
+change this behavior, you must reimplement the appropriate method in
+your subclass, making sure to replicate any desired existing code from
+the superclass in your event method.
+
+QicsScreenGrid and its subclasses take a different approach.  The base
+grid widget class, QicsScreenGrid, implements
+\link QicsScreenGrid::mousePressEvent mousePressEvent()\endlink,
+\link QicsScreenGrid::mouseMoveEvent mouseMoveEvent()\endlink, and
+\link QicsScreenGrid::mouseReleaseEvent mouseReleaseEvent()\endlink
+methods that handle many of the common behaviors that are needed in
+any grid widget.  QicsScreenGrid automatically handles signal
+emitting, and dispatches events to individual cell display objects.
+If an event is not handled by any of the above, it is dispatched to the
+\link QicsScreenGrid::handleMousePressEvent handleMousePressEvent()\endlink
+\link QicsScreenGrid::handleMouseMoveEvent handleMouseMoveEvent()\endlink
+\link QicsScreenGrid::handleMouseReleaseEvent handleMouseReleaseEvent()\endlink
+methods.  These methods are intended to be used by programmers who
+wish to augment the grid's mouse event handling in subclasses.  Simply
+reimplement one or more of these methods in your subclass and handle
+the appropriate mouse events as you wish.
+
+<H3>Using Your New Grid Widget in QicsTable</H3>
+
+Once you have created your new grid class, you have to tell QicsTable
+to use it when creating the table.  You do this by using an alternate
+QicsTable constructor (QicsTable::QicsTable).  This constructor takes
+as arguments several \a foundry \a methods.  Foundry methods are
+specific procedures that return new instances of a type of object.
+QicsTable uses these foundry methods to create the appropriate kind of
+grid.  (QicsTable also uses foundry methods to create data model
+objects for row and column headers.)  The foundry method type to
+create table grids is QicsTableGrid::Foundry.  The foundry method type
+to create header grids is QicsHeaderGrid::Foundry.
+
+No other actions are necessary to use your new grid widget in the
+table.  All other processing necessary to integrate the
+grid into the table environment is performed automatically by
+QicsTable.
+
+For an example showing how to create a custom grid, see
+\ref cg_example.
+
+*/

@@ -1,0 +1,21 @@
+/*!
+
+\page spread_demo Demo - Spreadsheet
+
+\image html spread.png
+<P>
+This demonstration program shows QicsTable used in a spreadsheet-like
+environment.  In the source, you will find examples of setting
+properties on cells, selection handling, loading and saving data from
+text files, cells spanning  and other QicsTable features.
+
+This demo is a work-in-progress.
+
+The code in this example can be found in \b \<QICSDIR\>/examples/spreadsheet.
+
+- \ref spread_h        Class Definitions
+- \ref spread_cpp      Program Code
+- \ref spread_curr_fmt_h Formatter class for currency
+- \ref spread_curr_fmt_cpp  Code for currency formatter class
+
+*/

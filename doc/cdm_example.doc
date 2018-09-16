@@ -1,0 +1,19 @@
+/*!
+
+\page cdm_example Example - Implementing a New Data Model
+
+This example shows how one can use an existing "data model"-type class
+and create a new subclass that implements the QicsDataModel API.  This
+new model can be used by QicsTable to display data stored in the
+original model object.
+
+The code in this example can be found in \b \<QICSDIR\>/examples/custom_data_model.
+
+For more information about creating a new data model, see
+\ref extend_model.
+
+- \ref cdm_h The new class's header file
+- \ref cdm_cpp The new class's source file
+- \ref cdm_main_cpp The main source file
+
+*/

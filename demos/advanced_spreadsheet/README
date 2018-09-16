@@ -1,0 +1,25 @@
+Advanced Spreadsheet Demo.
+Example of simple spreadsheet application with MS Excel look&feel.
+To build it qicstable must be compiled with XML support.
+
+Features already implemented:
+- cells/rows/columns formatting (borders,spans,colors,fonts,align)
+- cells/rows/columns editing (copy/cut/paste/drag&drop)
+- table grid context menu with basic formatting actions.
+- simple formula calculations(not fully implemented yet, only for
+  demonstration)
+- search and replace.
+- opening/saving document(data and table configuration).
+- printing(not fully implemented yet, only for demonstration)
+- inserting/deleting rows/columns.
+- hiding/showing rows/columns.
+- using custom formatters.
+- sorting(only for demonstration, needs much more work).
+- excel like headers highlighting when selection has changed.
+- print preview.
+
+
+Not implemented yet:
+- opening/saving of all document tabs as whole.
+- sorting by cells(not by rows).
+- undo/redo

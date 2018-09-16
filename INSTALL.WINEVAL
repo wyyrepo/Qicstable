@@ -1,0 +1,81 @@
+       BUILDING AND INSTALLING QicsTable Evaluation For Windows
+
+QicsTable is built with, and depends on, Qt version 4.7 and newer.
+You must have Qt installed on the machine that you are using to use
+QicsTable.
+
+In the following instructions, <QICSTABLE> refers to the toplevel
+directory of the QicsTable evaluation distribution.  For example, if
+you unpacked the Windows archive in \tmp, <QICSTABLE> would refer to
+\tmp\qicstable-x.x.x-win32-vs6-mt-qt-4.7.4-commercial-eval.zip
+
+It is suggested that all commands be issued from the
+command line shell that was installed with your Qt distribution
+because it properly sets your PATH and QTDIR environment properly
+to find the correct Qt and compiler tools. A shortcut is available
+from the START menu as well as the Microsoft Visual Studio 
+(under the "Qt" menu, if you installed the Qt/MSDev Integration Package).
+
+
+1.  Unpack the archive.
+    On Windows:     - Unzip the archive file using WinZip or similar
+		      utility.  Be sure to extract the entire folder
+		      hierarchy.
+
+2.  This evaluation version of QicsTable was built with the following options:
+    - 'release' build
+    - shared library/DLL
+
+3.  The QicsTable examples build using the Qt utility 'qmake'.  Before
+    running qmake, you must make sure you have set the environment
+    variable QTDIR to the location of your Qt distribution.
+
+    If you are using the Windows command shell, you can set QTDIR as
+    follows:  'set QTDIR=<your_qt_location>'
+
+4.  After setting QTDIR, simply change directory to <QICSTABLE> and
+    execute the following command:
+  
+    % qmake qicstable.pro
+
+5.  Once the toplevel makefile is built, you may build the examples.
+    On Windows(MSVC) - 'nmake'
+
+    This will build the QicsTable examples.
+
+6.  Online HTML documentation can be found in <QICSTABLE>/doc/html.  The
+    main page is 'index.html'.
+
+7.  Examples can be found in <QICSTABLE>/examples.
+
+8.  On Windows, you will need to modify your Path environment variable
+    in order for the example programs to find the QicsTable DLL.  This
+    can be done in a number of different ways, depending on the
+    version of Windows that you are running.  One way that will always
+    work is via the command line.
+
+    C:>  set Path=<QICSTABLE>/lib;%Path%
+
+    As before, replace <QICSTABLE> with the full path to the directory
+    in which you unpacked the archive.
+
+    Environment variables can also be set permanently via the Control
+    Panel.  Run the "System" application from the Control Panel,
+    select the "Advanced" tab, and set the environment variable.
+
+9.  This Windows evaluation library requires a key.  Any program that
+    links with the QicsTable DLL will prompt you for an evaluation
+    key.  This key will be provided via email when you download the
+    evaluation.  To use the key, simply type the key into the dialog
+    when prompted.  To avoid having to type the evaluation key each
+    time you run a QicsTable application, set the environment variable
+    ICS_EVAL_KEY to the value of the key as given to you.
+
+    C:>  set ICS_EVAL_KEY=a394deabcd632199
+
+    You may also set this environment variable permanently via the
+    Control Panel, as described above.
+
+    When your evaluation key expires, you will no longer be able to
+    run programs that link with QicsTable.  Please contact ICS at
+    http://www.ics.com or info@ics.com for instructions.

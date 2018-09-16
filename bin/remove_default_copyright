@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+undef $/;
+
+while (<>) {
+      s/\/\*(.*?)(\*\* Copyright)(.*?)\*\///gs;
+      s/\#(.*?)(\#\# Copyright)(.*?)\#\#\#//gs;
+      print;
+}

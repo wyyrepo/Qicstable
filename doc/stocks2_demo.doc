@@ -1,0 +1,51 @@
+/*!
+
+\page stocks2_demo Demo - Stocks2
+
+\image html stocks2.png
+<P>
+This demonstration program shows QicsTable used in a simple stock market 
+simulation.  In the source, you will find examples of setting
+properties on cells, rows, and columns.  Frozen rows are used, and
+real-time updates are shown.
+
+Also, you'll find how to export content of the table to HTML file
+(menu File->Export), and how to organize printing with preview
+(menu File->Print).
+
+The code in this example can be found in \b \<QICSDIR\>/examples/stocks2.
+
+There are three standard dialogs available in \a addons folder:
+	- QicsHTMLExportDialog.ui - a dialog for setting HTML export options;
+	- QicsPrintDialog.ui - a dialog for setting printing options;
+	- QicsPrintPreviewDialog.ui - a dialog for preview pages before printing.
+
+StockUI::exportHTML() method invokes standard export dialog to
+perform export via QicsHTMLExport.
+
+\code
+
+void StockUI::exportHTML()
+{
+    // myTable is the QicsTable to export, "table.html" is the default output file name.
+    QicsHTMLExportDialog::exportTable(myTable, "table.html");
+} 
+
+\endcode
+
+StockUI::printPreview() method invokes standard print preview 
+dialog to perform preview and printing via QicsTablePrint.
+
+\code
+
+void StockUI::printPreview()
+{
+    // myTable is the QicsTable to print
+	QicsPrintPreviewDialog::previewAndPrint(myTable);
+
+	raise();
+} 
+
+\endcode
+
+*/

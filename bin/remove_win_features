@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+undef $/;
+
+while (<>) {
+      s/#if defined\(Q_WS_WIN32\)(.*?)#endif//gs;
+      s/#ifndef QICSTABLE_EVAL(.*?)#endif//gs;
+      s/QICS_EXPORT //gs;
+      s/win32 {(.*?)}//gs;
+      print;
+}

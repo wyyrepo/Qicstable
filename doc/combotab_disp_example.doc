@@ -1,0 +1,18 @@
+/*!
+
+\page combotab_disp_example Example - Using a QicsComboTabCellDisplay class
+
+This example shows how to use combo box with tabbed dropdown list in the table.
+
+\image html disp_ct.png
+
+The code in this example can be found in \b \<QICSDIR\>/examples/displayers/combotab.
+
+For more information about display classes and subclassing them, see
+\ref cell_display.
+
+- \ref ctdisp_h The example's header file
+- \ref ctdisp_cpp The example's source file
+- \ref ctdisp_main_cpp The main source file
+
+*/

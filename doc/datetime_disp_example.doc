@@ -1,0 +1,18 @@
+/*!
+
+\page datetime_disp_example Example - Using a QicsDateTimeCellDisplay class
+
+This example shows how to use DateTime edit in the table.
+
+\image html disp_dt.png
+
+The code in this example can be found in \b \<QICSDIR\>/examples/displayers/datetime.
+
+For more information about display classes and subclassing them, see
+\ref cell_display.
+
+- \ref dtdisp_h The example's header file
+- \ref dtdisp_cpp The example's source file
+- \ref dtdisp_main_cpp The main source file
+
+*/

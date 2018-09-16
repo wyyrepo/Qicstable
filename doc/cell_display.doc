@@ -1,0 +1,163 @@
+/*!
+
+\page cell_display Customizing Table Display Using Cell Display Objects
+
+In the %QicsTable architecture, individual cell contents are not drawn
+by the table widget, but rather by entities called <A>cell display
+objects</A>.  A cell display object is responsible for not only the
+display of the cell, but also any edit operation that may occur in the
+cell.  The cell display object works together with the QicsGrid object
+to accomplish these tasks.
+
+A cell display object (also sometimes called a \i displayer), is a
+cell property.  This means that there is a default displayer for the
+entire table, and that different displayers may be set on individual
+rows, columns, and cells.  By setting different cell display objects
+on different cells, you can display data in many different ways.
+
+<H3>Built-in Cell Display Classes</H3>
+
+All cell display objects must inherit (directly or indirectly) from
+QicsCellDisplay, an abstract class that defines the API that every
+cell display object must implement.  QicsCellDisplay is the base of
+the cell display object class hierarchy.  Three subclasses of
+QicsCellDisplay provide additional support for various types of cell
+display objects.  If you need to create an entirely new cell display
+object, you most likely should base your object from one of these
+three classes.
+- QicsMovableEntryWidgetCellDisplay This abstract class provides
+  additional support for cell display classes that move a single entry
+  widget (line edit, check box, combo  box, etc) from cell to cell
+  when the user edits each cell.
+
+- QicsWidgetCellDisplay This concrete class allows any widget to be
+  placed into a cell.  This class can be used by itself (the widget is
+  specified in the displayer's constructor), or it can be subclassed
+  to create a class that always creates a certain widget.
+
+- QicsNoWidgetCellDisplay This abstract class provides additional
+  support for cell display objects that do not use a widget during
+  either displaying or editing of the cell.
+
+
+%QicsTable provides several pre-defined cell display objects.  These
+objects can be used as-is, or they can be subclassed to provide
+customized behavior. These display objects are subclassed from
+QicsMovableEntryWidgetCellDisplay so each of them could use single
+entry widget from cell to cell.
+- QicsTextCellDisplay Displays text and pixmaps.  This is the default
+  cell display object for the table. 
+
+- QicsCheckCellDisplay Displays data in the form of a check box.  This
+  class often needs to be subclassed in order to correctly map the
+  data values to the correct "check" values.
+
+- QicsComboCellDisplay Displays data in the form of a combo box.  This
+  class often needs to be subclassed in order to present the correct
+  list of choices and to correctly map data values to the appropriate
+  choice.
+
+- QicsDateTimeCellDisplay Displays data in the form of a datetime edit.
+  The value of the cell need to be the QDateTime type to correctly
+  display a datetime. To map datetime to another data types this class
+  should be subclassed.
+
+- QicsPushButtonCellDisplay Displays button in the cell. This
+  class often needs to be subclassed in order to correctly map the
+  data values to the correct pushbutton states.
+
+- QicsComboCheckCellDisplay Displays a dropdown checklist combo box.
+  This class is subclassed from QicsComboCellDisplay. It often needs
+  to be subclassed in order to present the correct list of choices
+  and to correctly map data values to the appropriate choice.
+
+- QicsComboTabCellDisplay Displays a combo box with tabbed dropdown
+  list. This class is subclassed from QicsComboCellDisplay. It often
+  needs to be subclassed in order to present the correct list of
+  choices and to correctly map data values to the appropriate choice.
+
+- QicsListCellDisplay Displays a list widget. This class often needs
+  to be subclassed in order to provide the correct list of choices
+  and to correctly map data values to the appropriate choice.
+
+- QicsRadioCellDisplay Displays a radio buttons group. This class
+  often needs to be subclassed in order to correctly map data values
+  to the appropriate choice.
+
+- QicsProgressCellDisplay Displays a progress bar. This class
+  often needs to be subclassed in order to correctly map data values
+  to the appropriate progress value.
+
+<H3>Creating a New Cell Display Class</H3>
+
+When none of the built-in cell display objects fit your requirements,
+you need to create your own displayer.  As noted above, your new class
+must be derived from QicsCellDisplay or one of its subclasses.  When
+you create your class, there are a number of class methods that must
+be implemented:
+- \link QicsCellDisplay::displayCell displayCell()\endlink  This is
+  the "guts" of the cell display object.  This method is responsible
+  for displaying a given data item in a given cell.  This method is
+  called by a grid object when that object is painting its contents.
+  It is important to remember that this method needs to be able to
+  draw to both the screen and a printer (the painter argument will
+  already be bound to the appropriate device).
+
+- \link QicsCellDisplay::startEdit startEdit()\endlink This method is
+  called when an edit operation is about to begin in a given cell.
+  This is the cell display object's chance to perform any necessary
+  pre-edit operations.  For example, a displayer that uses a single,
+  movable entry widget would retrieve the appropriate cell properties
+  (font, colors, etc) and set those properties on the entry widget.
+
+- \link QicsCellDisplay::moveEdit moveEdit()\endlink This method is
+  called when the location of the cell that is currently being edited
+  has changed.  In the case of a displayer that uses a single,
+  movable entry widget, this method would move the entry widget to the
+  new location.
+
+- \link QicsCellDisplay::hideEdit hideEdit()\endlink This method is
+  called when the cell that is currently being edited is no longer
+  visible on the screen.  In the case of a displayer that uses a single,
+  movable entry widget, this method would hide the entry widget.
+
+- \link QicsCellDisplay::editWhenCurrent editWhenCurrent()\endlink
+  This method informs the grid if each cell using this displayer should
+  be automatically put into edit mode when it becomes the current
+  cell.
+
+- \link QicsCellDisplay::isEmpty isEmpty()\endlink  This method
+  indicates to the grid whether the given cell is empty.  This is
+  normally used when the grid is determining whether the cell can be
+  overflowed into or not. 
+
+- \link QicsCellDisplay::sizeHint sizeHint()\endlink  This method
+  returns a "hint" as to the preferred size of the given cell.
+
+In addition, there are a number of methods that can be re-implemented
+in your subclass if you so desire.
+- \link QicsCellDisplay::handleMouseEvent handleMouseEvent()\endlink
+  This method allows the cell display object to handle any mouse event
+  that occurs in a given cell \b before the grid widget attempts to
+  handle the event.  This very powerful feature allows a cell display
+  object to implement its own input behavior.
+
+- \link QicsCellDisplay::handleKeyEvent handleKeyEvent()\endlink This
+  method allows the cell display object to handle any keyboard event
+  that occurs in a given cell \b before the grid widget attempts to
+  handle the event.  This very powerful feature allows a cell
+  display object to implement its own input behavior.
+
+- \link QicsCellDisplay::needsVisibilityNotification
+  needsVisibilityNotification()\endlink  This method indicates to the
+  grid whether this displayer needs to be notified (via
+  \link QicsCellDisplay::hideEdit hideEdit()\endlink ) when any cell
+  using the displayer becomes not visible on the screen.  Typically,
+  this is not needed, but in the case of a cell display object that
+  displays a widget in the cell (QicsWidgetCellDisplay or subclasses),
+  the displayer needs to be told to hide the widget.
+
+- \link QicsCellDisplay::tooltipText tooltipText()\endlink This method
+  provides text that will be displayed in a tooltip by the table
+  widget.
+*/

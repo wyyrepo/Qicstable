@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# Check for required commands: doxygen, xsltproc
+command -v doxygen >/dev/null 2>&1 || { echo >&2 "I require the command 'doxygen' but it's not installed.  Aborting."; exit 1; }
+command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require the command 'xsltproc' but it's not installed.  Aborting."; exit 1; }
+command -v dot >/dev/null 2>&1 || { echo >&2 "I require the command 'dot' but it's not installed.  Aborting."; exit 1; }
+
+BIN=`dirname $0`
+cd $BIN
+cd ..
+TOP=`pwd`
+SRC=$TOP/include 
+workdir=$TOP/IncludeTemp
+
+if [ ! -d $workdir ]; then
+   mkdir $workdir
+fi
+
+# start with a clean slate
+cd $workdir
+rm -f *
+cd $TOP/doc
+rm -rf html rtf
+
+# preprocess source code and put output into workdir
+cd $SRC
+find . -type f | grep '\.[Cch]$' | while read x ; do
+	$TOP/bin/trans_qprop <$x >$workdir/$x
+done
+
+SRC=$TOP/addons/table.tree
+
+# preprocess source code and put output into workdir
+cd $SRC
+find . -type f | grep '\.[Cch]$' | while read x ; do
+	$TOP/bin/trans_qprop <$x >$workdir/$x
+done
+
+SRC=$TOP/addons/printing
+
+# preprocess source code and put output into workdir
+cd $SRC
+find . -type f | grep '\.[Cch]$' | while read x ; do
+	$TOP/bin/trans_qprop <$x >$workdir/$x
+done
+
+SRC=$TOP/addons/kdchart
+
+# preprocess source code and put output into workdir
+cd $SRC
+find . -type f | grep '\.[Cch]$' | while read x ; do
+	$TOP/bin/trans_qprop <$x >$workdir/$x
+done
+
+SRC=$TOP/addons/table.html
+
+# preprocess source code and put output into workdir
+cd $SRC
+find . -type f | grep '\.[Cch]$' | while read x ; do
+	$TOP/bin/trans_qprop <$x >$workdir/$x
+done
+
+# copy other source docs into workdir
+cd $TOP/doc
+cp *.{doc,html} $workdir
+
+cd $TOP
+doxygen $TOP/config/qicstable.cfg
+xsltproc $TOP/config/tag2dcf.xsl $TOP/doc/qicstable.tag > $TOP/doc/QicsTable.dcf
+
+cd $TOP/doc
+cp *.jpg html
+cp *.png html
+
+rm -fr $workdir

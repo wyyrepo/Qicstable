@@ -1,0 +1,21 @@
+This is QicsTable kdchart support demo.
+
+To enable KDChart support, you should make QicsTable library
+with KDChart enabled (see <QICSTABLE>/INSTALL for detailed instructions):
+
+  a. Install KDChart 2.1+ to a directory on the filesystem (see KDChart
+     documentation for details). <KDCHART> would point to the root
+     of the installation.
+
+  b. Go to <QICSTABLE>/qicstable_config.pri file and find a line 
+
+     #KDCHART_PATH =
+
+     Uncomment this line and write here the value of <KDCHART>.
+     For example, if KDChart has been installed into /opt/kdchart-2.1
+     then the given line should look like:
+
+     KDCHART_PATH = /opt/kdchart-2.1
+
+     That's all - KDChart support enabled. Save the file and follow the 
+     instructions of <QICSTABLE>/INSTALL.

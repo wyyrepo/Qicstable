@@ -1,0 +1,41 @@
+/*!
+
+\page how_size HOWTO - Controlling the Size of a QicsTable Widget
+
+The overall dimensions of a QicsTable widget can be set in two
+different ways.
+
+As with any other Qt widget, absolute widget geometry may be set using
+methods like \b QWidget::setGeometry(), \b QWidget::setFixedWidth(),
+and \b QWidget::setFixedHeight().  In addition, you may specify the
+width and height of the table widget indirectly, by setting the
+properties
+\link QicsTable::visibleRows "visibleRows"\endlink and
+\link QicsTable::visibleColumns "visibleColumns"\endlink.
+\code
+table->setVisibleRows(20);
+\endcode
+
+When \link QicsTable::setVisibleRows setVisibleRows()\endlink is
+called, the table computes the height of the specified number of rows,
+starting with the current value of the
+\link QicsTable::topRow "topRow"\endlink property.  This value becomes
+the preferred height of the main grid in the table widget.
+
+Similarly, calling
+\link QicsTable::setVisibleColumns setVisibleColumns()\endlink
+causes the table to compute the width of the specified number of
+columns, starting with the current value of the
+\link QicsTable::leftColumn "leftColumn"\endlink property.
+This value becomes the preferred width of the main grid in the table
+widget.
+
+It is important to remember that the number of visible rows and
+columns does \b not include any frozen rows and columns.  For
+instance, the following code will result in 12 visible rows -- the two
+frozen rows plus the ten "regular" rows.
+\code
+table->freezeTopRows(2);
+table->setVisibleRows(10);
+\endcode
+*/

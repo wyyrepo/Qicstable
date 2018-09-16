@@ -1,0 +1,52 @@
+     BUILDING AND INSTALLING QicsTable Evaluation for Linux/Unix
+
+You may need to be logged in as root, depending on the permissions of
+the directories where you choose to install QicsTable.
+
+QicsTable is built with, and depends on, Qt version 4.7 and newer.
+You must have Qt installed on the machine that you are using to build
+QicsTable.
+
+In the following instructions, <QICSTABLE> refers to the toplevel
+directory of the QicsTable distribution.  For example, if you
+unpacked the Linux/Unix archive in /opt, <QICSTABLE> would refer to
+/opt/qicstable-3.x.x-unix-source-commercial-eval.tar.gz
+
+1.  Unpack the archive.
+    On Linux/Unix:  - 'tar xzvf qicstable-3.x.x-unix-source-commercial-eval.tar.gz'
+
+2.  By default, QicsTable will build with the following options:
+    - 'release' build
+    - shared library/DLL
+
+    If you wish to change any of these options, edit the configuration
+    file <QICSTABLE>/qicstable_config.pri.  Each option is documented in
+    the configuration file.
+
+3.  Currently, QicsTable builds using the Qt utility 'qmake'.  Before
+    running qmake, you must make sure you have set the environment
+    variable QTDIR to the location of your Qt distribution.  If you
+    are using the built-in Qt distribution on most Linux platforms,
+    this location is /usr/local/Trolltech/Qt-x.x.x/.  If you have built Qt
+    yourself from the source distribtion, use the location of that build.
+
+    If you are using 'csh' as your shell, you can set QTDIR as
+    follows:  'setenv QTDIR <your_qt_location>'.
+
+    If you are using 'bash' or 'ksh' as your shell, you can set QTDIR
+    as follows:  'QTDIR=<your_qt_location>; export QTDIR'
+
+4.  After setting QTDIR, simply change directory to <QICSTABLE> and
+    execute the following command:
+  
+    % qmake qicstable.pro
+
+5.  Once the toplevel makefile is built, you may build the distribution.
+    On Linux/Unix:   - 'make' or 'gmake'
+
+    This will build the QicsTable library and all the examples.
+
+6.  Online HTML documentation can be found in <QICSTABLE>/doc/html.  The
+    main page is 'index.html'.
+
+7.  Examples can be found in <QICSTABLE>/examples.

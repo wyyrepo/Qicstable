@@ -1,0 +1,189 @@
+/*! \page arch QicsTable Architectural Overview
+
+The %QicsTable distribution contains many different classes.  This page
+describes some of the more important and commonly used classes and how
+they work together.
+
+<H3>Model-View-Controller</H3>
+
+%QicsTable implements a form of the \a model-view-controller
+architecture.  In this type of architecture, the data is stored in the
+\a model, where it can be accessed by many views.  The \a view
+displays the data from the model.  The \a controller allows one to
+manipulate the data in the model.
+
+\image html mvc.jpg
+<P>
+<P>
+For a more general description of the model-view-controller
+architecture, see http://ootips.org/mvc-pattern.html .
+
+In %QicsTable, the model is represented by the abstract class
+QicsDataModel.  This class defines the common interface that all data
+models must support.  The QicsDataModelDefault class is the default
+implementation of the QicsDataModel interface.  If
+QicsDataModelDefault does not meet your needs, you may create your own
+implementation of the QicsDataModel API (see \ref extend_model for
+details).
+
+In many designs using the model-view-controller architecture, the view
+and the controller are grouped together.  This is especially
+common in GUI applications and toolkits, where the widget abstraction
+encompasses the domains of both the view (what is drawn in the
+widget's window) and the controller (how the user interacts with the
+widget).  In this case, it is natural to group the view and controller
+functions together into a widget.  This is the approach used in
+%QicsTable.
+
+The main table widget is QicsTable.  This widget acts as both view and
+controller.  Each QicsTable widget is associated with a single data
+model object, which holds the data that the table will display.
+
+<H3>Table Components</H3>
+
+The table widget itself has a number of different parts.  It has a
+main grid, which displays data from the model.  It has one or more row
+header grids, which display row indices, row labels, or arbitrary data
+for each row.  It has one or more column header grids, which display
+column indices, column labels, or arbitrary data for each column.  It
+has optional scrollbars, which allow the user to control which rows
+and columns of data are displayed.  Optional title widgets can be
+placed on each of the four sides of the table widget.
+
+\image html tableparts.png
+<P>
+<P>
+In the %QicsTable architecture, each component type is responsible for
+the layout and/or display of a particular part of the table.  The
+QicsTable widget is responsible for the overall layout of the table.
+Each grid (row, column, or table) is responsible for the display of
+its frame and grid lines, and is also responsible for the layout of
+the cells within the grid.  For more information on grids, see
+\ref keymouse_behavior.
+
+The actual drawing of individual cells is
+performed by <EM>cell display objects</EM>.  A cell display object is
+a property of each cell (see below for more details on cell
+properties).  For more information on cell display objects, see
+\ref cell_display.
+
+<H3>Flyweight Objects</H3>
+
+In an object-oriented programming environment, it is desirable to
+define a class for each distinct object type in the application.
+So, in a table, there should be a class representing the table as a
+whole, a class representing a row in the table, a class representing a
+column in the table, and a class representing a cell in the table.
+Each object should be able to retrieve and set all of the properties of
+that entity.  It is often very inefficient, however, to actually store
+instances of these objects for each row, column, and cell.
+
+A design pattern called the <EM>flyweight pattern</EM> solves this
+problem by defining small efficient classes that represent rows,
+columns, and cells, but don't actually contain redundant copies of all
+of the properties of the entities.  Rather, they contain just enough
+information to retrieve and set those properties within the table's
+internal data structures.  In addition, no instances of these
+flyweight classes exist until needed by the programmer.  
+
+When a programmer wants to refer to cell \c (3,2) in the table, s/he
+needs an instance of the QicsCell class.  There are three ways to get
+an instance of this flyweight class:
+
+- QicsTable::cellRef()  This method returns a reference to a cell
+  object.  This reference must be used immediately to retrieve or set
+  a property of the cell.
+- QicsTable::cell()  This method returns a newly allocated cell
+  object.  This object is persistent, and remains valid until it is
+  destroyed explicitly by the programmer or until the table is
+  destroyed.  It can be used multiple times to retrieve and set
+  properties, and can also be used in a signal/slot connection.
+- QicsCell::QicsCell()  This public constructor returns a newly
+  allocated cell object.  The object has the same characteristics as
+  described immediately above.
+
+Similar methods exist for QicsRow and QicsColumn.
+
+QicsRepeatingRow and QicsRepeatingColumn are special flyweight objects
+that refer to a repeating set of rows or columns.  Properties that are
+set on these objects will affect all rows or columns in the set.
+
+In addition, there are flyweight objects that represent entire grids
+in the table.  QicsMainGrid represents the central grid, while
+QicsRowHeader and QicsColumnHeader refer to the header grids.
+
+These grid objects can be accessed and/or created in the following
+ways:
+
+- QicsTable::mainGridRef(), QicsTable::rowHeaderRef(),
+  and QicsTable::columnHeaderRef
+- QicsTable::mainGrid(), QicsTable::rowHeader(), and
+  QicsTable::columnHeader()
+- QicsMainGrid::QicsMainGrid(), QicsRowHeader::QicsRowHeader(), and
+  QicsColumnHeader::QicsColumnHeader()
+
+Once you have a header object, you can refer to cells and rows and
+columns in the header in a similar way to the cells in the main table.
+For cells in the row header, use one of the following two methods:
+
+- QicsRowHeader::cellRef()
+- QicsRowHeader::cell()
+
+These methods work similarly to the corresponding methods of
+QicsTable.  Similar methods exist for rows and columns, and all of
+these methods are duplicated in QicsColumnHeader.
+
+<H3>Properties</H3>
+
+The table widget has four sets of properties.  <b>Table
+properties</b> specify attributes of the table as a whole.  <b>Grid
+properties</b> specify attributes of a specific grid (either the main
+grid or one of the headers).  <b>Cell properties</b> specify
+attributes of individual cells. <b>Region properties</b> specify
+attributes of rectangular region of cells.
+
+Table properties can be set only on a QicsTable widget.  These
+properties specify the visual and behavioral characteristics of the
+table widget.
+
+Grid properties can be set on the main grid of the QicsTable widget,
+or on one of the header grids.  These properties specify the visual
+and behavioral characteristics of an individual grid.  When setting or
+retrieving a grid property on the main grid of the table widget, use
+the read and write functions of the main grid object (QicsMainGrid).
+For example, to set the
+\link QicsMainGrid::frameStyle frameStyle\endlink property, use
+QicsMainGrid::setFrameStyle().  When setting or retrieving a grid
+property on one of the header grids, use the read and write functions
+from the appropriate flyweight class (QicsRowHeader and
+QicsColumnHeader).  For example, to set the
+\link QicsRowHeader::frameStyle frameStyle\endlink property on the
+row header grid, use QicsRowHeader::setFrameStyle().
+
+Cell properties can be set on a single cell, an entire row or column,
+or an entire grid.  For example, one property of a cell is \link
+QicsCell::font "font"\endlink. This property exists in all of the
+following objects: QicsCell (single cell), QicsRow (entire row),
+QicsColumn (entire column), QicsMainGrid (entire main grid),
+QicsRowHeader (entire row header grid), and QicsColumnHeader (entire
+column header grid).  Calling \link QicsRow::setFont setFont()\endlink
+on a row sets the font for all cells in that row, overriding any
+previous font settings.  Similarly, setting the font on a column
+overrides all previous font settings for cells in that column.
+Calling \link QicsMainGrid::setFont setFont()\endlink for an entire grid
+overrides all font settings for all cells in the grid.
+
+Region properties can be set on the main grid of the QicsTable widget,
+or on one of the header grids. They are handled by QicsCellRegion flyweight class
+which methods are optimized for high performance and convenience.
+For example, use QicsTable::cellRegionRef(4,10,100,200).setBackgroundColor(Qt::yellow); 
+to fill background colors of all the cells in region (4,10)-(100,200) with yellow color
+instead of iterating over all the cells in this region. It is simpler and many times faster.
+
+If you wish to set a cell or grid property on \b all of the grids, you
+can use the read and write functions on the QicsTable widget itself.
+For example, calling QicsTable::setAlignment() will change the
+alignment of all cells in the main grid, the row header, and the
+column header.
+
+*/

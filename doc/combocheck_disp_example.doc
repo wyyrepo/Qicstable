@@ -1,0 +1,18 @@
+/*!
+
+\page combocheck_disp_example Example - Using a QicsComboCheckCellDisplay class
+
+This example shows how to use dropdown checklist combo box in the table.
+
+\image html disp_cc.png
+
+The code in this example can be found in \b \<QICSDIR\>/examples/displayers/combocheck.
+
+For more information about display classes and subclassing them, see
+\ref cell_display.
+
+- \ref ccdisp_h The example's header file
+- \ref ccdisp_cpp The example's source file
+- \ref ccdisp_main_cpp The main source file
+
+*/

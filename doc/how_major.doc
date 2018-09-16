@@ -1,0 +1,54 @@
+/*!
+
+\page how_major HOWTO - Major/Minor Rows and Columns
+
+When displaying table data, often adjacent columns (or, less
+frequently, rows) are related.  We would like to be able to display
+these columns as a group, with each <I>minor column</I> having a
+different label, while the group as a whole (the <I>major column</I>)
+has its own label.  Selecting the major column automatically selects
+all of its minor columns, and moving the major column automatically
+moves all of its minor columns.
+
+In %QicsTable, the way to to achieve this type of display is through
+the use of cell spans.  For a general overview of cell spans, please
+see \ref how_span.  In this example, we are going to use a cell span
+in the column header.  Remember that the main grid and the headers
+all have a set of common grid properties and methods, and that almost
+anything that you can do to the main grid can also be done to the
+headers, including adding cell spans.
+
+The first step in creating the major and minor columns is to add a
+second row to the column header.  This will allow us to use the top
+row to show major column labels and to use to bottom row to show minor
+column labels.
+
+Once we have a second row in the column header, we just add a cell
+span in the top row to span all of the minor columns.  This cell span
+becomes the extent of our major column.
+
+\code
+    // The column header needs to have two rows
+    table->columnHeaderRef().setNumRows(2);
+
+    // Add the span in the column header.  This span starts at
+    // cell (0,1) in the header, and spans 1 row and 3 columns.
+    QicsSpan span(0,1, 1,3);
+    table->columnHeaderRef().addCellSpan(span);
+
+    // Clear out the labels for all the cells in the top row.
+    // If we don't do this, they will be labeled with the column number.
+    table->columnHeaderRef().rowRef(0).setLabel(QString(" "));
+
+    // Label the major column, and center its label in the span
+    table->columnHeaderRef().cellRef(0,1).setLabel(QString("Major"));
+    table->columnHeaderRef().cellRef(0,1).setAlignment(Qt::AlignCenter);
+
+    // Label each of the minor columns in the bottom row
+    table->columnHeaderRef().cellRef(1,1).setLabel(QString("Minor 1"));
+    table->columnHeaderRef().cellRef(1,2).setLabel(QString("Minor 2"));
+    table->columnHeaderRef().cellRef(1,3).setLabel(QString("Minor 3"));
+\endcode
+<P>
+\image html major.png
+*/

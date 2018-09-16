@@ -1,0 +1,27 @@
+? pyqicstable_eval.patch
+Index: license.py
+===================================================================
+RCS file: /home/cvs/root/qt/qicstable/addons/pyqicstable/license.py,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 license.py
+--- license.py	27 Jan 2005 13:32:19 -0000	1.1.1.1
++++ license.py	6 Aug 2008 15:30:37 -0000
+@@ -1,5 +1,5 @@
+ # Configure the build process for the commercial version.
+ 
+-LicenseType = "commercial"
+-LicenseName = "PyQicsTable Commercial License"
+-LicenseFile = "pyqicstable-commercial.sip"
++LicenseType = "eval"
++LicenseName = "PyQicsTable Evaluation License"
++LicenseFile = "pyqicstable-eval.sip"
+Index: sip/pyqicstable-commercial.sip
+===================================================================
+RCS file: /home/cvs/root/qt/qicstable/addons/pyqicstable/sip/pyqicstable-commercial.sip,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 pyqicstable-commercial.sip
+--- sip/pyqicstable-commercial.sip	27 Jan 2005 13:32:19 -0000	1.1.1.1
++++ sip/pyqicstable-commercial.sip	6 Aug 2008 15:30:37 -0000
+@@ -1 +1 @@
+-%License /Type="commercial"/
++%License /Type="eval"/

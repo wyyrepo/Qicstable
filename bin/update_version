@@ -1,0 +1,154 @@
+#!/usr/bin/perl
+
+# This script takes version variables from qicstable_config.pri
+# and substitutes values into other files that requires version.
+
+use POSIX qw(strftime);
+
+
+#variables declaration
+my $VERSION; my $VERSION_TEMPL = "\^VERSION ";
+my $SUFFIX; my $SUFFIX_TEMPL = "\^SUFFIX ";
+
+my $PARAM = @ARGV[0];
+chomp $PARAM;
+
+#date variables calculation
+my $QICSTABLE_PACKAGEDATE = strftime("%d-%b-%Y", localtime());
+my $SHORT_DATE = strftime("%d-%b-%y", localtime());
+
+#preprocessing of qicstable.pri file
+
+open PRO_FILE, "../qicstable_config.pri" or die "error opening qicstable_config.pri...";
+
+while( <PRO_FILE> )
+{
+    if( m/$VERSION_TEMPL/ )
+    {
+        $VERSION = (split /= /)[-1];
+    }
+    elsif( m/$SUFFIX_TEMPL/ )
+    {
+        $SUFFIX = (split /= /)[-1];
+    }
+}
+
+
+chomp $VERSION;
+chomp $SUFFIX;
+$SUFFIX =~ s/"//gs;
+
+close PRO_FILE;
+
+#processing README file
+open README, "../README" or die "error opening README file...";
+open README_TMP, ">../README_tmp" or die "error opening temporary file for writing...";
+
+while ( <README> )
+{
+    if(m/This is QicsTable, version /)
+    {
+        if($SUFFIX =~/^\s*$/)
+        {
+            print README_TMP  "This is QicsTable, version $VERSION$PARAM\n";
+        }
+        else
+        {
+            print README_TMP  "This is QicsTable, version $VERSION-$SUFFIX$PARAM\n";
+        }
+    }
+    else
+    {
+            print README_TMP $_;
+    }
+}
+
+close README;
+close README_TMP;
+
+system("mv -f ../README_tmp ../README");
+
+#processing QicsNamespace.h
+open NAMESPACE, "../include/QicsNamespace.h" or die "error opening QicsNamespace.h...";
+open NAMESPACE_TMP, ">../include/QicsNamespace.h_tmp" or die "error opening temporary file for writing...";
+
+while ( <NAMESPACE> )
+{
+    if(m/QICSTABLE_VERSION /)
+    {
+            print NAMESPACE_TMP "#define QICSTABLE_VERSION \"qicstable_version: $VERSION ($SHORT_DATE)\"\n";
+    }
+    elsif(m/QICSTABLE_PACKAGEDATE /)
+    {
+            print NAMESPACE_TMP "#define QICSTABLE_PACKAGEDATE  \"$QICSTABLE_PACKAGEDATE\"\n";
+    }
+    elsif(m/QICSTABLE_VERSION_NUMERIC /)
+    {
+            $APPENDIX = $VERSION;
+            $APPENDIX =~ s/\./0/gs;
+            $QICSTABLE_VERSION_NUMERIC = "0x0".$APPENDIX;
+
+            print NAMESPACE_TMP "#define QICSTABLE_VERSION_NUMERIC $QICSTABLE_VERSION_NUMERIC\n";
+    }
+    elsif(m/QICSTABLE_PACKAGEDATE_NUMERIC /)
+    {
+        $QICSTABLE_PACKAGEDATE_NUMERIC = strftime("%y%m%d", localtime());
+        print NAMESPACE_TMP "#define QICSTABLE_PACKAGEDATE_NUMERIC 0x$QICSTABLE_PACKAGEDATE_NUMERIC\n";
+    }
+    else
+    {
+            print NAMESPACE_TMP $_;
+    }
+}
+
+close NAMESPACE;
+close NAMESPACE_TMP;
+
+system("mv -f ../include/QicsNamespace.h_tmp ../include/QicsNamespace.h");
+
+#processing qicstable.cfg
+
+open QICSTABLE_CFG,"../config/qicstable.cfg" or die "can't open qicstable.cfg file...";
+open QICSTABLE_CFG_TMP,">../config/qicstable.cfg_tmp" or die "can't open tenorary file for writing...";
+
+while ( <QICSTABLE_CFG> )
+{
+        if(m/PROJECT_NUMBER /)
+        {
+            if($SUFFIX =~/^\s*$/)
+            {
+                print QICSTABLE_CFG_TMP "PROJECT_NUMBER         = QicsTable-$VERSION$PARAM\n";
+            }
+            else
+            {
+                print QICSTABLE_CFG_TMP "PROJECT_NUMBER         = QicsTable-$VERSION-$SUFFIX$PARAM\n";
+            }
+        }
+        else
+        {
+                print QICSTABLE_CFG_TMP $_;
+        }
+}
+
+close QICSTABLE_CFG_TMP;
+close QICSTABLE_CFG;
+
+system("mv -f ../config/qicstable.cfg_tmp ../config/qicstable.cfg");
+
+$VERSION =~ s/(\d\.\d\.\d)\.*\d*\s*/$1/gi;
+
+system("echo $VERSION > ../VERSION");
+
+# announcing package suffix
+if($SUFFIX eq "snapshot")
+{
+    print($VERSION,"-snapshot-",strftime("%Y%m%d", localtime()));
+}
+elsif($SUFFIX eq "")
+{
+    print ($VERSION);
+}
+else
+{
+    print ($VERSION,"-",$SUFFIX);
+}

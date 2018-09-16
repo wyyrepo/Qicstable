@@ -1,0 +1,14 @@
+/*!
+
+\page tree_example Example - Tree + Table
+
+This example shows how one can use QicsTreeTable class to make the table
+organized in a tree-like structure.
+
+\image html treetable.png
+
+The code in this example can be found in \b \<QICSDIR\>/examples/tree.
+
+For more information about tree in table, see QicsTreeTable class.
+
+*/

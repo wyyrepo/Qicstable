@@ -1,0 +1,595 @@
+#!/bin/csh -f
+
+# NOTE:  This script is kept under SVN control in the QicsTable module.
+#        This implies that you must check out a version of the source
+#        in order to run the script.  Please note that when this
+#        script is run, it DOES NOT use the source files that you just
+#        checked out.  Rather, it checks out its own version, or, in
+#        the case of Windows evals, uses an already checked out and
+#        built tree.
+#
+
+# FILES NEED TO BE CHECKED:
+#
+#	qicstable_config.pri
+#	include/QicsNamespace.h
+#	config/qicstable.cfg
+#	README
+#	CHANGES
+#	bin/qicstable-dist
+#	LICENSE files
+#	table adapter
+#
+
+# This is the packaging script for QicsTable.  It can be used to package
+# five different things.
+#
+# qicstable-dist
+# --------------
+#
+# The following four options will check out source from SVN and make
+# the appropriate package:
+#
+# unix              Unix commercial version
+# win               Windows commercial version
+# gpl               GPL version (Unix)
+# eval              commercial eval (Unix, Unix no-license)
+#
+# The Windows eval packaging is different, since it is binary-only.
+# The tree must first be built on a Windows box (with
+# CONFIG+=win_eval) and then copied to the current directory (the
+# build tree must be named 'qicstable').
+#
+# lineval <qt_ver> <gcc_ver> Linux eval (for Qt version <qt_ver>)
+# wineval <qt_ver>  Windows eval (for Qt version <qt_ver>)
+
+
+#
+# Setup vars
+#
+set proj = qicstable
+set tdir = `pwd`/../..
+set tag = qicstable_111
+#Remove package directory
+cd ../../ && rm -fr package
+
+if($?QICSTABLE_SUFFIX) then
+    set version = ${QICSTABLE_SUFFIX}
+else
+    set version = "2.2.2"
+endif
+
+set unix = ""
+set win = ""
+set gpl = ""
+set eval = ""
+set wineval = ""
+set wineval_qtver = ""
+set wineval_gccver = ""
+set source = ""
+
+while ($1 != "")
+      switch ($1)
+      case "unix":
+	   set unix = "1"
+	   breaksw
+      case "win":
+	   set win = "1"
+	   breaksw
+      case "gpl":
+	   set gpl = "1"
+	   breaksw
+
+      case "eval":
+	   set eval = "1"
+	   breaksw
+      case "wineval":
+	   set wineval = "windows"
+	   shift
+	   set wineval_qtver = $1
+	   breaksw
+      case "lineval":
+	   set wineval = "linux"
+	   shift
+	   set wineval_qtver = $1
+	   shift
+	   set wineval_gccver = $1
+	   breaksw
+      default:
+           breaksw
+      endsw
+
+      shift
+end
+
+set suffix = ""
+if ($gpl =~ "1") then
+   set type = "gpl"
+else if ($eval =~ "1") then
+   set type = "commercial"
+   set suffix = "-eval"
+#else if ($wineval =~ "1") then
+
+else if ($wineval != "") then
+   set type = ""
+#   "commercial"
+   set suffix = "-eval"
+else
+   set type = "commercial"
+endif
+
+if ($wineval =~ "") then
+   set source = "-source"
+endif
+
+set tarname = ${proj}-${version}-unix${source}-${type}${suffix}
+set nl_tarname = ${proj}-${version}-unix${source}-${type}-nolicense${suffix}
+
+if ($wineval_qtver != "") then
+
+   if ($wineval =~ "windows") then
+      set zipname = ${proj}-${version}-ia32-win-vs6-qt_${wineval_qtver}${suffix}
+   endif
+   if ($wineval =~ "linux") then
+      set tarname = ${proj}-${version}-ia32-linux-gcc_${wineval_gccver}-qt_${wineval_qtver}${suffix}
+   endif
+else
+   set zipname = ${proj}-${version}-win32${source}-${type}${suffix}
+endif
+
+echo Package name : $tarname
+
+#Make update of qicstable
+#if ( $USER == "tinderbox") then
+#cd $tdir/.. && cvs -z9 -d :ext:icstinderbox@cvs.ics.com:/home/cvs/root up qt/qicstable
+#endif
+
+#Make package dir and copy qicstable
+cd $tdir
+if ( ! -d package ) then
+    mkdir package
+endif
+#if (( ! -d pyqicstable ) && ($USER == "tinderbox") )then
+#    cd .. && cvs -z9 -d :ext:icstinderbox@cvs.ics.com:/home/cvs/root co qt/pyqicstable
+#endif
+
+cp -r $tdir/$proj $tdir/package
+
+@ its is already in /addons/
+#if ( ($gpl != "1") && ($wineval =~ "") ) then
+#    cp -r $tdir/pyqicstable $tdir/package/$proj
+#endif
+
+set tdir = $tdir/package
+set top = $tdir/$proj
+
+#
+# Make tar dir
+#
+mkdir -p $tdir
+
+cd $tdir
+
+#
+# Nuke any old tars
+#
+#if ( $USER == "tinderbox" ) then
+
+#if (($wineval =~ "") && ($win != "1") ) then
+#   rm -f ${tarname}.*
+#   rm -f ${nl_tarname}.*
+#endif
+
+#endif
+#if (($eval != "1") && ($gpl != "1") && ($unix != "1")) then
+#   rm -f ${zipname}.*
+#endif
+
+#if ($wineval != "1") then
+#   rm -rf $proj
+#endif
+
+#if ($wineval != "1") then
+#   cvs export -r $tag $proj
+#   cvs checkout $proj
+#endif
+
+#endif #  "tinderbox"
+#
+# Get rid of SVN directories
+#
+cd $top
+cd ..
+find . -name .svn -print | xargs rm -rf
+#find . -name .cvsignore -print | xargs rm -f
+
+#
+# Get rid of tests
+#
+cd $top
+rm -rf tests
+
+#
+# Get rid of internal examples
+#
+cd $top
+rm -rf examples/tabledemo
+
+
+#
+# When doing the Windows eval, copying the tree from Windows to
+# NFS loses the execute bits on the scripts
+#
+if ($wineval =~ "windows") then
+   cd $top/bin
+   foreach f (*)
+      dos2unix $f
+   end
+
+   chmod 755 $top/bin/*
+endif
+
+#
+# Windows eval may have examples built.  We need to remove them
+#
+if (($wineval =~ "linux") || ($wineval =~ "windows")) then
+echo "Eval cleaning ....."
+   cd $top/examples
+   if ($wineval =~ "linux") then
+       find . -type f -perm /+g+x,o+x -print | xargs rm -f
+   endif
+
+   find . -type d -name moc -print | xargs rm -rf
+   find . -type d -name obj -print | xargs rm -rf
+   find . -type d -name debug -print | xargs rm -rf
+   find . -type d -name release -print | xargs rm -rf
+
+   find . -name moc_\*.cpp -print | xargs rm -f
+   find . -name \*.moc -print | xargs rm -rf
+   find . -name \*.exe -print | xargs rm -f
+   find . -name \*.obj -print | xargs rm -rf
+   find . -name \*.ilk -print | xargs rm -f
+   find . -name \*.pdb -print | xargs rm -f
+   find . -name \*.rc -print | xargs rm -f
+   find . -name \*.res -print | xargs rm -f
+
+   find . -name \*.o -print | xargs rm -f
+
+   cd $top
+#   find . -name Makefile -print | xargs rm -f
+   find . -name Makefile\* -print | xargs rm -f
+#   find . -type d -name designer -print | xargs rm -rf
+else
+   cd $top/examples
+   if ( -f Makefile ) then
+   	make clean
+   endif
+   rm -rf $top/lib
+   cd $top
+   find . -name moc_\*.cpp -print | xargs rm -f
+   find . -name \*.moc -print | xargs rm -f
+   find . -name \*. -print | xargs rm -f
+   find . -name \*.o -print | xargs rm -f
+   find . -name \*.ilk -print | xargs rm -f
+   find . -name \*.pdb -print | xargs rm -f
+#   find . -name Makefile -print | xargs rm -f
+   find . -name Makefile\* -print | xargs rm -f
+endif
+
+#
+# Remove plugins
+#
+cd $top
+mkdir -p plugins
+cd $top/plugins
+rm -rf *
+cd $top/designer
+rm -f *.obj
+rm -f *.o
+cd $top/
+rm -f *.o
+
+#
+# Remove all eval dialog files and eval dialog code
+# (Eval dialog is only used when building the Windows binary eval)
+#
+if ($wineval =~ "") then
+    rm -rf $top/src/evaldialog
+    cd $top/src
+    foreach f (Q*.{cpp,h} *.pro *.pri)
+	$top/bin/remove_evaldialog < $f > $f.new
+	rm -f $f
+	mv $f.new $f
+    end
+endif
+#
+# Nuke TODO file for real release
+#
+cd $top
+rm -f TODO
+
+#
+# Remove unneeded license/install files
+#
+cd $top
+mkdir tmpinst
+mv INSTALL* tmpinst
+if ($gpl =~ "1") then
+   cp tmpinst/INSTALL.GPL INSTALL
+else if ($wineval != "") then
+   cp tmpinst/INSTALL.WINEVAL INSTALL
+else if ($eval =~ "1") then
+   cp tmpinst/INSTALL.UNIXEVAL INSTALL
+else
+   cp tmpinst/INSTALL INSTALL
+endif
+rm -rf tmpinst
+
+cd $top
+mkdir tmpinst
+mv LICENSE* tmpinst
+if ($gpl =~ "1") then
+   cp tmpinst/LICENSE.GPL LICENSE
+else if (($eval =~ "1") || ($wineval != "")) then
+   cp tmpinst/LICENSE.EVAL LICENSE
+else
+   cp tmpinst/LICENSE LICENSE
+endif
+rm -rf tmpinst
+
+#
+# Get correct toplevel qmake file
+#
+if ($wineval != "") then
+   cd $top
+   rm -f qicstable.pro
+   mv qicstable_wineval.pro qicstable.pro
+else
+   rm -f qicstable_wineval.pro
+endif
+
+#
+# Preprocess files (remove commercial features, or maybe just the tags)
+# Get rid of unneeded files
+#
+if ($gpl =~ "1") then
+   set script = "remove_comm_features"
+
+   cd $top/src
+   rm -f QicsTablePrint.*
+   rm -f QicsPrintGrid.*
+
+   cd $top/include
+   rm -f QicsTablePrint.*
+   rm -f QicsPrintGrid.*
+else
+   set script = "remove_comm_tags"
+endif
+
+if (($win =~ "1") || ($wineval != "")) then
+   cd $top/src
+   rm -f QicsNamespace.cpp
+endif
+
+cd $top/src
+foreach f (Q*.{cpp,h} *.pro *.pri)
+    $top/bin/$script < $f > $f.new
+    rm -f $f
+    mv $f.new $f
+end
+
+cd $top/include
+foreach f (Q*.{cpp,h} *.pro *.pri)
+    $top/bin/$script < $f > $f.new
+    rm -f $f
+    mv $f.new $f
+end
+
+#
+# Preprocess files to remove windows-specific stuff
+# if we're doing non-Windows versions
+#
+if (($win != "1") && ($wineval =~ "")) then
+   cd $top/src
+   foreach f (Q*.{cpp,h} *.pro *.pri)
+       $top/bin/remove_win_features < $f > $f.new
+       rm -f $f
+       mv $f.new $f
+   end
+endif
+
+#
+# Put the correct copyright notice in each source file
+#
+
+# first the source files
+cd $top/src
+foreach f (Q*.{cpp,h})
+    $top/bin/remove_default_copyright < $f > $f.new
+    rm -f $f
+
+    if ($gpl =~ "1") then
+       set hdr = $top/config/gpl_source_header.txt
+    else
+       set hdr = $top/config/comm_source_header.txt
+    endif
+
+    cat $hdr > $f
+    cat $f.new >> $f
+    rm -f $f.new
+end
+
+# now the qmake files
+cd $top/src
+foreach f (*.pro *.pri)
+    $top/bin/remove_default_copyright < $f > $f.new
+    rm -f $f
+
+    if ($gpl =~ "1") then
+       set hdr = $top/config/gpl_pro_header.txt
+    else
+       set hdr = $top/config/comm_pro_header.txt
+    endif
+
+    cat $hdr > $f
+    cat $f.new >> $f
+    rm -f $f.new
+end
+
+
+#
+# Preprocess qmakefile to get rid of eval and gpl stuff
+#
+
+cd $top
+if ($eval =~ "1") then
+   set script = bin/remove_eval_tags
+else
+   set script = bin/remove_eval_features
+endif
+$script < qicstable.pro > qicstable.pro.new
+rm -f qicstable.pro
+mv qicstable.pro.new qicstable.pro
+
+cd $top
+if ($gpl =~ "1") then
+   set script = bin/remove_gpl_tags
+else
+   set script = bin/remove_gpl_features
+endif
+$script < qicstable.pro > qicstable.pro.new
+rm -f qicstable.pro
+mv qicstable.pro.new qicstable.pro
+
+
+#
+# Generate documentation
+#
+#perl -e 'while (<>) { s/doxygen/\/ICS\/Users\/craig\/tmp\/doxygen-1.3.2\/bin\/doxygen/; print; }' < bin/generate_docs > bin/foo
+#rm bin/generate_docs
+#mv bin/foo bin/generate_docs
+#chmod 777 bin/generate_docs
+
+# Generate PyQicsTable documentation
+echo Generate PyQicsTable documentation ...
+
+if ( ($gpl != "1") && ($wineval =~ "") && ($eval != "1") ) then
+#   cd $tdir/../pyqicstable/doc
+   cd $top/addons/pyqicstable/doc
+   db2html -o html -u PyQicsTable.sgml
+   rm -rf PyQicsTable
+   rm -f PyQicsTable.sgml
+else
+   cd $top
+   rm -rf ./addons/pyqicstable
+   rm -rf adapter
+   rm -rf designer
+   rm -rf plugins
+endif
+
+$top/bin/generate_docs
+
+#
+# Preprocess files to remove doxygen comments
+#
+cd $top/include
+foreach f (*.h)
+    $top/bin/remove_dox_comments < $f > $f.new
+    rm -f $f
+    mv $f.new $f
+end
+
+#
+# When doing a windows eval, we want to re-copy the header files
+# to $top/include, now that they have been processed
+#
+if ($wineval != "") then
+   cd $top
+   rm -f include/moc_*.*
+endif
+
+#
+# Win evals are binary only, so nuke the source tree
+#
+
+if ($wineval != "") then
+   cd $top
+   rm -rf src
+endif
+
+#
+# Get rid of unneeded directories
+#
+cd $top
+rm -rf bin config Include adapter pack  plugins VERSION
+rm -f doxyLog
+
+#
+# Fixup doc directory
+#
+cd $top
+mv doc/html html
+mv doc/QicsTable.dcf QicsTable.dcf
+mv doc/README README_DOC
+rm -rf doc
+mkdir doc
+mv html doc
+mv QicsTable.dcf doc/QicsTable.dcf
+mv README_DOC doc/README
+
+#
+# Make unix tar file
+#
+if (($wineval =~ "") && ($win != "1")) then
+   cd $tdir
+   mv $proj $tarname
+   tar cvf ${tarname}.tar $tarname
+   gzip ${tarname}.tar
+   mv -f $tarname $proj
+endif
+
+#
+# Make Windows zip file
+#
+if (($eval != "1") && ($gpl != "1") && ($unix != "1")) then
+   cd $tdir
+
+   if (($wineval =~ "windows") || ($win =~ "1")) then
+      mv $proj $zipname
+      zip -r ${zipname}.zip $zipname
+      mv $zipname $proj
+   endif
+
+if ($wineval =~ "linux") then
+      rm -rf ${tarname}.tar.gz
+      mv $proj $tarname
+      tar cvf ${tarname}.tar $tarname
+      gzip ${tarname}.tar
+      mv $tarname $proj
+   endif
+
+endif
+
+#THIS IS TEMPORARY DISABLED:
+#
+# Make special build without license
+#
+#if (($wineval =~ "") && ($gpl != "1") && ($win != "1")) then
+#   cd $tdir
+#   mv $proj $tarname
+#   rm $tarname/LICENSE*
+#   tar cvf ${nl_tarname}.tar $tarname
+#   gzip ${nl_tarname}.tar
+#   mv $tarname $proj
+#endif
+
+#
+# remove working dir
+
+if ($wineval != "1") then
+   echo remove working dir .........
+   cd $top
+   cd ..
+   rm -rf $proj
+#endif
+

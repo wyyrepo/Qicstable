@@ -1,0 +1,18 @@
+/*!
+
+\page cdt_example Example - Implementing a New Data Type
+
+This example shows how one can create a new data type, subclassed from
+QicsDataItem, that can be used in the QicsTable.  This example creates
+a type that represents a QPoint.
+
+The code in this example can be found in \b \<QICSDIR\>/examples/custom_data_type.
+
+For more information about creating a new data type, see
+\ref extend_model.
+
+- \ref cdt_h The new class's header file
+- \ref cdt_cpp The new class's source file
+- \ref cdt_main_cpp The main source file
+
+*/

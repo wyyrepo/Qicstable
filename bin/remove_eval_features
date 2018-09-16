@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+undef $/;
+
+while (<>) {
+      s/#ifdef EVALDIALOG(.*?)#endif//gs;
+      s/#EVAL_NOOP(.*?)#END_EVAL_NOOP//gs;
+      s/contains\(CONFIG, eval_noop\) \{(.*?)\} #END_EVAL_NOOP//gs;
+      print;
+}

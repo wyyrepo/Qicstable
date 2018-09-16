@@ -1,0 +1,30 @@
+
+This directory contains examples of the QicsTable displayers classes usage.
+Please note that these examples are still under development,
+and may be changed during future beta releases.
+
+The folder contains following displayer examples:
+
+* combocheck - a cell displayer for dropdown checklist combo boxes
+  (QicsComboCheckCellDisplay class)
+
+* combotab - a cell displayer for combo box with tabbed dropdown list
+  (QicsComboTabCellDisplay class)
+
+* datetime - a cell displayer for DateTime edit
+  (QicsDateTimeCellDisplay class)
+
+* listwidget - a cell displayer for list widget
+  (QicsListCellDisplay class)
+
+* progress - a cell displayer for progress bar
+  (QicsProgressCellDisplay class)
+
+* pushbutton - a cell displayer for push buttons
+  (QicsPushButtonCellDisplay class)
+
+* radiobuttons - a cell displayer for radio buttons group
+  (QicsRadioCellDisplay class)
+
+* textedit - default cell displayer
+  (QicsTextCellDisplay class)

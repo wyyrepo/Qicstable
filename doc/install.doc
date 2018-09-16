@@ -1,0 +1,88 @@
+/*! \page install Installation
+
+\b Note:  You may need to be logged in as root, depending on the permissions of
+the directories where you choose to install %QicsTable.
+
+This product is built with, and depends on, Qt version 4.2 and newer.
+You must have Qt installed on the machine that you are using to build
+this product.
+
+In the following instructions, \b \<QICSTABLE\> refers to the toplevel
+directory of the %QicsTable distribution.  For example, if you
+unpacked the Linux/Unix archive in \c /opt, \b \<QICSTABLE\> would refer to 
+<tt>/opt/qicstable-x.x.x-unix-commercial-source</tt>
+
+In the case of binding QicsTable to KDChart, please note that only KDChart 2.x 
+is supported; any previous versions would not work. \b \<KDCHART\> refers to the
+toplevel directory of the KDChart distribution.
+
+-  Unpack the archive.
+    - <b>On Linux/Unix:</b>  <tt>'tar xzvf qicstable-x.x.x-unix-commercial-source.tar.gz</tt>
+      or, if your \c tar command doesn't support the '-z' flag,
+      <tt>'gunzip -c qicstable-x.x.x-unix-commercial-source.tar.gz | tar xvf -'</tt>
+    - <b>On Windows:</b>  Unzip <tt>qicstable-x.x.x-win32-commercial-source.zip</tt> using WinZip
+	          or similar utility.  Be sure to extract the
+	          entire folder hierarchy.
+
+-  By default, %QicsTable will build with the following options:
+     - 'release' build
+     - shared library/DLL
+
+     If you wish to change any of these options, edit the configuration
+     file \c \<QICSTABLE\>/qicstable_config.pri.  Each option is documented in
+     the configuration file.
+
+-  If you would like to enable KDChart support, do the following:
+     - Install KDChart 2.x to a directory on the filesystem (see KDChart
+        documentation for details). <KDCHART> would point to the root
+        of the installation.
+     - Go to <QICSTABLE>/qicstable_config.pri file and find a line 
+        <tt>#KDCHART_PATH =</tt>
+     - Uncomment this line and write here the value of <KDCHART>.
+         - For example, if KDChart has been installed into /opt/kdchart-2.0
+           then the given line should look like:
+            <tt>KDCHART_PATH = /opt/kdchart-2.0</tt>
+
+-  Set the environment variable <b>QTDIR</b> to the location of your
+    Qt distribution.  If you  are using the built-in Qt distribution
+    on most Linux platforms, this location is \b /usr/local/Trolltech/Qt-<QtVersion>.  If you
+    have built Qt yourself from the source distribtion, use the
+    location of that build.
+
+    - If you are using 'csh' as your shell, you can set QTDIR as
+      follows:  <tt>setenv QTDIR <your_qt_location></tt>.
+
+    - If you are using 'bash' or 'ksh' as your shell, you can set
+      QTDIR as follows:  <tt>QTDIR=<your_qt_location>; export QTDIR</tt>
+
+    - If you are using the Windows command shell, you can set QTDIR as
+      follows:  <tt>'set QTDIR=<your_qt_location></tt>
+
+-  Build the distribution using the Qt utility 'qmake'.
+   - <b>On Linux/Unix/Windows:</b>
+      - Change directory to \B \<QICSTABLE\> and execute the following command:
+        <tt>qmake qicstable.pro</tt>
+
+-  Once the toplevel makefile is built, you may build the distribution.
+   - <b>On Linux/Unix:</b> \c make or \c gmake
+   - <b>On Windows(MSVC):</b> \c nmake
+
+    This will build the %QicsTable library and all the examples.
+
+-  HTML documentation can be found in \c \<QICSTABLE\>/doc/html.  The
+    main page is \c index.html
+
+-  Examples can be found in \c \<QICSTABLE\>/examples.
+
+-  On Windows, you will need to modify your Path environment variable
+   in order for the example programs to find the QicsTable DLL.  This
+   can be done in a number of different ways, depending on the
+   version of Windows that you are running.  One way that will always
+   work is via the command line.
+
+   <tt>C:>  set Path=<QICSTABLE>;%%Path%</tt>
+
+   As before, replace <QICSTABLE> with the full path to the directory
+   in which you unpacked the archive.
+
+*/

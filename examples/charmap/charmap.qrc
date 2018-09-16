@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>Resources/icon16_clear.png</file>
+        <file>Resources/icon16_help.png</file>
+        <file>Resources/icon16_paste.png</file>
+        <file>Resources/icon16_select.png</file>
+        <file>Resources/ics.png</file>
+    </qresource>
+</RCC>

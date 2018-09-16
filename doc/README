@@ -1,0 +1,28 @@
+This directory contains documentation for QIcsTable 
+and a documentation index file 'QicsTable.dcf'.
+
+Note: If you do not see .dcf or .html files,
+that means you are using a CVS checked out copy, and must 
+generate them using ../bin/generate_docs
+
+QicsTable.dcf - index file which contain non global (relative to his path) links to 
+documentation *.html files in 'html' dirrectory.
+NOTE: File "QicsTable.dcf" and folder "html" should be in the same folder when they where copied.
+
+From Qt documentation :
+    Documentation can be added or removed from Qt Assistant by adding and removing the 
+content files. The format of the content files are specified below. To add a content file, 
+type the following command line option: -addContentFile docfile. To remove a content file 
+from the default set, type the following command line option: -removeContentFile 'docfile'. 
+
+For example:
+    1: > assistant -addContentFile QicsTable.dcf
+    2: > assistant
+    3: > assistant -removeContentFile QicsTable.dcf
+
+Note: In Qt 4.4, assistant was re-designed, 
+so you must use assistant_adp to import .dcf files.
+
+Read more about "Customizing Qt Assistant" in Qt Assistant 
+documentation set.
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+$1 < $2 > $2.new
+rm -f $2
+mv $2.new $2

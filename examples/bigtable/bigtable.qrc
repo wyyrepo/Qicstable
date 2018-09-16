@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>Resources/icon16_autorun.png</file>
+        <file>Resources/icon16_help.png</file>
+        <file>Resources/icon16_newregion.png</file>
+        <file>Resources/icon16_newview.png</file>
+        <file>Resources/icon16_run.png</file>
+        <file>Resources/icon16_stop.png</file>
+        <file>Resources/ics.png</file>
+    </qresource>
+</RCC>

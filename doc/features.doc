@@ -1,0 +1,53 @@
+/*! \page features Main Features List
+
+Since version \b 2.4:
+
+- Added QicsAbstractFilterDelegate class and subclasses for filters based on 
+	QStringList and QRegExp
+	(API and approach for applying filters to the table have been changed therefore).
+- Revised and improved tree functionality (added tree-in-header mode and a lot of
+	others).
+- Added KDChart support via QicsKDChartDataModelAdapter.
+- General performance improvements.
+
+
+Since version \b 2.3:
+
+- Added QicsTreeTable and compound classes to provide grouping functionality.
+- Extended drag&drop of headers with mouse middle button.
+- Addons folder rearranged; classes which could be used as standalone (QicsNavigator,
+    QicsRuler, QicsRubberBand, Print Preview) put into addons.
+- Added QicsAbstractClipboardDelegate class to customize clipboard operations.
+- Added a lot of attributes configurable via XML.
+- Exclusive selection significantly improved and now acts more like Excel.
+
+
+Since version \b 2.2.2:
+
+- Support of native Qt models via QicsDataModelQtModelAdapter and
+  QicsQtModelAttributeController.
+- Customizable copy/drag and cut/delete operations via corresponding policies.
+
+
+Since version \b 2.2:
+
+- <A HREF="classQicsTable.html#ExtAttr">External attribute controllers</A>
+  which allow to define own methods for storing and retrieving cell attributes.
+- Excel-like selection of cells (including spanned).
+- Copy/Paste of cell attributes, dimensions and spans as well as data.
+- Auto-selection of cells when mouse is being dragged out of the screen.
+- <A HREF="classQicsTable.html#WideKeys">Global key actions</A>.
+
+
+Since version \b 2.1:
+
+- <A HREF="classQicsTable.html#Printing">WYSIWYG printing</A> via Print Preview Framework.
+- <A HREF="classQicsTable.html#Export">Export content</A> to HTML as well as to CSV.
+- Quick navigation through the large table (see QicsNavigator).
+- Setting attributes for <A HREF="classQicsTable.html#Regions">rectangular regions of cells</A>.
+- Copy/Paste of cell data from/to MS Excel.
+- Exclusive selection mode with Excel-like "fill handle".
+- Filtering data by rows (see QicsRowFilter).
+
+
+*/

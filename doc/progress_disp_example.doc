@@ -1,0 +1,18 @@
+/*!
+
+\page progress_disp_example Example - Using a QicsProgressCellDisplay class
+
+This example shows how to use progress bar in the table.
+
+\image html disp_pr.png
+
+The code in this example can be found in \b \<QICSDIR\>/examples/displayers/progress.
+
+For more information about display classes and subclassing them, see
+\ref cell_display.
+
+- \ref prdisp_h The example's header file
+- \ref prdisp_cpp The example's source file
+- \ref prdisp_main_cpp The main source file
+
+*/

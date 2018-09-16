@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+undef $/;
+
+while (<>) {
+      s/#ifndef QICSTABLE_GPL(.*?)#endif//gs;
+      s/#GPL_NOOP(.*?)#END_GPL_NOOP//gs;
+      s/contains\(CONFIG, gpl_noop\) \{(.*?)\} #END_GPL_NOOP//gs;
+      print;
+}

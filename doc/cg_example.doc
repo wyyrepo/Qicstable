@@ -1,0 +1,19 @@
+/*!
+
+\page cg_example Example - Creating a Table with a Custom Grid
+
+This example shows how to create a custom table grid object, and also
+shows how to create a table that uses this new grid.  The grid acts
+like the default QicsTableGrid, except that it posts a popup menu
+when the user presses the right mouse button.
+
+The code in this example can be found in \b \<QICSDIR\>/examples/custom_grid.
+
+For more information about creating a custom grid, see
+\ref keymouse_behavior.
+
+- \ref cg_h The new grid's header file
+- \ref cg_cpp The new grid's source file
+- \ref cg_main_cpp The main source file
+
+*/

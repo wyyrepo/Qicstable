@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>Resources/close.png</file>
+        <file>Resources/filter.png</file>
+        <file>Resources/ics.png</file>
+        <file>Resources/no_filter.png</file>
+        <file>Resources/sortA.png</file>
+        <file>Resources/sortD.png</file>
+    </qresource>
+</RCC>

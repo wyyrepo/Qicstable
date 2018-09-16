@@ -1,0 +1,14 @@
+/*! \page about About QicsTable
+
+%QicsTable is a full-featured, high-performance, Qt-based table widget
+suited for use in industrial-strength applications. It incorporates a
+model-view-controller architecture to allow multiple views of the same
+data.  The table also produces high-quality printed output.
+
+%QicsTable has been tested on the following platforms:
+- MS/Windows (95, 98, NT 4.0, ME, 2000, and XP)
+- Unix/X11 (Linux, Solaris, HP-UX, Tru64, AIX, IRIX)
+
+%QicsTable is a product of
+<a href="http://www.ics.com"> Integrated Computer Solutions</a>.
+*/

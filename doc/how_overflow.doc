@@ -1,0 +1,68 @@
+/*!
+
+\page how_overflow HOWTO - Cell Overflowing
+
+%QicsTable has a number of ways to handle a cell that cannot display
+all of its data in the cell's normal area.  One way is cell spanning,
+which allows a larger region of the table to always appear as one
+cell (see \ref how_span for details).  Cell spanning is very powerful,
+but has the sometimes undesirable effect of making any spanned cells
+invisible and uneditable.
+
+Another, less intrusive way of displaying cell data that cannot fit
+into the cell's normal area is by setting the table's
+\link QicsTable::cellOverflowBehavior "cellOverflowBehavior"\endlink
+property.  (This property is actually a common grid property, so you
+can set it on not only the table's main grid, but its row and column
+headers as well.)  The table supports three types of overflow
+behavior.
+
+The default overflow behavior is \b Clip.  In this case, the text of
+the cell is displayed according to the current setting of the
+\link QicsTable::gridCellClipping "gridCellClipping"\endlink
+property.  The text will either be partially displayed
+(<B>AllowPartial</B>), not displayed at all
+(<B>NoDisplayOnPartial</B>), or partially displayed with a "clipped"
+symbol (<B>UseClippedSymbol</B>).  In the last instance, the clipped
+symbol can be changed by setting the
+\link QicsTable::moreTextPixmap "moreTextPixmap"\endlink property.
+
+\image html overflow-clip.png
+<CENTER><B>Qics::Clip -- Text clipped at end of cell</B></CENTER>
+<P>
+The second overflow behavior is \b Overflow.  In this case, the table
+will attempt to "overflow" the additional text to the next cell(s) to
+the right.  When the table performs an overflow, it looks for the next
+cell to the right of the original cell.  If that cell is empty, its
+area is added to the original cell's area to create a larger "cell".
+If this new area is large enough to display the entire text, the
+overflow is complete.  If it still is not large enough, the table will
+continue by looking at the next cell to the right.  This iteration
+continues until one of the following occurs:  (1) the entire text can
+be displayed, (2) the next cell is not empty, (3) the right edge of
+the table is reached, or (4) the number of overflowed cells exceeds
+the current value of the
+\link QicsTable::maxOverflowCells "maxOverflowCells"\endlink
+property.  If, at the end of this iteration, the entire text is still
+not visible, the full text is displayed according to the
+\link QicsTable::gridCellClipping "gridCellClipping"\endlink
+property in as many cells as possible.
+
+\image html overflow.png
+<CENTER><B>Qics::Overflow -- Text overflows to adjacent cells</B></CENTER>
+<P>
+When an empty cell is overflowed into, it is still able to be
+traversed to and edited.  When the empty cell becomes the current
+cell, the overflow is removed.  When the empty cell is no longer the
+current cell (i.e. the user traversed to another cell), the overflow
+appears again.
+
+The third overflow behavior is \b Tooltip.  In this case, the extra
+text is clipped as in the \b Clip behavior, but when the user hovers
+the mouse pointer over the cell, the entire contents of the cell is
+displayed in a tooltip.
+
+\image html overflow-tt.png
+<CENTER><B>Qics::ToolTip -- Text is shown in tooltip</B></CENTER>
+<P>
+*/

@@ -1,0 +1,284 @@
+<ui version="4.0" >
+ <class>OptionsDialog</class>
+ <widget class="QDialog" name="OptionsDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>200</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>View preferences</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>157</y>
+     <width>171</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="displayersGroupBox" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>8</y>
+     <width>171</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Figure Displayers</string>
+   </property>
+   <widget class="QRadioButton" name="buttonRadioButton" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>111</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>button</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="comboRadioButton" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>81</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>combo box</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="checkRadioButton" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>51</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>check box</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="textRadioButton" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>21</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>text (empty)</string>
+    </property>
+    <property name="checked" >
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="colorGroupBox" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>8</y>
+     <width>201</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Color options</string>
+   </property>
+   <widget class="QGroupBox" name="figureColoGroupBox" >
+    <property name="geometry" >
+     <rect>
+      <x>8</x>
+      <y>146</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="title" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="randomCheckBoc" >
+    <property name="geometry" >
+     <rect>
+      <x>100</x>
+      <y>118</y>
+      <width>83</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>random</string>
+    </property>
+    <property name="checked" >
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="figureColorLabel" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>121</y>
+      <width>81</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Figure color:</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="fieldColoGroupBox" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>91</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="title" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="fieldColorLabel" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>71</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Field color:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="fieldColorPushButton" >
+    <property name="geometry" >
+     <rect>
+      <x>104</x>
+      <y>86</y>
+      <width>80</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Color</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="gridColorPushButton" >
+    <property name="geometry" >
+     <rect>
+      <x>105</x>
+      <y>35</y>
+      <width>80</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Color</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="colorGridGroupBox" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>41</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="title" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="gridColorLabel" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>21</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Grid color:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="figureColorPushButton" >
+    <property name="enabled" >
+     <bool>false</bool>
+    </property>
+    <property name="geometry" >
+     <rect>
+      <x>104</x>
+      <y>141</y>
+      <width>80</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Color</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,54 @@
+          BUILDING AND INSTALLING the GPL version of QicsTable
+
+You may need to be logged in as root, depending on the permissions of
+the directories where you choose to install QicsTable.
+
+QicsTable is built with, and depends on, Qt version 4.7 and newer.
+You must have Qt installed on the machine that you are using to build
+QicsTable.
+
+In the following instructions, <QICSTABLE> refers to the toplevel
+directory of the QicsTable distribution.  For example, if you
+unpacked the Linux/Unix archive in /opt, <QICSTABLE> would refer to
+/opt/qicstable-x.x.x-unix-gpl-source.tar.gz
+
+1.  Unpack the archive.
+    On Linux/Unix:  - 'tar xzvf qicstable-x.x.x-unix-gpl-source.tar.gz'
+
+2.  By default, QicsTable will build with the following options:
+    - 'release' build
+    - shared library/DLL
+
+    If you wish to change any of these options, edit the configuration
+    file <QICSTABLE>/qicstable_config.pri.  Each option is documented in
+    the configuration file.
+
+3.  Currently, QicsTable builds using the Qt utility 'qmake'.  
+
+    Before running qmake, make sure you have the correct (4.x) version of
+    qmake installed and findable first in your path. If you are using
+    the version installed by your package manager, on Debian/Ubuntu systems,
+    root can select and set symlinks from /usr/bin to the preferred version of
+    multiple alternate installed versions with this command:
+
+    % update-alternatives --config qmake
+    
+    Afterwards, check the version you are running
+    
+    % qmake -version
+    
+    Note, for people who have QTDIR set: that environment variable is
+    not required in Qt4.
+
+    % qmake qicstable.pro
+
+5.  Once the toplevel makefile is built, you may build the distribution.
+    On Linux/Unix:   - 'make' or 'gmake'
+
+    This will build the QicsTable library and all the examples.
+
+6.  Online HTML documentation can be found in <QICSTABLE>/doc/html.  The
+    main page is 'index.html'.
+
+7.  Examples can be found in <QICSTABLE>/examples.
+

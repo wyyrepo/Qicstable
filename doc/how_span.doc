@@ -1,0 +1,56 @@
+/*!
+
+\page how_span HOWTO - Cell Spanning
+
+The QicsTable widget supports cell spanning.  Cell spanning is a way
+of specifying a region of the grid that should appear as one cell. The
+contents of the first (top and left) cell in the span is displayed in
+the entire spanned region.
+
+When a cell span is created, all of the cells that are \a spanned
+(i.e. cells that are in the spanning region but are not the first cell
+in the region) are not visible.  They cannot be traversed to, and thus
+cannot be edited.  If you are trying to cause a cell to display its
+contents over multiple cells, but still want those cells to be able to
+be edited, you should investigate cell overflow features instead (see
+\ref how_overflow for details).
+
+A cell spanning region is specified by a QicsSpan object.  A QicsSpan
+object differs from a QicsRegion object in that a span is specified by
+a starting cell and a height and width, while a region is specified by
+a start cell and an end cell.
+
+Once you have created a span object, simply add the span by calling
+\link QicsTable::addCellSpan addCellSpan()\endlink.  This method will
+check to make sure that this new span does not overlap any other span.
+
+\code
+    // Create a span starting at cell (1,1), spanning 2 rows and 3 columns
+    QicsSpan span(1,1, 2,3);
+
+    // Add the span to the table
+    table->addCellSpan(span);
+
+    // Set a new value in the starting cell of the span
+    QString val = QString("Span region from cell (1,1)\n2 rows x 3 columns");
+    data_model->setItem(1, 1, val);
+\endcode
+<P>
+\image html spanning.png
+<P>
+To remove a span, call
+\link QicsTable::removeCellSpan removeCellSpan()\endlink.  Because no
+two cell spans can overlap, it is only necessary to specify the
+starting cell of the span to remove it.
+
+The current list of spanned regions in the table can be retrieved by
+calling
+\link QicsTable::cellSpanList cellSpanList()\endlink.  The returned
+list is a \b copy of the table's internal list, and must be deleted by
+the caller when it is no longer needed.  Modifications to this list
+will not affect the table.
+
+One specialized use of cell spanning is to create major/minor rows and
+columns.  Please see \ref how_major for details.
+
+*/

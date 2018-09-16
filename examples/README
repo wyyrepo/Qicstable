@@ -1,0 +1,20 @@
+This directory contains several examples of the use of the QicsTable
+widget.  Please note that these examples are still under development,
+and more examples will be added during future releases.
+
+hellotable  - the simple, "hello, world" example.
+frozen      - using frozen rows and columns
+consultant  - using displayers, validators, formatters; reading and
+              writing data with help of serialization methods.
+spreadsheet - a work-in-progress simple spreadsheet-like demo
+              (there may be some compiler warnings when building this demo).
+stocks      - an example simulating a changing stock listing.
+
+custom_data_model - example of a custom data model class
+custom_data_type  - example of a custom data type
+
+custom_grid - example of creating a custom grid and decorated headers.
+
+tree - example of table grouped into the tree.
+
+displayers - a set of examples how to use QicsTable display classes.

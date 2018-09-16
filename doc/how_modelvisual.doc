@@ -1,0 +1,68 @@
+/*! \page how_modelvisual HOWTO - Model vs. Visual Indices in QicsTable
+
+Every cell in a QicsTable widget has two sets of coordinates.
+<i>Model coordinates</i> specify the row and column indices of the
+cell in the underlying data model that is being displayed.
+<i>Visual coordinates</i> specify a cell's position in the visual
+table.  Visual coordinates always begin with the first row and column
+in the table's viewport, and end with the last row and column in the
+table's viewport.
+
+In the simplest case, a QicsTable widget displays the entire contents
+of a QicsDataModel object, using the same row and column order as the
+data model.  In this case, the table's default viewport ranges from
+(0, 0) to (\<last_row\>, \<last_col\>), and the visual coordinates of each
+row and column are the same as the model coordinates.
+
+If the QicsTable::viewport property is set, the table will display
+only a subset of the cells in the data model.  The table might display
+only rows 20 through 50 in the model, for example.
+The important thing to note is that, even in this case, the visual
+coordinates of each row and column are the same as the model
+coordinates.
+
+If sorting is enabled, the table widget can display rows and columns
+using a different ordering (sorted by the "key" row or column) than
+the ordering of the model.  This capability means that a row or column
+in the table can be referred to in two different ways, by its visual
+index or by its model index.
+
+Another feature of QicsTable is the ability to hide rows and columns.
+A hide operation on a row or column is always performed on the \b
+model row or column.  The result of hiding a row is that that model
+row is \b ignored when displaying the table.  This means that,
+wherever the model row would normally be displayed in the table, it is
+simply skipped.  A hidden row does not affect the visual row indices
+of any other row.
+
+<H3>Model and Visual Indices in Flyweight Objects</H3> As described in
+\ref arch, %QicsTable contains many flyweight classes that refer to
+various parts of the table.  In particular, there are several classes
+that refer to rows, columns, or cells, which are specified by passing
+row and/or column indices to their constructors.  These indices should
+always be expressed in <b>visual coordinates</b>.  If you want the
+flyweight object to always refer to the visual row, column, or cell,
+regardless of which model row, column, or cell is currently being
+displayed there, create the object with \a follow_model=false.  We can
+call this a <b>visual flyweight object</b>.  If you
+want the flyweight object to always refer to the model row, column, or
+cell that is being displayed at the specified visual coordinates,
+create the object with \a follow_model=true.  We can call this a
+<b>model flyweight object</b>.
+
+Assume we are using a QicsRow object to refer to a row in the table.
+The general rule for properties of row flyweight classes is this:
+
+Any operation that is performed on a model flyweight row object is
+performed on the \b model row.  Any operation that is performed on a
+visual flyweight row object is performed on the \b visual row.
+
+This rule is also valid (with the obvious modifications) for column
+objects and cell objects.
+
+The only exception to this rule are the \b hide() and \b show()
+methods of QicsRow and QicsColumn.  These operations are always
+performed on model rows and columns, even if the flyweight object is a
+visual object.
+
+*/

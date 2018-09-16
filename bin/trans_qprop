@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+while (<>) {
+      # we only want the first two words of the argument to Q_PROPERTY
+      # (plus a semi-colon)
+
+       s/Q_PROPERTY\(\s*([\w:]+)\s*(\w+)\s*(.*)\)/$1 $2\;/;
+       s/Q_ENUMS\(\s*\w*\s*\)//;
+      print;
+}
+

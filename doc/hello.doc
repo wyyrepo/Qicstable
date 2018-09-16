@@ -1,0 +1,109 @@
+/*!	\page hello Example - Hello World
+
+This example shows how to get started with %QicsTable.  This simple,
+"hello, world" program creates a data model and a table widget, and
+displays the table.  The code for this example is listed below, and
+each section of the code is described in more detail.
+
+The complete code for this example program can be found in
+\b \<QICSTABLE\>/examples/QicsHello.
+
+
+These are the main %QicsTable header files.
+\code
+#include <QicsTable.h>
+#include <QicsDataModelDefault.h>
+\endcode
+
+    Some standard Qt initialization code here...
+\code
+#include <qapplication.h>
+#include <qlabel.h>
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc,argv);
+\endcode
+
+Now let's create the data model.  QicsDataModelDefault is the standard
+data model class.
+\code
+    // dimensions of the data model
+    int numRows = 10;
+    int numCols = 5;
+
+    // create the data model
+    QicsDataModel *dm = new QicsDataModelDefault(numRows, numCols);
+\endcode
+
+Now that we have a data model object, let's populate it with some data.
+Using the QicsDataInt class constructor we are creating a new integer data item
+with value \a (i*j).  This item is immediately inserted into the data model
+using \link QicsDataModel::setItem setItem() \endlink.
+\code
+    // populate the data model with some data
+    int i, j;
+    for (i = 0; i < numRows; i++)
+    {
+	for (j = 0; j < numCols; j++)
+	{
+	    dm->setItem(i, j, QicsDataInt(i*j));
+	}
+    }
+\endcode
+
+Alternatively, we could have used a different, overloaded version of
+\link QicsDataModelDefault::setItem setItem() \endlink that takes an integer
+as an argument instead of a QicsDataItem object.  There are several different
+overloads of this method for different types of data.
+
+The data model is ready, so now we can create the table widget.  Here, we
+pass the data model to the QicsTable constructor.
+\code
+    // create the table, using the data model we created above
+    QicsTable *table = new QicsTable(dm, 0);
+\endcode
+
+Alternatively, we could
+have created the table widget without a data model and set it later using
+\link QicsTable::setDataModel setdataModel() \endlink.
+
+By default, the table widget will size itself big enough to display 10 rows
+and 10 columns.  In this case, we'd like to make the table just big enough
+to display all the data in the model, so we call
+\link QicsTable::setVisibleRows setVisibleRows() \endlink and
+\link QicsTable::setVisibleColumns setVisibleColumns() \endlink.
+\code
+    // make sure the table is only as large as necessary
+    table->setVisibleRows(numRows);
+    table->setVisibleColumns(numCols);
+\endcode
+
+Now, let's add a title above the table.  QicsTable allows the programmer
+to place any widget in any of eight locations in the table (top, bottom,
+left, right, and the four corners).  Here, we use 
+\link QicsTable::setTopTitleWidget setTopTitleWidget() \endlink
+to place a label widget.
+\code
+    // Add a title widget to the top of the table
+    QLabel *label = new QLabel(QString("Hello World, Table"), table);
+    label->setAlignment(Qt::AlignCenter);
+    table->setTopTitleWidget(label);
+\endcode
+
+That's all the table-specific code.  All that's left to do is set the
+application's main widget, show the table, and enter the application
+event loop.
+\code
+    app.setMainWidget(table);
+    table->show();
+
+    return app.exec();
+}
+\endcode
+
+When the program is executed, you should see the following:
+
+\image html hellotable.png
+
+*/

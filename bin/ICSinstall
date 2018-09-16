@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# Install the current build into /bfs/software in the right place
+#
+
+
+BT=/bfs/snapshot/buildtools/current
+
+if [ -z "$QICSTABLE" ] ; then
+	QICSTABLE=`pwd`
+fi
+
+if [ ! -f $QICSTABLE/lib/libqicstable.so ] ; then
+	echo $QICSTABLE/lib/libqicstable.so is missing.  Perhaps you have
+	echo not built it yet.
+	exit 1
+fi
+
+
+if [ -z "$QTDIR" ] ; then
+	echo "QTDIR is not set"
+	exit 1
+fi
+
+
+#
+# TODO: these should all come from $TOP/product.cf
+#
+PRODUCT=qicstable
+eval `sed -ne '/^VERSION *=/s/ //gp' $QICSTABLE/qicstable_config.pri`
+eval `sed -ne '/^SUFFIX *=/s/ //gp' $QICSTABLE/qicstable_config.pri`
+
+
+#
+# Get the build platform information
+#
+eval `$BT/bin/machine_info | egrep 'COMPILER|MACHARCH|OSTYPE|OSVER'`
+
+#
+# Get the QT version...
+# TODO - fold this into buildtools
+#
+
+QTVER=`echo $QTDIR/lib/libQtCore.so.*.*.* | sed -e 's/^.*libQtCore\.so\.//'`
+
+
+INSTALL_DIR=/bfs/software/$MACHARCH/$OSTYPE-$OSVER/$PRODUCT-$VERSION-$COMPILER/qt_$QTVER
+
+#
+# Now do the install
+#
+
+
+echo Installing $PRODUCT $VERSION to $INSTALL_DIR
+
+if [ ! -d $INSTALL_DIR ] ; then
+	mkdir -p $INSTALL_DIR
+fi
+
+cd $QICSTABLE
+tar cf - lib include examples | (cd $INSTALL_DIR ; tar xf - )

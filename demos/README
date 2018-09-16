@@ -1,0 +1,11 @@
+These demonstrations are intended to highlight QicsTable's capabilities 
+in different areas, and provide examples that are more advanced than those in
+the examples directory.
+
+dimensions   - using span, delete, hide, insert and move rows/column.
+doubleTable  - using two table with common QicsDataModel that changes every second
+mdiQicsTable - example demonstrates how to use QicsTable in multiple document interface applications
+widgetsTable - using set max/min width/height for rows/columns, QListWidget and QTreeWidget in cell
+		example can not be compiled without XP style on Windows
+advanced_spreadsheet - example of full-functional spreadsheet application with MS Excel like
+		look&feel.

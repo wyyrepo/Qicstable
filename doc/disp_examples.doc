@@ -1,0 +1,16 @@
+/*!
+
+\page disp_examples Example - Display classes
+
+The following examples shows how to use the display classes:
+
+- \ref combocheck_disp_example
+- \ref combotab_disp_example
+- \ref datetime_disp_example
+- \ref list_disp_example
+- \ref progress_disp_example
+- \ref button_disp_example
+- \ref radio_disp_example
+- \ref text_disp_example
+
+*/

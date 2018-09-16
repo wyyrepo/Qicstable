@@ -1,0 +1,18 @@
+/*!
+
+\page button_disp_example Example - Using a QicsPushButtonCellDisplay class
+
+This example shows how to use pushbuttons in the table.
+
+\image html disp_button.png
+
+The code in this example can be found in \b \<QICSDIR\>/examples/displayers/pushbutton.
+
+For more information about display classes and subclassing them, see
+\ref cell_display.
+
+- \ref butdisp_h The example's header file
+- \ref butdisp_cpp The example's source file
+- \ref butdisp_main_cpp The main source file
+
+*/

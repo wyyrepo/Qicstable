@@ -1,0 +1,20 @@
+#!/bin/sh
+
+find -name '*.h' -exec dos2unix {} \;
+find -name '*.cpp' -exec dos2unix {} \;
+find -name '*.pri' -exec dos2unix {} \;
+find -name '*.pro' -exec dos2unix {} \;
+find -name '*.qrc' -exec dos2unix {} \;
+find -name '*.sip' -exec dos2unix {} \;
+find -name '*.py' -exec dos2unix {} \;
+find -name '*.txt' -exec dos2unix {} \;
+find -name '*.cfg' -exec dos2unix {} \;
+find -name '*.ui' -exec dos2unix {} \;
+find -name '*.xpm' -exec dos2unix {} \;
+find -name '*.csv' -exec dos2unix {} \;
+find -name '*.in' -exec dos2unix {} \;
+find -name '*.sgml' -exec dos2unix {} \;
+find -name 'README' -exec dos2unix {} \;
+find -name 'CHANGES' -exec dos2unix {} \;
+find -name 'LICENSE' -exec dos2unix {} \;
+find -name 'INSTALL' -exec dos2unix {} \;

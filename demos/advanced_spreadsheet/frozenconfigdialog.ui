@@ -1,0 +1,130 @@
+<ui version="4.0" >
+ <class>FrozenConfigDialogClass</class>
+ <widget class="QDialog" name="FrozenConfigDialogClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>175</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>300</width>
+    <height>175</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>300</width>
+    <height>175</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>FrozenConfigDialog</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>297</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" >
+    <item row="0" column="1" >
+     <widget class="QLabel" name="label" >
+      <property name="text" >
+       <string>How many?</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" >
+     <widget class="QCheckBox" name="cbFreezeTopRows" >
+      <property name="text" >
+       <string>Freeze Top Rows</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" >
+     <widget class="QLineEdit" name="leNumTopFrozenRows" />
+    </item>
+    <item row="2" column="0" >
+     <widget class="QCheckBox" name="cbFreezeBottomRows" >
+      <property name="text" >
+       <string>Freeze Bottom Rows</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" >
+     <widget class="QLineEdit" name="leNumBottomFrozenRows" />
+    </item>
+    <item row="3" column="0" >
+     <widget class="QCheckBox" name="cbFreezeLeftColumns" >
+      <property name="text" >
+       <string>Freeze Left Columns</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1" >
+     <widget class="QLineEdit" name="leNumLeftFrozenCols" />
+    </item>
+    <item row="4" column="0" >
+     <widget class="QCheckBox" name="cbFreezeRightColumns" >
+      <property name="text" >
+       <string>Freeze Right Columns</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1" >
+     <widget class="QLineEdit" name="leNumRightFrozenCols" />
+    </item>
+    <item row="5" column="1" >
+     <widget class="QDialogButtonBox" name="buttonBox" >
+      <property name="standardButtons" >
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>FrozenConfigDialogClass</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>215</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>149</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>FrozenConfigDialogClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>215</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>149</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

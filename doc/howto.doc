@@ -1,0 +1,13 @@
+/*!
+
+\page howto HOWTO List
+
+The following pages document individual %QicsTable features:
+
+- \ref how_size
+- \ref how_freeze
+- \ref how_span
+- \ref how_major
+- \ref how_overflow
+- \ref how_modelvisual
+*/

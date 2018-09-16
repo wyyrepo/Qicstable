@@ -1,0 +1,54 @@
+/*! \page qobj_childs QicsTable classes inherited from QObject
+
+In this section listed %QicsTable classes which inherited
+from Qt QObject class or other Qt/%QicsTable class which 
+are child of QObject, like %QicsCellCommon.
+
+Classes list with parents:
+
+- %QicsCell Parent: %QicsCellCommon
+- %QicsCellCommon. Parent QObject
+- %QicsCellDisplayConfigurationWidget. Parent: QWidget
+- %QicsCheckCellDisplay. Parent: QCheckBox
+- %QicsColumn. Parent: %QicsCellCommon
+- %QicsColumnHeader. Parent: %QicsHeader
+- %QicsComboCellDisplay. Parent: QComboBox
+- %QicsDataModel. Parent: QObject
+- %QicsDataModelDefault. Parent: %QicsDataModel
+- %QicsDateTimeCellDisplay. Parent: QDateTimeEdit
+- %QicsDimensionManager. Parent: QObject
+- %QicsGridCommon. Parent: %QicsCellCommon
+- %QicsGridGeometry. Parent: QObject
+- %QicsGridInfo. Parent: QObject
+- %QicsGridLayout. Parent: QGridLayout
+- %QicsHeader. Parent: %QicsGridCommon
+- %QicsHeaderGrid. Parent: %QicsScreenGrid
+- %QicsKeyboardManager. Parent: QObject
+- %QicsMainGrid. Parent: %QicsGridCommon
+- %QicsPushButtonCellDisplay. Parent: QPushButton
+- %QicsRepeatingColumn. Parent: %QicsCellCommon
+- %QicsRepeatingRow. Parent: %QicsCellCommon
+- %QicsRow. Parent: %QicsCellCommon
+- %QicsRowColumnDrag. Parent: QMimeData
+- %QicsRowHeader. Parent: %QicsHeader
+- %QicsScreenGrid. Parent: QFrame
+- %QicsScrollBarScroller. Parent: %QicsScroller
+- %QicsScrollManager. Parent: QObject
+- %QicsScroller. Parent: QObject
+- %QicsSelectionManager. Parent: QObject
+- %QicsSorter. Parent: QObject
+- %QicsSpanManager. Parent: QObject
+- %QicsStyleManager. Parent: QObject
+- %QicsTable. Parent: QFrame
+- %QicsTableCommon. Parent: %QicsGridCommon
+- %QicsTableGrid. Parent: %QicsScreenGrid
+- %QicsTablePrint. Parent: %QicsTableCommon
+- %QicsTableRegionDrag. Parent: QMimeData
+- %QicsLineEdit. Parent: QLineEdit
+- %QicsTextCellDisplay. Parent: QObject
+- %QicsTipLabel. Parent: QLabel
+- %QicsWidgetCellDisplay. Parent: QObject
+
+%QicsTable is a product of
+<a href="http://www.ics.com"> Integrated Computer Solutions</a>.
+*/

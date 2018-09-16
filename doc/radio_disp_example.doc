@@ -1,0 +1,18 @@
+/*!
+
+\page radio_disp_example Example - Using a QicsRadioCellDisplay class
+
+This example shows how to use radio buttons group in the table.
+
+\image html disp_radio.png
+
+The code in this example can be found in \b \<QICSDIR\>/examples/displayers/radiobuttons.
+
+For more information about display classes and subclassing them, see
+\ref cell_display.
+
+- \ref radiodisp_h The example's header file
+- \ref radiodisp_cpp The example's source file
+- \ref radiodisp_main_cpp The main source file
+
+*/

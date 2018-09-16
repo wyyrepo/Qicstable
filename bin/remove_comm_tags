@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+undef $/;
+
+while (<>) {
+      s/#ifndef QICSTABLE_GPL(.*?)#endif/$1/gs;
+      s/#PRINTING_NOOP(.*?)#END_PRINTING_NOOP/$1/gs;
+      s/#DESIGNER_NOOP(.*?)#END_DESIGNER_NOOP/$1/gs;
+      s/#KDCHART_NOOP(.*?)#END_KDCHART_NOOP/$1/gs;
+      s/#ifdef QICSTABLE_GPL(.*?)#endif//gs;
+      print;
+}

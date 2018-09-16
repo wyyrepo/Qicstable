@@ -1,0 +1,20 @@
+/*!
+
+\page freeze_example Example - Freezing Rows and Columns
+
+This example shows how one can freeze rows and columns in a QicsTable
+widget.  The \b View menu contains a dialog that allows the user
+to pop up dialogs to move selected rows and/or columns to the edges of
+the table, as well as a dialog that allows the user to freeze rows and
+columns.
+
+The code in this example can be found in \b \<QICSDIR\>/examples/frozen.
+
+For more information about freezing rows and columns, see \ref how_freeze.
+
+- \ref frozen_h        Class Definitions
+- \ref frozen_cpp      Program Code
+- \ref frozen_dlg_h    Common dialog class used in multiple examples
+- \ref frozen_dlg_cpp  Common dialog class used in multiple examples
+
+*/

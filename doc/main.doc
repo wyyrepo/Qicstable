@@ -1,0 +1,56 @@
+/*
+ * Copyright 1990 - 2014 Integrated Computer Solutions, Inc.
+ *
+ * All Rights Reserved.
+ *
+ * MODULE:    main.doc
+ * AUTHOR:    Chris Craig
+ *
+ * DESCRIPTION:
+ */
+
+/*!	\mainpage
+
+\image html stocks.png
+<P>
+
+%QicsTable is a full-featured, high-performance, Qt-based table widget
+suited for use in industrial-strength applications. It incorporates a
+model-view-controller architecture to allow multiple views of the same
+data. The table also produces high-quality printed output and some tree
+functionality.
+
+\section features Main Table Features
+- \link features.html Features list \endlink
+
+\section start Getting Started
+- \ref about
+- \ref install
+- \ref hello
+- \ref tree_example
+- \ref arch
+- \ref qobj_childs
+
+\section custom Customization
+- \ref extend_model
+- \ref cell_display
+- \ref keymouse_behavior
+
+\section howto HOWTO Documents
+- \link howto.html HOWTO List \endlink
+
+\section examples Table Examples
+- \ref hello
+- \ref freeze_example
+- \ref cdt_example
+- \ref cdm_example
+- \ref cg_example
+- \ref tree_example
+- \ref disp_examples
+
+\section demos Table Demos
+- \ref spread_demo
+- \ref stocks_demo
+- \ref stocks2_demo
+- \ref consult_demo
+*/

@@ -1,0 +1,511 @@
+<ui version="4.0" >
+ <class>SetupDialogClass</class>
+ <widget class="QDialog" name="SetupDialogClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>422</width>
+    <height>241</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Table Settings</string>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" colspan="4" >
+    <widget class="QTabWidget" name="tabWidget" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabAppearance" >
+      <attribute name="title" >
+       <string>Appearance</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <item row="0" column="0" colspan="2" >
+        <widget class="QGroupBox" name="groupBox" >
+         <property name="title" >
+          <string>Window</string>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="1" >
+           <widget class="QComboBox" name="cbStyle" />
+          </item>
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize" >
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>40</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Style</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QGroupBox" name="groupBox_7" >
+         <property name="title" >
+          <string>Cells</string>
+         </property>
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QLabel" name="label_2" >
+            <property name="text" >
+             <string>Overflow behavior</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cbOverflow" >
+            <item>
+             <property name="text" >
+              <string>Clip</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>Overflow</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>ToolTip</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item rowspan="2" row="1" column="1" >
+        <widget class="QGroupBox" name="groupBox_8" >
+         <property name="title" >
+          <string>Grid</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="cbVGrid" >
+            <property name="text" >
+             <string>Vertical gridlines</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbHGrid" >
+            <property name="text" >
+             <string>Horizontal gridlines</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>171</width>
+           <height>27</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabData" >
+      <attribute name="title" >
+       <string>Copy/Paste/Select</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <item row="0" column="2" >
+        <widget class="QGroupBox" name="groupBox_4" >
+         <property name="title" >
+          <string>Selection Policy</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QComboBox" name="cbSelectionPolicy" >
+            <item>
+             <property name="text" >
+              <string>SelectNone</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>SelectSingle</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>SelectMultiple</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>SelectSingleRow</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>SelectMultipleRow</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbExclusiveSelection" >
+            <property name="text" >
+             <string>Exclusive</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item rowspan="2" row="0" column="0" >
+        <widget class="QGroupBox" name="groupBox_2" >
+         <property name="title" >
+          <string>Copy/Drag Policy</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="cbCopyData" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Data</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbCopyAttr" >
+            <property name="text" >
+             <string>Attributes</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbCopySize" >
+            <property name="text" >
+             <string>Dimensions</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbCopySpan" >
+            <property name="text" >
+             <string>Spans</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>51</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item rowspan="2" row="0" column="1" >
+        <widget class="QGroupBox" name="groupBox_3" >
+         <property name="title" >
+          <string>Clear Policy</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="cbClearData" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Data</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbClearAttr" >
+            <property name="text" >
+             <string>Attributes</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbClearSpan" >
+            <property name="text" >
+             <string>Spans</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabHeaders" >
+      <attribute name="title" >
+       <string>Headers</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <widget class="QGroupBox" name="groupBox_5" >
+         <property name="title" >
+          <string>Row Header</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="cbRHMovable" >
+            <property name="text" >
+             <string>Movable</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbRHUserResizable" >
+            <property name="text" >
+             <string>Resizable Height</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbRHResizable" >
+            <property name="text" >
+             <string>Resizable Width</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QGroupBox" name="groupBox_6" >
+         <property name="title" >
+          <string>Column Header</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="cbCHMovable" >
+            <property name="text" >
+             <string>Movable</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbCHUserResizable" >
+            <property name="text" >
+             <string>Resizable Width</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbCHResizable" >
+            <property name="text" >
+             <string>Resizable Height</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QCheckBox" name="cbExtDrag" >
+         <property name="text" >
+          <string>Extended Drag Style</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>121</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="2" >
+    <widget class="QPushButton" name="bApply" >
+     <property name="text" >
+      <string>Apply</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <widget class="QPushButton" name="bOK" >
+     <property name="text" >
+      <string>OK</string>
+     </property>
+     <property name="default" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3" >
+    <widget class="QPushButton" name="bCancel" >
+     <property name="text" >
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>bOK</tabstop>
+  <tabstop>bApply</tabstop>
+  <tabstop>bCancel</tabstop>
+  <tabstop>cbRHMovable</tabstop>
+  <tabstop>cbRHUserResizable</tabstop>
+  <tabstop>cbRHResizable</tabstop>
+  <tabstop>cbCHMovable</tabstop>
+  <tabstop>cbCHUserResizable</tabstop>
+  <tabstop>cbCHResizable</tabstop>
+  <tabstop>cbStyle</tabstop>
+  <tabstop>cbOverflow</tabstop>
+  <tabstop>cbVGrid</tabstop>
+  <tabstop>cbHGrid</tabstop>
+  <tabstop>cbCopyData</tabstop>
+  <tabstop>cbCopyAttr</tabstop>
+  <tabstop>cbCopySize</tabstop>
+  <tabstop>cbCopySpan</tabstop>
+  <tabstop>cbClearData</tabstop>
+  <tabstop>cbClearAttr</tabstop>
+  <tabstop>cbClearSpan</tabstop>
+  <tabstop>cbSelectionPolicy</tabstop>
+  <tabstop>cbExclusiveSelection</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>bCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>SetupDialogClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>331</x>
+     <y>280</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>18</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bOK</sender>
+   <signal>clicked()</signal>
+   <receiver>SetupDialogClass</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>188</x>
+     <y>285</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>45</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

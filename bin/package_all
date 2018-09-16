@@ -1,0 +1,35 @@
+#!/bin/sh
+
+echo '##############################################################'
+echo '            Processing version variables'
+echo '##############################################################'
+
+QICSTABLE_SUFFIX=`./update_version` && export QICSTABLE_SUFFIX && echo 'success...' || {
+echo 'failed...' &&
+exit 1
+}
+
+echo
+echo '##############################################################'
+echo '                    Processing config'
+echo '##############################################################'
+./process_cfg.pl && echo 'success...' || {
+echo 'failed...' && 
+exit 1
+}
+
+echo
+echo '##############################################################'
+echo '                          Packaging'
+echo '##############################################################'
+
+rm -rf ../../package/*
+
+./qicstable-dist.sh unix commercial && ./qicstable-dist.sh unix commercial eval && ./qicstable-dist.sh win commercial && ./qicstable-dist.sh unix gpl && ./qicstable-dist.sh win gpl
+cd ..
+cd ..
+cd package
+echo
+echo "Packaged :"
+echo 
+ls -l

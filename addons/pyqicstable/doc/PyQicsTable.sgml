@@ -1,0 +1,621 @@
+<!DOCTYPE Article PUBLIC "-//OASIS//DTD DocBook V3.1//EN">
+<Article>
+<ArtHeader>
+	<Title>Python Bindings for QicsTable</Title>
+	<CorpAuthor>Integrated Computer Solutions, Inc.</CorpAuthor>
+	<Abstract>
+	<Para>
+	This document describes a set of Python bindings for the QicsTable
+	widget set.
+	</Para>
+	</Abstract>
+</ArtHeader>
+
+
+<Sect1><Title>Introduction</Title>
+<Para>
+What is it?
+This is a Python bindings for QicsTable, whom writed in C++/Qt.
+This documentation for PyQicsTable version 1.2.
+</Para>
+</Sect1>
+
+
+<Sect1><Title><Literal>PyQicsTable</Literal> Module Reference</Title>
+
+<Para>
+The following sections should be used in conjunction with the normal class
+documentation - only the differences specific to the Python bindings are
+documented here.
+</Para>
+
+<Para>
+If an operator has been implemented then it is stated explicitly.
+</Para>
+
+<Sect2><Title>Qics</Title>
+<Para>
+<Literal>Qics</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsCell</Title>
+<Para>
+<Literal>QicsCell</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsCellCommon</Title>
+<FuncSynopsis>
+	<FuncDef>void <Function>setUserData</Function></FuncDef>
+	<ParamDef>void *<Parameter>data</Parameter></ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>data</Literal> is a Python object of any type.  A reference to the
+object is not taken, i.e. another reference to the object must be maintained to
+prevent it from being garbage collected.
+</Para>
+
+<FuncSynopsis>
+	<FuncDef>void *<Function>userData</Function></FuncDef>
+	<ParamDef></ParamDef>
+</FuncSynopsis>
+<Para>
+The return value is the Python object set using
+<Literal>setUserData()</Literal>.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsCellDisplay</Title>
+<Para>
+<Literal>QicsCellDisplay</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsCheckCellDisplay</Title>
+<Para>
+<Literal>QicsCheckCellDisplay</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsColumn</Title>
+<Para>
+<Literal>QicsColumn</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsColumnHeader</Title>
+<Para>
+<Literal>QicsColumnHeader</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsComboCellDisplay</Title>
+<Para>
+<Literal>QicsComboCellDisplay</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataBool</Title>
+<Para>
+<Literal>QicsDataBool</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataDate</Title>
+<Para>
+<Literal>QicsDataDate</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataDateTime</Title>
+<Para>
+<Literal>QicsDataDateTime</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataDouble</Title>
+<Para>
+<Literal>QicsDataDouble</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataFloat</Title>
+<Para>
+<Literal>QicsDataFloat</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataInt</Title>
+<Para>
+<Literal>QicsDataInt</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataLongLong</Title>
+<Para>
+<Literal>QicsDataLongLong</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataItem</Title>
+<FuncSynopsis>
+	<FuncDef>void <Function>registerType</Function></FuncDef>
+	<ParamDef>const QString <Parameter>type_name</Parameter></ParamDef>
+	<ParamDef>QicsDataItemParser <Parameter>parser</Parameter></ParamDef>
+	<ParamDef>QicsDataItemDecoder <Parameter>decoder</Parameter></ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>parser</Literal> and <Literal>decoder</Literal> are both Python
+callable objects.  References to the callables are taken so it is possible to
+use Python lambda functions.
+NOTE: now we use Q3PtrList for backup compatability. In feature this will replaced with QVector, QList.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataItemFormatter</Title>
+<Para>
+<Literal>QicsDataItemFormatter</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataItemSprintfFormatter</Title>
+<Para>
+<Literal>QicsDataItemSprintfFormatter</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataLong</Title>
+<Para>
+<Literal>QicsDataLong</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataModel</Title>
+<Para>
+<Literal>QicsDataModel</Literal> is fully implemented.  The
+<Literal>QicsDataModelColumn</Literal> and <Literal>QicsDataModelRow</Literal>
+types have been implemented as Python lists of <Literal>QicsDataItem</Literal>
+instances.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataModelDefault</Title>
+<Para>
+<Literal>QicsDataModelDefault</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataString</Title>
+<Para>
+<Literal>QicsDataString</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsDataTime</Title>
+<Para>
+<Literal>QicsDataTime</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsGrid</Title>
+<FuncSynopsis>
+	<FuncDef>virtual void <Function>orderColumnsBy</Function></FuncDef>
+	<ParamDef>int <Parameter>row</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Ascending</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+
+<FuncSynopsis>
+	<FuncDef>virtual void <Function>orderRowsBy</Function></FuncDef>
+	<ParamDef>int <Parameter>column</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Ascending</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsGridCommon</Title>
+<Para>
+<Literal>QicsGridCommon</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsGridInfo</Title>
+<FuncSynopsis>
+	<FuncDef>void <Function>orderColumnsBy</Function></FuncDef>
+	<ParamDef>int <Parameter>row</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Qics::Ascending</ParamDef>
+	<ParamDef>int <Parameter>from</Parameter> = 0</ParamDef>
+	<ParamDef>int <Parameter>to</Parameter> = -1</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+
+<FuncSynopsis>
+	<FuncDef>void <Function>orderRowsBy</Function></FuncDef>
+	<ParamDef>int <Parameter>column</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Qics::Ascending</ParamDef>
+	<ParamDef>int <Parameter>from</Parameter> = 0</ParamDef>
+	<ParamDef>int <Parameter>to</Parameter> = -1</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+
+<Para>
+The <Literal>QicsScreenGridPV</Literal> type has been implemented as a Python
+list of <Literal>QicsScreenGrid</Literal> instances.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsHeader</Title>
+<Para>
+<Literal>QicsHeader</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsHeaderGrid</Title>
+<Para>
+<Literal>QicsHeaderGrid</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsICell</Title>
+<Para>
+<Literal>QicsICell</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsMainGrid</Title>
+<Para>
+<Literal>QicsMainGrid</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsMovableEntryWidgetCellDisplay</Title>
+<Para>
+<Literal>QicsMovableEntryWidgetCellDisplay</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsMovableEntryWidgetCellDisplay::QicsEntryWidgetInfo</Title>
+<Para>
+<Literal>QicsMovableEntryWidgetCellDisplay::QicsEntryWidgetInfo</Literal> is
+fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsNoWidgetCellDisplay</Title>
+<Para>
+<Literal>QicsNoWidgetCellDisplay</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsRegion</Title>
+<Para>
+<Literal>QicsRegion</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsRepeatingColumn</Title>
+<Para>
+<Literal>QicsRepeatingColumn</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsRepeatingRow</Title>
+<Para>
+<Literal>QicsRepeatingRow</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsRow</Title>
+<Para>
+<Literal>QicsRow</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsRowHeader</Title>
+<Para>
+<Literal>QicsRowHeader</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsScreenGrid</Title>
+<FuncSynopsis>
+	<FuncDef>virtual void <Function>orderColumnsBy</Function></FuncDef>
+	<ParamDef>int <Parameter>row</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Qics::Ascending</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+
+<FuncSynopsis>
+	<FuncDef>virtual void <Function>orderRowsBy</Function></FuncDef>
+	<ParamDef>int <Parameter>column</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Qics::Ascending</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsScrollBarScroller</Title>
+<Para>
+<Literal>QicsScrollBarScroller</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsScroller</Title>
+<Para>
+<Literal>QicsScroller</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsSelection</Title>
+<Para>
+<Literal>QicsSelection</Literal> is fully implemented.  The
+<Literal>==</Literal> and <Literal>!=</Literal> operators are supported
+allowing <Literal>QicsSelection</Literal> instances to be compared for
+equality.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsSelectionList</Title>
+<Para>
+The Python implementation has no super-classes.  The class behaves like a
+Python list, i.e. it supports the <Literal>len()</Literal> builtin function and
+<Literal>in</Literal> operator, and elements and slices may be assigned,
+updated and deleted.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsSpan</Title>
+<Para>
+<Literal>QicsSpan</Literal> is fully implemented.  The
+<Literal>QicsSpanList</Literal> type has been implemented as a Python list of
+<Literal>QicsSpan</Literal> instances.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsTable</Title>
+<FuncSynopsis>
+	<FuncDef><Function>QicsTable</Function></FuncDef>
+	<ParamDef>QicsDataModel::Foundry <Parameter>rhdmf</Parameter></ParamDef>
+	<ParamDef>QicsDataModel::Foundry <Parameter>chdmf</Parameter></ParamDef>
+	<ParamDef>QicsTableGrid::Foundry <Parameter>tf</Parameter></ParamDef>
+	<ParamDef>QicsHeaderGrid::Foundry <Parameter>hf</Parameter></ParamDef>
+	<ParamDef>QicsDataModel *<Parameter>model</Parameter> = 0</ParamDef>
+	<ParamDef>QWidget *<Parameter>parent</Parameter> = 0</ParamDef>
+	<ParamDef>const char *<Parameter>name</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>rhdmf</Literal>, <Literal>chdmf</Literal>, <Literal>tf</Literal> and
+<Literal>hf</Literal> are all Python callable objects.  References to the
+callables are not taken as they are only used immediately by the constructor
+itself.
+</Para>
+
+<FuncSynopsis>
+	<FuncDef>void <Function>sortColumns</Function></FuncDef>
+	<ParamDef>int <Parameter>row</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Qics::Ascending</ParamDef>
+	<ParamDef>int <Parameter>from</Parameter> = 0</ParamDef>
+	<ParamDef>int <Parameter>to</Parameter> = -1</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+
+<FuncSynopsis>
+	<FuncDef>void <Function>sortRows</Function></FuncDef>
+	<ParamDef>int <Parameter>column</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Qics::Ascending</ParamDef>
+	<ParamDef>int <Parameter>from</Parameter> = 0</ParamDef>
+	<ParamDef>int <Parameter>to</Parameter> = -1</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsTableCommon</Title>
+<FuncSynopsis>
+	<FuncDef>void <Function>sortColumns</Function></FuncDef>
+	<ParamDef>int <Parameter>row</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Qics::Ascending</ParamDef>
+	<ParamDef>int <Parameter>from</Parameter> = 0</ParamDef>
+	<ParamDef>int <Parameter>to</Parameter> = -1</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+
+<FuncSynopsis>
+	<FuncDef>void <Function>sortRows</Function></FuncDef>
+	<ParamDef>int <Parameter>column</Parameter></ParamDef>
+	<ParamDef>QicsSortOrder <Parameter>order</Parameter> = Qics::Ascending</ParamDef>
+	<ParamDef>int <Parameter>from</Parameter> = 0</ParamDef>
+	<ParamDef>int <Parameter>to</Parameter> = -1</ParamDef>
+	<ParamDef>DataItemComparator <Parameter>func</Parameter> = 0</ParamDef>
+</FuncSynopsis>
+<Para>
+<Literal>func</Literal> is a Python callable object.  A reference to the
+callables is taken so it is possible to use a Python lambda function.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsTableGrid</Title>
+<Para>
+<Literal>QicsTableGrid</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsTablePrint</Title>
+<Para>
+<Literal>QicsTablePrint</Literal> is fully implemented.
+<FuncSynopsis>
+    <FuncDef>void 	<Function>print_</Function></FuncDef>
+    <ParamDef>QPrinter* <Parameter>printer</Parameter></ParamDef>
+</FuncSynopsis>
+<FuncSynopsis>
+    <FuncDef>void 	<Function>print_</Function></FuncDef>
+    <ParamDef>QPrinter* <Parameter>printer</Parameter></ParamDef>
+    <ParamDef>const QicsRegion& <Parameter>region</Parameter></ParamDef>
+</FuncSynopsis>
+<Literal>QicsTablePrint::print()</Literal> method was renamed to print_()
+    to avoid name conflicts with python keyword print.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsTextCellDisplay</Title>
+<Para>
+<Literal>QicsTextCellDisplay</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+<Sect2><Title>QicsWidgetCellDisplay</Title>
+<Para>
+<Literal>QicsWidgetCellDisplay</Literal> is fully implemented.
+</Para>
+</Sect2>
+
+</Sect1>
+
+
+<Sect1><Title><Literal>pyqicstableconfig</Literal> and Build System Support</Title>
+<Para>
+The SIP build system (ie. the <Literal>sipconfig</Literal> module) is described
+in the SIP documentation.  PyQicsTable includes the
+<Literal>pyqicstableconfig</Literal> module that can be used by configuration
+scripts of other bindings that are built on top of PyQicsTable.
+</Para>
+
+<Para>
+The <Literal>pyqicstableconfig</Literal> module contains the following classes:
+</Para>
+
+<VariableList>
+<VarListEntry>
+<Term><Literal>Configuration(pyqtconfig.Configuration)</Literal></Term>
+<ListItem>
+<Para>
+This class encapsulates additional configuration values, specific to
+PyQicsTable, that can be accessed as instance variables.
+</Para>
+
+<Para>
+The following configuration values are provided (in addition to those provided
+by the <Literal>pyqtconfig.Configuration</Literal> class):
+</Para>
+<VariableList>
+
+<VarListEntry>
+<Term><Literal>pyqicstable_mod_dir</Literal></Term>
+<ListItem>
+<Para>
+The name of the directory containing the PyQicsTable modules.
+</Para>
+<Para></Para><Para></Para>
+</ListItem>
+</VarListEntry>
+
+<VarListEntry>
+<Term><Literal>pyqicstable_qicstable_sip_flags</Literal></Term>
+<ListItem>
+<Para>
+A string of the SIP flags used to generate the code for the
+<Literal>qicstable</Literal> module and which should be added to those needed
+by any module that imports the <Literal>qicstable</Literal> module.
+</Para>
+<Para></Para><Para></Para>
+</ListItem>
+</VarListEntry>
+
+<VarListEntry>
+<Term><Literal>pyqicstable_sip_dir</Literal></Term>
+<ListItem>
+<Para>
+The name of the base directory where the <Literal>.sip</Literal> files for each
+of the PyQicsTable modules is installed. A sub-directory exists with the same
+name as the module.
+</Para>
+<Para></Para><Para></Para>
+</ListItem>
+</VarListEntry>
+
+<VarListEntry>
+<Term><Literal>pyqicstable_version</Literal></Term>
+<ListItem>
+<Para>
+The PyQicsTable version as a 3 part hexadecimal number (eg. v1.1 is represented
+as <Literal>0x010100</Literal>).
+</Para>
+<Para></Para><Para></Para>
+</ListItem>
+</VarListEntry>
+
+<VarListEntry>
+<Term><Literal>pyqicstable_version_str</Literal></Term>
+<ListItem>
+<Para>
+The PyQicsTable version as a string. For development snapshots it will start
+with <Literal>snapshot-</Literal>.
+</Para>
+<Para></Para><Para></Para>
+</ListItem>
+</VarListEntry>
+
+</VariableList>
+</ListItem>
+</VarListEntry>
+
+<VarListEntry>
+<Term><Literal>QicsTableModuleMakefile(pyqtconfig.QtModuleMakefile)</Literal></Term>
+<ListItem>
+<Para>
+The Makefile class for modules that import the <Literal>qicstable</Literal>
+module.
+</Para>
+<VariableList>
+<VarListEntry>
+<Term><Literal>finalise(self)</Literal></Term>
+<ListItem>
+<Para>
+This is a reimplementation of <Literal>sipconfig.Makefile.finalise()</Literal>.
+</Para>
+<Para></Para><Para></Para>
+</ListItem>
+</VarListEntry>
+</VariableList>
+</ListItem>
+</VarListEntry>
+
+</VariableList>
+</Sect1>
+
+</Article>

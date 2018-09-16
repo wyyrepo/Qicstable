@@ -1,0 +1,19 @@
+/*!
+
+\page text_disp_example Example - Using a QicsTextCellDisplay class
+
+This example shows how to use the default display class.
+It includes text and pixmap output, masked input and password edit.
+
+\image html disp_txt.png
+
+The code in this example can be found in \b \<QICSDIR\>/examples/displayers/textedit.
+
+For more information about display classes and subclassing them, see
+\ref cell_display.
+
+- \ref textdisp_h The example's header file
+- \ref textdisp_cpp The example's source file
+- \ref textdisp_main_cpp The main source file
+
+*/

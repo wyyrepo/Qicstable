@@ -1,0 +1,1300 @@
+QicsTable 3.0.0             2014/02/11
+--------------------------------------
+
+Added:
+- Ported to Qt 5
+- First LGPL release
+
+
+QicsTable 2.4.5             2011/11/11                           
+--------------------------------------
+Fixed:
+- Row filters without any match shows wrong results (Mantis #1512)
+- Rendering problem after freeze / unfreeze (Mantis #1462)
+- Resizing multi-row headers (#89683, RT)
+- Problems with tooltips in QicsTable (#89738, RT)
+- Wrong include directive in QicsRepeatingCellStyle.h (#89948, RT)
+- Sortindicator in QicsTable (#90009, RT)
+- Resizing Tables with hidden columns (#90040, RT)
+- PrintPreview with empty table (#90062, RT)
+- Window decorations in PrintPreview (#90061, RT)
+- No documentation provided for QicsTreeTable & related classes (#89879, RT)
+- QicsTable refresh problem with frozen rows (#89833, RT)
+- Qicstable problem: row filter is not working properly (#89714, RT)
+- Problem in empty table with frozen rows (#89658, RT)
+- QicsTable locked rows bug (#89522, RT)
+- Bottom Border Pen problem (89640#, RT)
+- QICS Table Tooltips on Multihead Display (#91661, RT)
+- QicsTable Copy to Excel Bug (#92039, RT)
+- Print Preview does not respect filtering  - if rowFilters are in effect, the filtered rows still appear in the printed output
+- Repeating Columns Problem (#92198, RT)
+
+Added:
+- Selection color does not respect alpha (#90122, RT)
+- Be able to changed row height in the multi-row column header (#89683, RT)
+- QicsTable::copy() improvement suggestion: copy to Excel the column\row headings (#92061, RT)
+
+QicsTable 2.4.4             2010/01/27                
+--------------------------------------
+
+Improvements:
+- Speed up table when setting/changing/removing filter
+- Full support of Qt 4.5 (Qt 4.5.1 and above recommended).
+- Full support of Qt 4.6
+- Support for KDChart 2.3
+
+Fixed:
+- Building errors on Qt 4.2.x
+- QicsRadioWidget drawing problem on Qt 4.5.0
+- Scrollbar position is not proper when frozen column/s is/are hidden (#87539, RT)
+- The table "automatically" scrolls until it scrolls to the bottom, when the mouse button is released past the boundary of the window (#87594 (3), RT)
+- QicsTable::unfreezeTopRows() doen't work properly in some cases (#87594 (1), RT)
+- Potential crashes in QicsColumnHeader::numRows() and in QicsRowHeader::numColumns()
+- In some cases, QicsTable doesn't draw properly when set row filter
+- In some cases, QicsTable doesn't draw properly when remove rows
+- Drawing column header artifacts when moving horizontal scroll
+- If a few columns are hidden, and when try to paste data, it pastes into the hidden columns (#87905, RT)
+- Display bug (cut off the text) of QicsPushButtonCellDisplay on MS Windows Vista
+- Display bug (arrow doesn't draw) of QicsComboCellDisplay, QicsComboTabCellDisplay  and QicsComboCheckCellDisplay on MS Windows Vista (#87933, RT)
+- QicsWidgetCellDisplay: When the widget  gets focus the insertion pointer is not displayed (#88283 (2), RT)
+- QicsWidgetCellDisplay: When the table is refreshed sometimes the widgets are not drawn until a mouse is clicked in the table (#88283 (2), RT)
+- Paint Issue with QicsTreeTable (#88424, RT)
+- Refresh issue with QicsTreeTable when rows are deleted (#88435, RT)
+- Problem in visibleRows() when hidden rows are present (#88607, RT)
+- Performance issue in QicsTable::addRows(int) and QicsTable::addColumns(int) (#88622, RT)
+- Performance issue in QicsGridInfo::deleteRow(int, int) and QicsGridInfo::deleteColumns(int, int) (#88622, RT)
+- QicsComboCellDisplay does not show current cell value (##88908, RT)
+- Problem with fixWidthToViewport() for empty table: the width of the table is too small, and it does not display all the columns as expected (#88899, RT)
+- VIRT increasing in when chnage data model (#88766, RT)
+- No frame on main grid (#88815, RT)
+- QicsTextCellDisplay::setInputMask does not work (#88897, RT)
+- Junk in header with frozen columns (#88906, RT)
+- Problem shrinking internal table (#88807, RT)
+- The inner table is displayed badly on Linux (#88735, RT)
+- QicsTable::copy() didn't work properly (#87967, RT)
+- Multiple selection is not working with qicstable-2.4.4-snapshot-20091020 (#89198, RT)
+- currentCell() problem upon insertRows() (#89214, RT)
+- Drag & Drop columns is not working properly (#89217, RT)
+- There any way to  set a maximum width to a column so will not go wider even if user double click on the border between two columns on the header. (#89275, RT)
+- Clicked and doubleClicked signals in row and colums header are emited twice (#89289, RT)
+- Misalignment of columns headers when resizing last columns (#89292, RT)
+
+Added:
+- QicsColumn: setVisible(bool), isVisible() and setHidden(bool) methods
+- QicsRow: setVisible(bool), isVisible() and setHidden(bool) methods
+- QicsCell: isVisible() method
+- Super QicsCheckCellDisplay - whole cell should be clickable (#1148, Bugzilla)
+- QicsTable::deleteColumns(int, int) and QicsTable::deleteRows(int, int) methods (#88622, RT)
+- QicsDataModelQtModelAdapter::index(int, int, const QModekIndex &) (#88622, RT)
+- New selection style like Excel
+- New example examples\displayers\boolean (#503, Bugzilla)
+- An exapmle which shows how to work with QicsRepeatingRow, has been added (examples/repeating)
+- QSqlTableModel example (examples/qsqltablemodel)
+
+Changes:
+- QicsCheckCellDisplay::checkStateChanged() now virtual
+- QicsScreenGrid: doTraverseHorizontal, doTraverseVertical, doTraverseCellVertical and doTraverseCellHorizontal now virtual
+
+Known Issues:
+- When drawing the focus bound box for a combobox in the Qt style system, the focus box position is not properly handled. This problem occurs on Linux 
+when the "windows" style is used. It is bug in Qt. Please see task #210069 on Qt Software's Bug Tracker. It fixed in Qt 4.5.0.
+- QicsDateTimeCellDisplay and QicsComboCellDisplay display as selected when the Windows XP style is used (#86339, RT). It is bug in Qt. Please see
+task #222057 on Qt Software's Bug Tracker. It fixed in Qt 4.5.0.
+- Memory leak when using QicsCellCommon::setUserData(void *data). It will be fixed in some future release.
+- QicsListWidgetCellDisplay does not work properly on Qt 4.5.0. It is bug in Qt. Please see task #244240 on Qt Software's Bug Tracker.
+  It fixed in Qt 4.5.1
+- Base color is ignored for QicsDateTimeCellDisplay when using QPlastiqueStyle. It is bug in Qt. Please see task #246351 on Qt Software's Bug Tracker.
+
+
+QicsTable 2.4.3             2009/02/16
+--------------------------------------
+
+Improvements:
+- Support Qt 4.5.0 (tested on Qt 4.5.0 RC1).
+
+Fixed:
+- Performance issue in some cases (used 100% CPU) when application is started (#86186, RT).
+- Performance issue in some cases (used 100% CPU) when uses freezing (#86186, RT).
+- Crash when freeze feature is used and columns are hidden (#0001044, Mantis).
+- In some cases, applications are not run on Windows.
+- In some cases, toolTips did not show for displayers (#0001054, Mantis).
+- Selection is sometimes empty (#0001053, Mantis).
+- Assert when removing a row (#0001081, Mantis).
+- The dotted line drawn on the table when clicking on a grid position after setting the QicsTable to not resizeable, and the grid is not visible.
+- Include files in the addons directory are not found when using "nmake install" (#86293 (1), RT).
+- Model coordinates, as opposed to visual coordinates, are passed into some QicsCheckCellDisplay methods (#86240 (1), RT).
+- QicsDateTimeCellDisplay::setCalendarPopup(true) did not work correctly (#86339, RT).
+- Selecting rows in QicsTable can be very sluggish (regression from QicsTable 2.3.x) (#86240, RT).
+- Freezing row headers: If column 0 is hidden the column headers are invisible, too (#0001028, Mantis).
+- QicsTable crashes because it uses static global Qt GUI objects in the QicstTble library. Reproducible since QicsTable 2.3 (#86265, #87000, RT).
+- Sort delegates does not work when setting delegates using table->setRowSorterDelegate() (#86402, RT).
+- Flushing header data to model (#86434, RT).
+- In some cases, the user can edit cells for read only table (#86446, (2), RT).
+- Warnings "warning: suggest parentheses around && within ||" and "warning: suggest parentheses around assignment used as truth value"
+  on GCC 4.3.1.
+- Last columns/rows are not visible as horizontal/vertical scrollbar reaches the right/bottom most position when left columns/top
+  rows are freezing (#86624, RT).
+- The Shift+TAB navigation does not work correctly after using traverseToCell (#86713, RT).
+- Crashes in QicsCellDisplay (#86816, RT).
+- QicsTable does not paint correctly when using frozen rows and columns at the same time (#87005 (1), RT).
+- Saving data to CSV format does not work correctly with QicsDataModelQtModelAdapter (#86994, RT).
+- Selected cell remains in the frozen grid of the table and does not jump to the main grid when the user selects a region in frozen grid of the table and
+  clicks into main grid (#87005 (2), RT).
+- setEnterTraversalDirection(...) method does not work with "Return or Enter" key in the number keypad (#87142, RT).
+- QicsTable::setViewport(...) does not work properly.
+- QicsTable has drawing artifacting when updating cell. The problem only occur after setting the border pen for the main grid (87284 (1), RT).
+
+Added:
+- Now QicsTable installs dlls to the Qt bin directory on Windows (#86293 (2), RT).
+- Added methods QicsTable::traversePageUp() and QicsTable::traversePageDown() (#86446, (1), RT).
+- Added method QicsTable::setCurrentCell(const QicsICell &cell).
+- kdchart2 demo.
+- datasets example.
+- richtext example.
+- displayer examples (combocheck, combotab, datetime, listwidget, progress, pushbutton, radiobuttons).
+
+Changes:
+- QicsRuler.h, QicsRubberBand.h and QicsNavigator.h were moved from QICSTABLEDIR\addons\common to QICSTABLEDIR\include.
+- QicsRuler.cpp, QicsRubberBand.cpp and QicsNavigator.cpp were moved from QICSTABLEDIR\addons\common to QICSTABLEDIR\src.
+- QicsPopupDialog.h and QicsPopupDialog.cpp were moved from QICSTABLEDIR\addons\common to QICSTABLEDIR\addons\table.tree.
+- QICSTABLEDIR\addons\common directory was removed.
+- Now advanced_spreadsheet demo can store data to CSV format.
+
+Known Issues:
+- When drawing the focus bound box for a combobox in the Qt style system, the focus box position is not properly handled. This problem occurs on Linux 
+when the "windows" style is used (bug in Qt #210069). It will fixed in Qt 4.5.0.
+- QicsDateTimeCellDisplay and QicsComboCellDisplay display as selected when the Windows XP style is used (#86339, RT). It is bug in Qt. Please see
+task #222057 on Trolltech's Bug Tracker. It will fixed in Qt 4.5.0.
+- Memory leak when using QicsCellCommon::setUserData(void *data). It will be fixed in some future release.
+- QicsListWidgetCellDisplay does not work properly on Qt4.5.0 RC1. It is bug in Qt. Please see task #244240 on Trolltech's Bug Tracker.
+  It will be fixed in 4.5.1
+
+
+QicsTable 2.4.2             2008/07/31
+--------------------------------------
+
+Improvements:
+- Sped up table scrolling.
+- Sped up QicsSorter up to 40%.
+- Support Qt 4.4.x.
+- Better support of Qt item models - now QicsTable supports Qt::ItemFlags (Qt::ItemIsEditable and Qt::ItemIsEnabled only).
+
+Fixed:
+- Memory leaks in QicsDimensionManager (#85451, RT).
+- Building error on Qt 4.3.0 (#85435, RT).
+- Memory leak in demo/advanced_spreadsheet.
+- Memory leak in examples/stocks2.
+- Layout problem in examples/bombhunt on Qt 4.4.0.
+- Potential bug in QicsMovableEntryWidgetCellDisplay::endEdit() (#85501, RT).
+- Bug with header displaying on Qt 4.4.0 (#85483, RT).
+- Bug with header resizing on Qt 4.4.0 (#85511, RT).
+- Bug with missing table update when hide rows/columns (#0000797, Mantis).
+- Table resizing issue when the number of visible columns in a rowHeader changes on Qt 4.4.0 (#85698 (1), RT).
+- Bug with tooltips inside of the table (#85698 (2), RT).
+- Minor memory leaks in examples/spreadsheet (#85698 (3), RT).
+- Breaking the drawing of the cells when changing the height and width at the same time of a header cell which contains dropdown boxes (#1376 (2), Bugzilla).
+- Bug with row-filter delegate (filter delegate is called for invisible rows) (#0000804, Mantis).
+- Issue with printing frozen rows/columns.
+- Performance issue (used 100% CPU) in QicsPopupDialog::exec(const QPoint &pos).
+- QicsTreeTable::groupColumns() filters out possible duplicates. 
+- Regression with changing width of row header (#0000769, Mantis).
+- Bug with QicsCheckCellDisplay(setChecked method did not work) (#85861 (1), RT).
+- Bug with QicsComboCellDisplay(setCurrentIndex and setCurrentText methods did not work) (#85861 (2), RT).
+- All warning messages when building QicsTable, designer plugin, examples, and demos.
+- Include files addon/*.h are not installed when the user runs "nmake install" (#85918 (3), RT).
+- Both release and debug are built, but only debug is installed in the Qt lib directory when "nmake install" is run (#85918 (1), RT).
+- In some cases the row header is one pixel below the table row (#0000930, Mantis).
+- Wrong column labels in demo/advanced_spreadsheet.
+- When a span is set across multiple columns in the column header and those spanned columns are moved, the span does not move with them (#85962 (2), RT).
+- Grid lines were drawn on one pixel above and left.
+- QicsTable is not updated when we reset a data model.
+- QicsTable::setLayoutDirection(Qt::RightToLeft) did not work.
+- Incorrect drawing of span regions for Right-to-left direction.
+- Incorrect drawing of table for Right-to-left direction when using QicsColumn::setWidthInChars.
+- When setting a grid line style to anything other than Qics::Plain, the table seems to ignore the setting (#85962 (1), RT).
+- ToolTip sometimes stays "open" (#0000977, Mantis).
+- QicsComboCellDisplay: Unexpected selection behavior when comboboxes are editable. It is impossible to select multiple cells which contains comboboxes (#0000979, Mantis).
+- QicsCheckCellDisplay: Check-Boxes are handled incorrectly (#0000978, Mantis).
+- Fixed hanging while changing font of filled cells (#1349, Bugzilla).
+- The functions QicsSelectionList::rows() and QicsSelectionList::columns() do not handle QicsLAST_COLUMN and QicsLAST_ROW. Thus, it consumes all the memory if the whole table is selected (#0001019, Mantis).
+- Enter key on the keypad did not handle properly.
+
+Added:
+- Signals rowVisibilityChanged(int,bool) and columnVisibilityChanged(int,bool) to QicsTable.
+- The override cursor for auto fit operation (#0000823, Mantis).
+- QicsRegion::completeRegion() method.
+- QicsTreeTable::expandTree() and QicsTreeTable::collapseTree() methods.
+- QicsTable::aboutQicsTable() method for displaying a simple message box about QicsTable.
+- QicsAbstractSorterDelegate and QicsStandardSorterDelegate classes. Now you can implement a flexible sorting.
+- Methods to QicsTable: setSorterDelegate\sorterDelegate, setRowSorterDelegate\rowSorterDelegate, and setColumnSorterDelegate\columnSorterDelegate.
+- sorterdelegate example.
+- QicsTextCellDisplay::setInputMask(const QString&) and QicsTextCellDisplay::setEchoMode(QLineEdit::EchoMode)methods.
+- Display classes QicsComboCheckCellDisplay, QicsComboTabCellDisplay, QicsListCellDisplay, QicsProgressCellDisplay, and QicsRadioCellDisplay (see the displayers example).
+- QicsTable::setCellToolTipOffset, QicsTable::cellToolTipOffset for setting\getting offset for tool tip from top-left corner of the cell.
+- Added toggleRowHeightExpansion(int row) and toggleColumnWidthExpansion(int col) methods for headers (#85896, RT).
+- Added method QicsDataModel::isCellEmpty(int row, int col) (#86129, RT).
+
+Changes:
+- Removed QicsToolTip.
+- Full revision of QicsTable's displayers.
+- Integrated KD Chart support into the library.
+- It is now possible to edit text in the column or row headers (see QicsHeader::allowUserEdit()/QicsHeader::setAllowUserEdit(bool)).
+- Added alphabetic numeration for column header in examples/spreadsheet.
+- Extension of function "bool QicsAbstractFilterDelegate::match(const QString &string)". Now it has 2 additional parameters (int row, int col) and looks like: "bool QicsAbstractFilterDelegate::match( const QString &string, int row, int col)" (#0000976, Mantis).
+
+Known issues:
+- When drawing the focus bound box for a combo box in the Qt style system, the focus box position is not properly handled. This problem occurs on Linux 
+when the "windows" style is used (bug in Qt #210069). It will fixed in Qt 4.5.0.
+- Memory leak when use QicsCellCommon::setUserData(void *data). It will fixed in a future release.
+
+QicsTable 2.4.1             2008/04/24
+--------------------------------------
+
+Fixed:
+- Issue with crash in QicsRegionalAttributeController.
+- Issue with adding rows to the empty table.
+- QicsTreeTable::groupColumns() filters possible duplicates out.
+- Performance fixes of tree expanding methods.
+- Issue with table repaint after hiding/removing rows (#1389 (1), Bugzilla).
+- Fixed bug that when rows are unhidden, the vertical scrollbar sometimes disappears (#1389 (2), Bugzilla).
+- Stack overflow in QicsDataModelDefault::addRows (#85211, RT).
+
+Added:
+- QicsTreeTable::expandTree() and QicsTreeTable::collapseTree() methods.
+- QicsTreeTable::groupingInProgress() signal.
+- bool repaint parameter to tree expanding methods.
+- Autofit like Excel.
+
+QicsTable 2.4.0             2008/01/19
+--------------------------------------
+
+Fixed:
+- Issue with resizing popup windows on Linux.
+- Some speed issues with QicsTreeTable and QicsSpanManager.
+- Issue in QicsGridCommon::setMouseButton. 
+- Issue with setting font for a row.
+- Issue with freezing.
+- Some fixes in QicsDimensionManager.
+- Crash in QicsKeyboardManager.
+- Memory leaks when clicking a header.
+- Memory leaks in QicsCellStyle and QicsGridStyle constructors.
+- Issue with setting font of the region.
+- Issue with setting font in QicsAttrCommon::applyFontAttr().
+
+Added:
+- QicsAbstractFilterDelegate, QicsRegexpFilterDelegate, QicsListFilterDelegate classes.
+- API for changing active look state of QicsCellDisplay.
+- QicsHeaderDragStyle property for customizing look of row/column header dragging.
+- Tristate support in QicsCheckCellDisplay.
+- QicsCell::dataString() method.
+- QicsSpan::vrow() and QicsSpan::vcolumn() methods.
+- QicsPopupDialog class.
+- add_columns parameter to QicsDataModel's CVS reader.
+- QicsTreeTable addon:
+	- Summary row policies to QicsTreeTable class.
+	- QicsSummarizer::onCellValueChanged() method.
+	- QicsTreeTable::groupForRow() method.
+	- QicsDataItem::number() method.
+	- QicsSummaryRowData class.
+	- QicsGroupInfo::setSummaryData(), firstDataRowVisualIndex() and
+	lastDataRowVisualIndex() methods.
+	- QicsTreeTable::isHeader() method.
+	- QicsTreeTable::showGroupedColumns() and groupedColumnsVisible() methods.
+	- QicsGroupCellDisplay class.
+	- QicsTreeTable::QicsExpandPolicy enum and appropriate set/get methods.
+	- QicsTreeTable::regroup() method.
+	- Flat grouping mode (set by QicsTreeTable::setFlatMode()).
+- QicsEnumerator class.
+- QicsRegion: isEntireRow() and isEntireColumn() methods.
+- VS2005 solutions for examples and demos.
+- displayers example.
+- inner_table example.
+
+Changed:
+- API and approach for applying filters.
+- QicsTreeTable completely revised.
+- Cell displayers are automatically being deleted with the table.
+- QicsCellStyle::Current property deprecated.
+- QicsSpanManager::visualCellSpanList deprecated.
+- Removed double buffer (speedup & memory gained).
+- Data Model and Clipboard Delegate classes inherited from QObject for now.
+- QicsCellRegion is now able to set row/column attributes as well as cell ones.
+
+QicsTable 2.3.4             2008/02/06
+--------------------------------------
+
+- Memory leaks when setting another data model to QicsTable.
+- Issue with QicsRow::selected() and QicsColumn::selected() methods.
+- Issue with updating selections on delete of rows & columns.
+
+
+
+QicsTable 2.3.3             2007/12/06
+--------------------------------------
+
+Fixed:
+- Some selection/edit issues with QicsComboCellDisplay and QicsDateTimeCellDisplay.
+- Crash while calling setRowHeaderUsesModel(true) and then modifying datamodel.
+- Issue with sorting.
+- Issue with freezing top rows after setRowHeaderUsesModel(true) was called.
+- Issue in QicsCellDisplay with drawing custom colored background.
+- Issue with QicsScreenGrid::redraw().
+- Issues with painting on MacOS.
+- QicsWidgetCellDisplayer deletes widget on remove.
+- Building issues on Solaris-10 (GCC 3.4.3).
+- Issue with corner header resize mode.
+- Crash when a cell wider than table window ends editing.
+- Drawing frames of QicsComboCellDisplay and QicsDateTimeCellDisplay.
+- Crash when setting value of the item being edited from outside.
+- Scrolling problem (flicker & slowdown) with large widgets.
+- Some issues with sorter.
+- Issue with losing focus from header grid during traverse.
+- Imnproved speed of row/column moving.
+- Crash in QicsRegionalAttributeController when removing cell displayer.
+- Issue with scrolling when frozens & hiddens present.
+
+
+
+
+QicsTable 2.3.2             2007/10/15
+--------------------------------------
+
+Fixed:
+- Python binding issues.
+- Some minor fixes in examples.
+
+
+
+QicsTable 2.3.1             2007/10/02
+--------------------------------------
+
+Fixed:
+- Issue with textEdited() signal of QicsTextCellDisplay reporting wrong row/column index.
+- Performance issues with painting the grid and spans.
+- Issue with painting headers in highlight mode.
+- Some memory leaks.
+- Issue with updating exclusive selection.
+- Cell overflow issues.
+- Issue with str_rect initialization in QicsTextCellDisplay.
+- Issue with double-click on cell.
+- Issue with flicker when QicsWidgetCellDisplay losts focus.
+- Issue with crash during sorting when there are no items in the list.
+- Issue with connection to scrollbars.
+- Issue with tooltips for particular cells.
+
+Added:
+- QicsSelection::toRegion() method.
+- QicsTable: gridGeometry(), rowHeaderHeight(), columnHeaderWidth(),
+  currentRowOrder(), currentColumnOrder(), setRowOrder(), setColumnOrder() methods.
+- Double-clicking escape while editing will return from edit mode.
+
+Changed:
+- QicsCellDisplay::hideEdit() method deprecated.
+
+
+
+QicsTable 2.3               2007/09/12
+--------------------------------------
+
+Fixed:
+- Crash due to sorting when the whole table is selected.
+- Issue in QicsTable::configureFromXml() when table became hidden after loading from xml.
+- Issue with storing default cell style to XML.
+- Issue in QicsSelectionManager - when new datamodel is set, header list was not cleared
+  properly; this leads to crashes during selection.
+- Issue with displaying icons in QicsComboCellDisplay.
+- Issue with junk around the cell in QicsComboCellDisplay with Qt 4.3, Windows style.
+- Issue with switching off check box state in QicsCheckCellDisplay.
+- Issue with dropping attributes while changing application style.
+- Some issues with frozen items.
+- Issue with applying color of selected text in QicsTextCellDisplay.
+- Issue with wrong span arrangement while moving rows and cells.
+- Issue with clearing current selection.
+- Issue with selection by Ctrl+click (fixed partially).
+- Issue with changing cell size according to its content.
+- Issue with insertion/deletion rows/cols when freezing is active.
+- Issue with unwanted editing of header cells after visiting combo displayer.
+- Issue with updating table layout after changing margins and header size.
+- Issue with configuring color of header's text.
+- Issue with changing selection list after row/column expansion.
+- Issue with visual feedback while changing header size.
+- Issue with drawing shaded grid lines.
+- Issue with applying frame style and line width.
+- Issue with grabbing mouse in QicsNavigator.
+- Issue with cell overflowing.
+- Crashes while switching to print mode.
+
+
+Added:
+- QicsTreeTable and compound classes to provide grouping functionality.
+- QicsRubberBand class.
+- QicsAbstractClipboardDelegate class.
+- QICSTABLE_VERSION_STR define.
+- QicsGroupInfo: methods
+    summaryCellRef(), headerCellRef(), cellRef(),
+    spanHeader(), spanSummary().
+- QicsTable: methods
+    - setExternalAttributeControllers(), gridAttributeController(), rowHeaderAttributeController(),
+    columnHeaderAttributeController();
+    - numFreezeTopRows(), numFreezeBottomRows(), numFreezeRightColumns(), numFreezeLeftColumns().
+- QicsDataModel::notifyRegionChanged() method.
+- setDefaultImagePath() and defaultImagePath() methods to QicsTable and QicsGridInfo;
+  pixmaps can now be loaded from xml file as well.
+- selectRow() and selectColumn() methods to QicsTable.
+- advanced_spreadsheet demo:
+    - load of csv data.
+- Current cell selection policies type QicsSelectCurrentCellPolicy (Follow and Static), 
+  which can be set via QicsTable::setSelectCurrentCellPolicy() and retrieved via
+  QicsTable::selectCurrentCellPolicy() methods.
+- QicsTable::configureFromXmlFile() method.
+- QicsTable: sortingSensitivity() and setSortingSensitivity() methods.
+- Dragging fill handle performs actual selection as well as emitting signals.
+- Customizable grid properties:  ExclusiveSelectionBorderWidth, ExclusiveSelectionBorderColor,
+    ExclusiveSelectionHandleBackColor, ExclusiveSelectionHandleColor, CellDecorationStyle,
+    ExclusiveSelectionHandleColor, ExclusiveSelectionDragBackColor, ExclusiveSelectionDragPen,
+    ExclusiveSelectionDragMode, ExclusiveSelectionDragOpacity, HighlightSelection.
+- Customizable cell properties: SelectedFont, HighlightBackColor, HighlightForeColor.
+- Toggling row/column expansion of selected rows/columns.
+- QicsSelection: isEntireRow() and isEntireColumn() methods.
+- QicsGrid::screenViewport() method.
+- Default sorting now works like in Excel (numbers first, empties last).
+- QicsSpan::toRegion() method.
+- QicsSelectionList: rows() and columns() methods.
+- QicsGridInfo::updateAllGrids() method.
+- QicsTextCellDisplay: iconShiftsText() and setIconShiftsText() methods.
+
+
+Changed:
+- Header drag&drop with mouse middle button extended:
+    - drawing of dragged items.
+    - more intellectual drop (items are inserted between those under mouse).
+- QicsRowColumnDrag now arranges its items correctly.
+- QicsTable::configureFrozen() method revised.
+- VS2005_NO_EXPORT macro deprecated; use QICS_DLL to link against dll (static lib by default).
+- Addons folder rearranged; classes which could be used as standalone (QicsNavigator,
+    QicsRuler, Print Preview) put into addons.
+- Revised drawing of exclusive selection.
+- Revised drawing of cells - result is significant painting speedup.
+- Coordinates for QicsTable::addCellSpan() and QicsTable::removeCellSpan() could be passed
+  in model coordinates as well as in visual (thus avoiding extra model2visual conversions).
+- QicsCheckCellDisplay::setCheckState() made protected.
+- QicsSelectionList: added parameter "complete" to isRowSelected() and isColumnSelected() methods. 
+- Deprecated methods:
+    - QicsScreenGrid::requestCellOverflow()
+    - QicsGrid::requestCellOverflow()
+    - QicsGrid::acceptCellOverflow()
+
+QicsTable 2.2.2:            2007/05/13
+--------------------------------------
+
+Fixed:
+- Slowdown while cutting cells to clipboard.
+- Regression: Pressing Enter at the last row does not move current cell to the top of the next column.
+- Regression: Current cell in the main grid remains selected when clicking on a header.
+- Issues with update of the grid after paste/drop operations.
+- Issue with pasting of cells with empty attributes set.
+- Propagation from cell now works only if this cell is selected.
+- Issue with forgetting current selection in exclusive mode when mouse was released over the 
+  fill handle.
+- Issue with clearing pixmaps while cutting/deleting.
+- "Current" cell attribute is no more being copied/erased during copying of cell style.
+- Current cell now becomes hidden when disabled cells are being selected.
+- Issue with hiding current cell when selectAll() method is called. (967) 
+- Pressing Shift-Ctrl-End/Shift-Ctrl-Home now selects the rest of the table from the current cell 
+    to the end/beginning of the grid respectively. (967)
+- Issue with sizing of the frozen rows/columns. (1062) 
+- Issue with updating grid after clearing cells when rows/columns are reordered.
+- Issues in QicsSelection::setEntireRow() and QicsSelection::setEntireColumn() which
+  lead to incorrect selection setup and possible crashes.
+- Issue with spans messed up when rows/columns were reordered.
+- Some traversal problems when there are spans spanning whole row/columns.
+- Scrolling issues - scrollbars now remain their sizes constantly, so no more jumps while dragging
+  scrollbars via mouse.
+- Issues with QicsNavigator (the label became obscured for large viewports).
+- Issues with print preview:
+    - black page background and slow output under Linux;
+    - wrong page sizing.
+
+Added:
+- QicsRegion: new constructors for covering single-cell regions.
+- QicsGridInfo::deleteSelected(), QicsGridInfo::reorganizeSpans() methods.
+- qicsptr definition - the same as quintptr but is compatible with Qt 4.1.x.
+- QicsCommonRegionalController class.
+- QicsQtModelAttributeController and QicsDataModelQtModelAdapter classes to support native
+  Qt models.
+- QicsStyleManager::getDefaultCellStyle() method.
+- Control what to copy via copying policies: 
+    - QicsCopyPolicy enumeration type;
+    - QicsTable and QicsGridInfo: setCopyPolicy() and copyPolicy() methods;
+- Control what to clear via clearing policies: 
+    - QicsClearPolicy enumeration type;
+    - QicsTable and QicsGridInfo: setClearPolicy() and clearPolicy() methods.
+    
+Changed:
+- QicsRegionalAttributeController is now inherited from QicsCommonRegionalController.
+- QicsSorter: compare(int &_a, int &_b) replaced with compare(const int &_a, const int &_b)
+  to be compatible with Qt 4.3.
+- QicsTablePrint print preview performance changes: 
+    - added local page cache;
+    - QImage-based page buffer replaced with QPixmap.
+
+QicsTable 2.2.1:            2007/04/17
+--------------------------------------
+
+Fixed:
+- Compilation issues with MSVC6.
+- Project issues with advanced_speadsheet.
+- Issue with scrolling by mouse. (911) 
+- Column numeration in advanced_spreadsheet demo.
+- Issue with crash while performing drag&drop of the same region.
+- Traversing on header by arrow keys.
+- Correct selection while traversing in SelectSingleRow and SelectMultipleRow modes.
+- Scrollbars' geometry when there are frozen and hidden rows/columns.
+- Scrolling to the end of row (with End) and end of table (with Ctrl+End keys).
+- Compilation issue with qobject_cast<QWindowsXPStyle*> when Qt is configured without QWindowsXPStyle.
+- Scrolling issues with navigator.
+- Flicker while traversing by keyboard.
+- Flicker while changing current cell in exclusive selection mode.
+- Scrolling timer stops correctly when the mouse is moved back into the grid.
+- Export to HTML: incorrect dimensions of spanned cells.
+- Issue in QicsSelectionManager::orderChanged() which has lead to selection list overflow.
+- Cell containing QicsComboCellDisplay indicates its current state correctly.
+- Some performance revisions of QicsRegionalAttributeController and QicsCellRegion.
+- Issue with propagating changes from edited cell after copy.
+- advanced_spreadsheet demo: search, rows/columns deletion revised.
+- Issue with QicsRegion returning wrong width/heighr when there are no columns/rows.
+- Issue with wrong scrollbarsize when table is empty.
+- Issue with deleting rows/columns in QicsDimensionManager.
+- Issues with traversing and selecting spanned cells with hidden parts.
+- Issue with drawing QicsComboBox displayer in Windows style.
+- Issue in QicsCellDisplay::commonInit() sometimes causes a crash.
+- Issues in QicsKeyboardManager with traversing by Tab/Shift+Tab through hidden rows.
+- Moving through header with cursor keys + SHIFT selects rows/columns as well.
+- Issue with hiding QicsWidgetCellDisplay when it is out of screen after row/column insertion. (806) 
+- Issue with QicsRegionalAttributeController when setting label property for row headers 
+    did not work.
+- Issue with wrong text color in QicsTextCellDisplay for headers.
+- Issue with spanned cells in headers that were not drawn as selected.
+- Issue with colors of disabled cells.
+- Issue with QicsCellRegion was not working sometimes on the first usage.
+- Read-only and disabled cells cannot be altered while data propagation or clear via GUI.
+- Issues with building on 64-bit platforms.
+
+Added:
+- QicsSelectionList: region() method.
+- QicsSelectionManager: selectedRegion() method.
+
+Changed:
+- Attribute "Palette" is completely removed and replaced by single colors
+  (thus fixing rge issue with setting individual color attributes for a cell).
+- QicsHTMLExport: 
+    - added automatic CSS style compression (exported HTML file becomes less up to 50%).
+    - spaces are being replaced with "&nbsp;" tag.
+- QicsCellDisplay::isCellSelected() method revised and simplified.
+- Completely revised and improved traversing methods in QicsScreenGrid and QicsHeaderGrid.
+
+QicsTable 2.2:              2007/03/23
+--------------------------------------
+
+Fixed:
+- Issue with order of printing rows/columns (now, visual order is used as well).
+- Issue with extra pixels around the grid while printing.
+- Issue with QicsHTMLExportDialog::exportTable().
+- Sources adapted to Qt 4.1.x.
+- Issue with traversing by Tab.
+- Removed flicker when moving to another cell. (948) 
+- Issue with scrolling when hidden rows/columns present. (909,934) 
+- Issue with scrolling when row/column size is larger than the current viewport. (936) 
+- Issue with QicsWidgetCellDisplay selection while editWhenCurrent is on. (964) 
+- Issue with losing edit focus when switched to another window in editWhenCurrent mode.
+- Issue with scrolling in editWhenCurrent mode.
+- Some memory leaks with selection list.
+
+Added:
+- QicsPrintPreviewWidget: setCornerWidget() and cornerWidget() methods.
+- QicsHeaderGrid: method editCurrentCell() which disables editing of the header's cells.
+
+Known Issues:
+- Frozen rows/columns cannot be printed.
+- Issue with setting individual color attributes for a cell.
+
+QicsTable 2.2 beta:
+--------------------------------------
+
+Changed:
+- QicsSelection (added starting cell property and appropriate methods and changes).
+- QicsGridInfo: reportSelection() method which now allows the user to perform selections in
+  Excel style (auto-selection of spanned cells).
+- When setting SelectMultiple selection mode, old selection remains unchanged.
+- Significantly improved HTML export performance.
+- Using font styles while export to HTML.
+- "addons" directory added - common dialogs (print preview, html export etc.) are put in.
+  The demos which are using them were changed correspondingly.
+- Wide key actions made customizable.
+- QicsGridInfo::redrawModel() method optimized for performance.
+- Revised methods QicsCellDisplay::textToDisplay() and QicsCellDisplay::pixmapToDisplay().
+- Revised cell displayers (code simplified and optimized).
+- QObject::inherits() method (old way) replaced with qobject_cast<> (faster and safer).
+- QicsTextCellDisplayWidget interface extended.
+- Selection attribute for cells became virtual - it is no longer stored into cell attribute,
+  thus resulting in less memory consumption and speed up of selection operations.
+- QicsTable and QicsSelectionManager's selectionList() methods return a copy of the
+  list or a pointer to internal list depending of parameter value.
+- QicsDimensionManager: hidden rows/cols are stored in QSet instead of QList - thus increasing
+  performance on hide/show row/column.
+- Implementation of QicsStyle, QicsScreenGrid (used QVector instead of []).
+- Implementation of QicsDataItemFormatter (vector of vectors replaced by QMap).
+- Revised includes and forward declarations to minimize dependencies between files.
+- Removed QICSMAX and QICSMIN macro, replaced by qMin and qMax.
+- advanced_spreadsheet demo (added print preview, html export, picture insert; some fixes).
+- QicsAbstractAttributeController interface extended.
+- QicsCellRegion::setRegionAttr() now queries attribute controller for supported properties
+  and passes an attribute directly to the controller omitting style manager.
+- QicsCellCommon::setPixmap() now calls setDMFitSize() to ensure that the pixmap is fit into
+  cell and expands the cell if it doesn't.
+- stocks and stocks2 demos redesigned.
+- QicsSorter now uses native Qt sorting algorithms, thus the class QicsSort is deprecated.
+
+Fixed:
+- Some issues with drawing selection frame in exclusive mode; drawing code simplified.
+- Issues with copying object attributes to another application (now it is blocked).
+- Issues with storing and loading cell attributes.
+- Issues with QStyleManager (adding rows and columns was not processed - this could lead
+  to issues with attributes).
+- Memory disposal in QicsRegionalAttributeController.
+- Issues with copy/paste.
+- Drawing issues with QicsCheckCellDisplay and QicsComboCellDisplay.
+- Issue with printing spanned cells.
+- isPrinterDevice() function works properly under Windows and for print preview as well as
+  for a real printer.
+- Issues with drawing and printing Windows XP styled widgets.
+- Removed compiler warnings.
+- Registered cell displays deletion.
+- Field set order in QicsAttrCommon constructor (fix for Fedora Core).
+- QicsComboCellDisplay (correct alignment and icon drawing).
+- Storing pointer to object in QicsRegionalAttributeController.
+- "Huge" cell shrinks the data editor to fit the viewport in edit mode.
+- Handling empty pen in QicsRegionalAttributeController and QicsCellRegion.
+- Handling default cell style in QicsAbstractAttributeController.
+- Exclusive selection drawing issues.
+- QicsGridInfo::propagateChangesFromCell: fixed issues with accessing empty data
+  and wrong behavior while dealing with visually reordered cells.
+- QicsGridCommon: addCellSpan() and removeCellSpan() - translation of incoming span into
+  model coordinates.
+- QicsStyle - vector range violation fixed.
+- qt_data_model compiles under Linux without issues.
+- Fixed issue with QicsCellRegion while setting an attribute for region
+  without usage of an attribute controller.
+- Table navigator issue.
+- Some issues in QicsScreenGrid.
+- Issue with flicker on first table redraw.
+- QicsTextCellDisplay compilation issues for GCC 4.0.
+- Issue with clearModel().
+
+Added:
+
+- QicsSelectionManager: methods validateSelection() and replaceSelection().
+- QicsSelectionType::SelectionReplace.
+- QicsSelection: | and |= operators.
+- QicsHTMLExport: new options
+    - for export selected cells only;
+    - for fill empty cells with &nbsp;
+    - for export border pens.
+- advanced_spreadsheet demo: saving as HTML.
+- QicsStyleManager: addRows() and addColumns() slot.
+- QicsTable: methods firstRowWithData(), firstColumnWithData(), lastRowWithData(),
+  lastColumnWithData(), selectedRegion(), dataRegion(), deleteSelected(),
+  setWideKeyAction(), isWideKeyAction(), setWideKeyActions().
+- QicsDataModel, QicsDataModelDefault: methods isRowEmpty() and isColumnEmpty().
+- New examples: bigtable, bombhunt, charmap, iconedit, imageviewver.
+- QicsGrid and QicsPrintGrid: boundRect() method.
+- QicsHTMLExportDialog: static method exportTable().
+- QicsPrintPreviewDialog: static method previewAndPrint().
+- QicsTextCellDisplay: signal textChanged().
+- QicsDataVariant data item class.
+- Copying of cell attributes, dimensions, spans.
+- VS2005_NO_EXPORT macro to QicsNamespace.h to avoid issues with MSVC 2005 linker.
+- QicsTable: methods navigator(), selectAll().
+- QicsCell: method selected().
+- QicsSpanManager: methods visualCellSpanList(), insideSpan().
+- QicsGridInfo: method computeSelectionRegion().
+- QicsTable::handleWideKeyPressed() slot that is called when a table-wide key
+  is pressed which should be handled over others (i.e. Delete etc).
+- Saving and reading controller-managed attributes to/from XML.
+- QicsStyle::clear() and QicsCellStyle::clear() methods which are clearing all the properties.
+- Copy constructor to QicsCellStyle class.
+- QicsRegionalAttributeController class.
+- QicsTable::setExternalAttributeController() and QicsTable::removeExternalAttributeController()  
+  methods.
+- setDMFitSize() internal method to QicsCellCommon; implemented in QicsCell.
+- QicsAbstractAttributeController::isPropertySupported() method.
+- QicsSorter: methods reorder() and currentOrder().
+  
+Known Issues:
+- Sorted columns are printed in original order.
+
+QicsTable 2.1
+--------------------------------------
+
+Fixed:
+- Copy/paste issue - data now copying to proper cells. 
+- Compiling errors on MSVC6.
+- PgUp/PgDown scrolling( now it scrolls to the proper number of rows/columns).
+- Issue with setting dotted pen.
+- QicsNavigator, QicsRuler, QicsRowFilter classes.
+- Signal selectionListChanged now emits properly
+- QicsDataModelDefault dispose speed increased by 10-15%.
+- Compiler errors on MSVC7.
+- setGridLinePen method.
+- Scrolling to last column/row.
+- Showing hidden last row (with widget displayer).
+- Build process of QicsDesignerPlugin with Qt 4.2.x
+- Hiding/showing last row/column.
+- Scrollbar reacting with fixed with of table.
+- Install script for QicsTable designer plugin
+  (by default, the plugin will be installed in QtDesigner plugin dir).
+- Event loop recursion in QApplication with Qt 4.2.0.
+- Freezing/unfreezing row/column issue with scroll.
+- Scrollbar update problem.
+- Memory leaks with QPlastiqueStyle.
+- Selection following in QicsSelectionManager.
+- Context menu now works correctly when cells are in editing mode.
+- Cell flickering when current cell jumps to the next row/column.
+- Focus problems with QicsTable and external widgets.
+- Selection flashing during traversing in SelectMultipleRow/Column modes.
+- Show row problem while repaint behavior is OFF.
+- QicsTable linking problem on MSVC6.
+- Resize line showing above widgets and frozen areas.
+- Table compiling in debug_and_release mode.
+- Focus/traversal problems in QicsCheckCellDisplayer.
+- Issues with Qt 4.2.0 library.
+- All known freezing issues.
+- Removed pragmas from QicsNamespace.h
+- Compilation error on Qt without WindowsXP style (Windows).
+- Problems with scrolling.
+- QicsComboCellDisplay popup problem (during scrolling).
+- Crash in QicsTable::setDataModel() method.
+- QICS_PACKAGEDATE_NUMERIC variable format.
+- Editing cell issue in editWhenCurrent mode.
+- Main grid last column resizing.
+- lastPageStartColumn, lastPageStartRow return value.
+- Table navigator issue (last column/row were not accessible with Navigator).
+- Freezing problems after second freeze.
+- The scrollbar and the table "dancing" left and right with moved and hidden columns.
+- Incorrect selection when row move on click by cell.
+- Problem with scrolling when each second row/column is hidden.
+- Correct show last hidden row/column after moving rows/columns.
+- Scrolling problem with hidden, moved indexes.
+- Scrollbar "dancing" with reordered and hidden columns.
+- Drawing cell borders and grid lines issue.
+
+Added:
+- Delete key now clears data in all selected cells.
+- Method normalize in QicsRegion class.
+- Mouse button mapping method.
+- QicsTextCellDisplay functionality extended to show additional scrollbars
+  when editing cell wider than screen grid.
+- Possibility to resize frozen rows/columns.
+- QicsRuler class, which shows rulers for current page.
+- QicsPageMetrics struct which extends standard paper size list and also
+	provides methods to access it.
+- Static/dynamic page counting mode to QicsPrintPreviewWidget class.
+- Code to QicsTablePrint to support dynamic print preview mode.
+- Select/pan modes to QicsPrintPreviewWidget class.
+- print() method to QicsPrintPreviewWidget class, which performs customizable printing.
+- Export of pixmaps, coloring, font, alignment etc. to QicsHTMLExport class.
+- Struct QicsHTMLExportOptions which holds options for HTML export.
+- gridInfo() method to QicsCell class.
+- Documentation for QicsNavigator, QicsRuler, QicsHTMLExport, QicsFilter, QicsRowFilter classes,
+    and Print Preview.
+- Finished documentation for Print Preview.
+- QicsTable documentation updated.
+- QicsNavigator class, which provides quick navigation within the big table.
+- QicsFilter class which allows the user to hide/show rows using a QRegExp based filter.
+- Excel style selection frame with corner handle(selectionStyle property).
+- QicsHTMLExport class to export table as hypertext page (basic implementation).
+- Print preview facilities; QicsTablePrint extended to support preview framework.
+- Example print preview dialog which works with QicsTablePrint.
+- Optimized QicsSorter methods for speed.
+- Steps on how install QicsTable under MacOS.
+- Documented QObject ownerships.
+- visibleRows/Columns methods now return normal row/column index (from '0' and upper).
+- New properties for QicsTable object (set/get default height/width of the cell).
+- New property to QicsCell, canAcceptDrops, can allow/deny drop action.
+- Made a lot of changes in traversal functions, added QicsKeyboardManager
+  and QicsGridGeometry internal classes.
+- General performance improvements.
+- Optimized painting recalculations for dimensions (for rows/columns/both).
+- QicsPushButtonCellDisplayer to display PushButton in grids.
+- Optimized updating "view" for dimension changes and some others.
+- More speed for redrawing while scrolling.
+- Excel-like selection behavior with SHIFT/CTRL + arrows keys.
+- QicsDateTimeCellDisplayer to display QicsDataDateTime data items.
+- Example of using improved header displayer into custom_grid example.
+- autoHeaderNamingMask property into QicsHeader class.
+- Documentation updated according to 2.0 version.
+- colortable example which demonstrates changing palette of QicsTable.
+- Method widget() into QicsCellDiplay class.
+- New example qtDataModel that demonstrate Qt data model using QicsTable.
+- New demo advanced_spreadsheet.
+- Designer plugin now compiling and works with Qt4. Significantly rewritten plugin
+  interface. Added new configuration dialogs and menus that allows saving of 90%
+  of QicsTable settings.
+- New properties for QicsTable and QicsScreenGrid object (get fullyVisibleBottomRow, fullyVisibleRightColumn).
+- New properties for QicsTable object (set/get fakeCellsDrawingIndex) that
+  force the table to draw empty uneditable cells which are using default style.
+- New demo qics_tetris.
+- Removed flickering when traversing between cells.
+- stocks2 example, optimized by speed, and with new features(printing with preview, export to HTML).
+
+Known Issues:
+- When the table is filled with a huge
+  amount of data (1000x1000 cells), clearing the table is too slow. It
+  takes several seconds on a fast machine. The source of the issue is a call
+  to the delete operator for each data item in the data model.
+  There are a lot of destructor calls and thus losing performance.
+- QPainter::drawText is too slow - whole table repaints for ~400-500 ms.
+  There is no workaround for now.
+- After selection of a region with the mouse, the previously selected region sometimes
+  does not update itself and remains painted as "selected".
+  - Excel-like selection is too slow and leaves some painting issues.
+- While printing, wide spanned cells do not break on page edge.
+- Cell widget content is printed incompletely (seen for combobox, Windows XP style).
+
+QicsTable 2.0
+--------------------------------------
+
+Fixed:
+- Added autoRecognition() method in QicsCellCommon.
+- setCellOverflowBehavior() text size.
+- Table crashing when QicsComboCellDisplayer is edited.
+- Minor visual issues with scrollbar when columns are hiding/showing.
+- QicsWidgetCellDisplayer painting issues.
+- Problems with "current cell" when table loses focus.
+- Grid lines not drawn if they are hidden.
+- Removed warning about converting long to int32.
+- endEdit() call when QicsCheckCellDispalyer loses focus.
+- QicsWidgetCellDisplayer clipping problems.
+- QicsCheckCellDisplayer and QicsComboCellDisplayer focus/traversal problems.
+- QicsCheckCellDisplayer crashing on Qt 4.1.3.
+- QicsDataModelDefault::rowItems() and  QicsDataModelDefault::columnItems() now return the 
+  correct results.
+- Spreadsheet example hanging during spans adding.
+- QicsWidgetCellDisplay drawing problems.
+- setAllowUserResize() method.
+- Traversal problems between widgets and frozen parts of table.
+- Drawing frame using Windows XP style.
+- Improved QicsWidgetCellDisplay drawing.
+- QicsWidgetCellDisplayer clipping problem.
+- Removed flickering after setting to RepaintOn.
+- Traversal problems between table greed and inner widgets.
+- Removed compiler warnings under Microsoft VC.
+
+Added:
+- New properties enterTraveseToBegin and tabTraverseToBegin that allows the user to control
+  traversal behavior at the end of row/column.
+- QicsComboCellDisplay now highlighted when it is on the current or selected cell.
+- Changed setPalette() behavior. It now behaves like in standard Qt widgets.
+- Increased performance while resizing events.
+- Signal layoutFailed() that emitted when layout of widget deformed.
+- pageUp/pageDown keys now work for QicsTable.
+- Ability to move header selections with arrow keys.
+
+ Known Issues:
+- Table does not have alternate means of accessing functionality for two mouse buttons or one mouse button.
+- If arrow keys were used to traverse to the next row, the rows were not painted correctly.
+- When the dialog containing the QicsTable gains or loses focus, spanned
+  cells have the lines of the cells they span across flicker.
+- Performance degrade in addRows() if call 1000 times to addRows().
+- When resizing a column (or a row), the resize line is drawn underneath any "live" widget that is displayed
+  in the table.
+- Wrong set and get function results in test results.
+- Minor visual problem when traversing between table cells using Tab key.
+- Table prevents focus traversal to other widgets.
+- Several problems regarding QicsTable within a QScrollArea:
+  a ) The top LineEdit has focus, press Tab, the scroll
+  area scrolls to a wrong location, and the top left table cell becomes current
+  but not editable.
+  b ) When clicking in the top left table cell, it becomes current
+  and editable, press Tab, the scroll area scrolls to a wrong location.
+- Selection does not follow model changes when other than the selection row was deleted.
+- Widget cell displayer draws over the frame of main grid.
+
+QicsTable 1.2.0-beta4
+--------------------------------------
+
+Fixed:
+- Widget crushing during printing.
+- Methods QicsCell::setMinWidthInChars and QicsCell::setMinHeightInChars now work properly.
+- Problem with header resize cursor appearing.
+- signals clicked(), pressed() and doubleClicked() now not emitting
+   in headers resizing area.
+- Tab/enter traversal behavior when table has hidden rows/columns.
+- Tab/enter traversal behavior for right-to-left layout.
+- Issues with editable QicsComboCellDisplayer.
+- Alignment of text displayed in current editing cell.
+- Scrolling problem (when mouse wheel wrapped over main grid rows
+   scrolled overmuch).
+- QicsComboCellDisplay open/close behavior with Space key.
+- Value changing in QicsTextCellDisplayer when cell is in edit mode.
+- Indexes of rows and columns after moving are now displaying correct (in model coordinates).
+- Selection behavior when selectionPolicy property
+ set to SelectMultipleRow.
+- Incorrect behavior of editable QicsComboCellDisplayer.
+- Horizontal scrollbar issue.
+- Draw grid lines with correct styles.
+- Problem with cursor changing over headers.
+- Scrolling problem during resizing.
+- Enter and tab traversal behavior.
+- Increased drawing performance of table.
+- Old lowercase include files replaced with Qt 4-style.
+- Removed warning about cellColorGroup() from QicsCellDisplayer.
+- Header and main grid alignment.
+- Resize line now draws on header too.
+- makeCellFullyVisible() on frozen parts.
+- Positioning of current cell line.
+- Cursor, span, and frame drawing in Right-To-Left alignment mode.
+- Min width/heights follow model.
+- Drag and drop problem during moving data from headers to main grid.
+- Wrong valueChanged() signal emitting when data model is empty.
+- Traversal and focus problems when QicsCellDisplay::editWhenCurrent(true).
+- QicsTable right to left column hide problem.
+- Minimum width follow model.
+- Performance degrade on inserting/deleting rows.
+- Top and Bottom cell border pens drawing failure.
+- Setting cell border width to 0 now causes no border drawing.
+- Order of emitting rowSelected() and currentCellChanged() signals.
+- QicsTable show/hide column problems.
+- QicsDataModelDefault::setItem() method when empty string entering.
+- repaint() calls replaced to update, increased perfomance and removed warnings.
+
+Added:
+- New feature - ability to move rows/columns after last row/column.
+- Now you can change direction of scrolling over main grid by key modifiers (without
+    modifiers - vertical scrolling, with Alt key - horizontal).
+- Saving QPalette and QPen settings to QString, XML.
+- QicsHeader::setAllowHeaderResize() method.
+- "$(MAKE) all" command now will compile both debug and release
+  version of QicsTable.
+- QicsTable::setVerticalScrollBar(QicsScroller*) and
+  QicsTable::setHorizontalScrollBar(QicsScroller*) methods.
+- Implemented Right-to-Left layout for cells and displayers.
+- Removed qt3support from examples.
+- QicsTable::setCursor() method.
+- QicsHeader::setAllowHeaderResize() method.
+- QicsCheckCellDisplay class now gives methods checkState()
+   and valueChanged() for all standard Qics data types.
+- Implemented QicsTable::rowsMoved() and QicsTable::columnsMoved() signals.
+- QicsTable::setSortMode() and multi-key sort possibility.
+- Added to QicsCellCommon and QicsTable classes new method
+  setPixmap(QString file_name) to load pixmaps from file directly
+- QicsTable.dcf file to integrate our documentation in QtAssistant.
+- New class QicsPasteValidator that allows validation of data that is
+  pasted into cells.
+
+QicsTable 1.2.0-beta3
+--------------------------------------
+
+Fixed:
+- Problem with signals rowResized() and columnResized()
+- Drag and drop problem that caused tables crashing during copying
+  or moving operations.
+- Drag and drop problem with cells properly clearing during moving operations.
+- Scrolling problem that occurred when custom widgets were placed
+  into QicsTable (Windows only).
+- Initial grid repainting problem (Windows only).
+
+Added:
+- Added public slot repaint() that allows repaint whole table.
+- Possibility to set Top, Left, Right or Bottom border pen of the cell.
+- configurationToDomXml() configurationFromDomXml() added to QicsTable.
+- QicsTable designer plugin now can modify/configure any table property etc.
+
+QicsTable 1.2.0-beta2
+--------------------------------------
+
+Fixed:
+- QicsTable::uneditCurrentCell now calls QicsCellDisplay::endEdit()
+  with correct cell after model changes.
+- Initial screen painting problem in frozen example.
+- QicsDataModel::readASCII() now reads the proper number of lines.
+- Parameters of signal selectionListChanged(bool) after
+  adding selection using the Shift button.
+- Links on architecture documentation page.
+- Drag and drop problem with whole rows and columns.
+- Resizing problem with frozen rows and columns.
+- Font change problem.
+
+Added:
+- Signals emitted when selection or size of columns changed.
+
+QicsTable 1.2.0-beta1
+--------------------------------------
+
+- QicsTable 1.1.1 ported from Qt 3 to Qt 4.
+
+
+QicsTable 1.1.1
+--------------------------------------
+
+Fixed:
+- Memory leaks in QicsDataModelDefault.
+- Problem when the first row or column of viewport was hidden.
+- Documentation about setting colors on a table.
+- Problems with selecting comboboxes using the CTRL key.
+- Problem with the scroller when the last column is hidden.
+- Tab key behaviors.
+- Styles in QicsComboCellDisplay and QicsCheckCellDisplay.
+- Update cell contents when editing.
+
+Added:
+- If any column/row is stretchable, all grids will autofit in the visible table area.
+- New data types QicsDataLongLong and QicsDataBool.
+- Implemented enhancement- propagate changes to multiple cells.
+  Added property to enable or disable the feature ‘propagate changes to multiple cells.’
+
+QicsTable 1.1.1 beta 2
+--------------------------------------
+
+Fixed:
+- Problem with scrolling table when clicking on the header.
+- Memory leak connected with creating a new QicsCell object in QicsTable.
+- QicsRowHeader class (defined Q_OBJECT).
+- Crash when setting the new dataModel().
+- Failure in QicsTable designer plugin.
+- Segmentation fault when printing QicsTable.
+- Setting up to work styles in QicsComboCellDisplay and
+  QicsCheckCelldisplay
+- Stretch method if you have stretchable columns or rows.
+- Returned value in handleMouseEvent() in different situations.
+
+Added:
+- Two new data types QicsDataLongLong and QicsDataBool.
+- Improved the tab behavior of QicsTable- now the user can cycle between
+  widgets and cells (ComboBoxes, CheckBoxes).
+
+QicsTable 1.1.1 beta 1
+--------------------------------------
+
+Fixed:
+- Allowed the user to force the cell displayer to reflect changes in 
+  model item for cells that are under editing.
+- Segmentation fault when printing a QicsTable.
+- Segfault when the header clicked on QicsTable with an empty data model.
+- Drag and drop and copy routines when a whole row or column is selected.
+- Problem with removing the displayer of the currently editing cell.
+- Problem with the floating displayer after a row/column of the
+  currently editing cell is deleted.
+- Problem with bigger maximum value of the scroller if the last column
+  is wider than the visible area.
+- Documentation on QicsDataModelDefault.
+- Problem with editable combo boxes.
+- QicsTable crash when setting a new data model using
+  QicsTable::setDataModel() after the table already has a valid data model.
+
+Added:
+- Provided the "index.dcf" file so documentation can easily be
+  integrated with Qt's assistant via the "assistant-addContentFile index.dcf" command.
+- Implemented QicsTable::wheellEvent() so that now the user can use mouse scroll on this widget.
+
+QicsTable 1.1.0:
+--------------------------------------
+
+Fixed:
+
+- Checkbox's check/uncheck problem.
+- Problem with the wrong coordinates in checkbox's valueChanged()
+  signal.
+- Problem of not allowing the selection to be done from a checkbox
+  cell.
+- Combobox's repaint problem when setting styles on the current
+  cell.
+- Problem when using the setDataModel() function instead of the 
+  constructor to set the data model.
+- Segmentation fault when the user tried to insert rows at the end
+  of a sorted table.
+- Selection problems with combo-boxes, problems with dragging
+  combo/check boxes when the selection policy is SelectSingleRow, and
+  problem when moving data using the middle mouse button on checkboxes.
+- Spans behavior when a row or column was inserted or deleted.
+- Focus policy to allow the user to cycle between widgets using
+  tab key.
+- Error with deleting a single row 0.
+- Error where the wrong row was deleted when the data model of
+  this row is empty.
+- Sorting of “Billable Rate” in Consultant example. Allows the
+  table to decide what is the data type of first entered data.
+- Error in the traverseToCell() function.
+- Printing error with cells overflow behavior on non-first
+  pages.
+- Selection error where the selection of multiple check- or combobox
+  cells wasn't possible.
+
+Added:
+- User can use the tab key to apply currently editing text,
+without the necessity of switching to another cell. (bug#52, case #21407)
+- Extended a behavior of QicsComboCellDisplay with QComboBox method
+  calls.
+
+QicsTable 1.1.0 (beta 2)
+--------------------------------------
+
+Fixed:
+- Behavior of check box and combobox cell displayers.
+- Selection error where the selection of multiple check- or combobox
+  cells wasn't possible.
+- Error where wrong coordinates of cells are returned when frozen
+  rows/columns were used.
+- Error where the program failed when more than one row/column
+  was deleted.
+- Bug where the cell entry widgets didn't hide when frozen
+  rows/columns were used.
+- Bug where spans and hidden rows/columns didn't follow the data
+  model.
+- Selection of column when some cells of that column are already
+  selected.
+- Deselection of cells in selected column/row.
+- Segmentation fault when the user selects a column.
+- Style manager segmentation fault on clearing properties.
+- Row/column selection problem.
+- Ctrl-left mouse row selection problem.
+- addSelection() function to use model coordinates.
+- Parameters for function calls in the functions
+  QicsColumn::minWidthInPixels() and
+  QicsMappedDimensionManager::columnMinWidth(). Added header size
+  calculation for an expansion toggle.
+- Position index for insertion calculating.
+- Qt Designer plugin. Fixed isContainer property of the plugin.
+
+Added:
+- Constructor to use QicsTable with Qt Designer.
+
+QicsTable 1.1.0 (beta 1)
+--------------------------------------
+
+Fixed:
+- Layout error where an extra blank space was shown at the bottom and
+  right edges of the table.
+- Bug where a selection made outside the main grid (in the header
+  grids, for example) did not correctly cause the current cell in the
+  main grid to be invalidated.
+- Bug where double clicking a cell was not causing the cell to
+  enter edit mode.
+- Bug where clicking and dragging when the selection policy is
+  SelectSingle or SelectSingleRow would cause the current cell to
+  incorrectly move.
+- Many memory leaks.
+
+Added:
+- traversalKeyEditBehavior grid property. This allows the
+  programmer to control the behavior of the traversal keys when
+  editing a cell.
+- editForegroundColor and editBackgroundColor properties. These
+  colors will be used by QicsTextCellDisplay objects when a cell is
+  being edited.
+- Visual row, column, and cell properties. This allows the
+  programmer to set properties that stay on a particular visual row,
+  column, or cell, regardless of the ordering of the model. See the
+  HOWTO page "Model vs. Visual Indices in QicsTable" for more
+  details.
+- Repeating visual row and column flyweight objects. Row and
+  column properties can now be set on repeating series of rows or
+  columns. See QicsRepeatingRow and QicsRepeatingColumn for details.
+- toolTipText cell property. See QicsCellCommon::toolTipText for
+  details.
+- Row and column stretching. See QicsRow::stretchable() and
+  QicsColumn::stretchable() for details.
+- Row and column hiding. See QicsRow::hide(), QicsRow::show(),
+  QicsColumn::hide(), and QicsColumn::show() for details.
+- QicsTable::setDefaultRowHeightInPixels(),
+  QicsTable::setDefaultRowHeightInChars(),
+  QicsTable::setDefaultColumnWidthInPixels(), and
+  QicsTable::setDefaultColumnWidthInChars().
+- Increased performance in some areas.
+
+QicsTable 1.0.1
+--------------------------------------
+
+Fixed:
+- Traversal bug where some traversal actions would cause the
+  previously traversed cell to stay selected.
+- Traversal bug where traversing via keyboard, followed by
+  traversing to a new cell via mouse, followed by traversing via
+  keyboard would result in the current cell moving to an incorrect
+  cell.
+- Bug where freezing rows would result in the visibleColumns
+  property setting being ignored.
+- Bug where freezing rows and then calling
+  QicsTable::setLeftHeaderVisible(false) would not remove one of the
+  row header grids.
+- Bug where clicking a column header in a table with a
+  selectionPolicy of SINGLE_ROW or MULTIPLE_ROW caused incorrect cells
+  to be selected.
+
+QicsTable 1.0.0
+--------------------------------------
+
+Fixed:
+- Drawing bug when cells in the first column of the table contain
+  pixmaps.
+
+QicsTable 0.9.7 (beta)
+--------------------------------------
+
+Fixed:
+- Selection bug where "unselecting" cells (by ctrl-clicking them)
+  caused an incorrect selection list.
+- Build error using MSVC 7.0 compiler.
+
+Added:
+- QicsSelection now has the concept of "selected" vs. "unselected".
+  This allows a QicsSelection object to also represent an
+  "unselection".
+- QicsTable::selectionActionList(), which represents the user's
+  actual actions when selecting or unselecting cells in the table.
+
+QicsTable 0.9.6 (beta)
+--------------------------------------
+
+- Bug where edit widget was not hidden from the current cell if the
+  current cell was in a row that was just deleted.
+- Bug where traversing out of a cell after editing it caused a
+  change to the data model, even if the data was not changed by the
+  user.
+- Bug where two single clicks caused a cell to go into edit mode,
+  rather than the correct double click.
+- In QicsCheckCellDisplay, the valueChanged() method was not being called
+  when the user changed the value of the check box.
+- Changed QicsCheckCellDisplay to draw using the palette's base color
+  as the background for the check box.
+- Bug where QicsCheckCellDisplay did not use the correct
+  background color when drawing a cell that was selected.
+- Bug where coordinates of mouse clicks in signals were relative
+  to the internal grid widgets they originated from, rather than from
+  the table widget.
+
+Added:
+- Property to QicsComboCellDisplay ("addValueToList") that
+  specifies whether data values from the model that are not in the
+  combobox's list should be added to the list.
+- valueChanged() signals to QicsTable and QicsGridCommon. Cell
+  coordinates passed in these signals are in visual coordinates.
+- New demo, "consultant", which demonstrates the use of many
+  different cell display objects, custom validators, custom
+  formatters, as well as many other QicsTable features.
+
+QicsTable 0.9.5 (beta)
+--------------------------------------
+
+Fixed:
+- Layout bug with frozen rows/columns.
+- Crash when destroying table under certain circumstances.
+
+Added:
+- Extremely significant increase in drawing, scrolling, and update
+  speed.
+- Changed visual display to look more like Excel and QTable (main grid
+  background is now the colorgroup's base() color, some border and
+  spacing values were changed).
+- Documentation additions (customizing grids) and corrections.
+
